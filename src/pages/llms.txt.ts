@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { absoluteFileUrl, absoluteUrl } from "../lib/routes";
-import { allFamilies } from "../lib/data";
+import { allFamilies, allThemes } from "../lib/data";
 import { guides } from "../lib/guides";
 import { targets } from "../data/targets";
 
@@ -27,6 +27,15 @@ export const GET: APIRoute = () => {
     "## Guides",
     "",
     ...guides.map((guide) => `- [${guide.title.en}](${absoluteUrl(`guides/${guide.slug}`)})`),
+    "",
+    "## Themes",
+    "",
+    ...allThemes().map(
+      (theme) =>
+        `- [${theme.name}](${absoluteFileUrl(`themes/${theme.family}/${theme.slug}/theme.json`)})`,
+    ),
+    "",
+    `- [Full dataset](${absoluteFileUrl("llms-full.txt")})`,
     "",
     "## Per-theme JSON",
     "",
