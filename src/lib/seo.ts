@@ -1,5 +1,6 @@
 import { t } from "../i18n/ui";
 import {
+  allThemes,
   familyDescription,
   generatedDescription,
   themesOf,
@@ -24,7 +25,9 @@ export function titleFor(page: Page): string {
     case "family":
       return `${page.family.name} ${t(locale, "family.title")} — ${brand(locale)}`;
     case "theme":
-      return `${page.theme.name} — Terminal Color Scheme for Herdr App, Ghostty, Alacritty — ${brand(locale)}`;
+      return locale === "zh"
+        ? `${page.theme.name} — Herdr App、Ghostty、Alacritty 终端配色方案 — 终端主题`
+        : `${page.theme.name} — Terminal Color Scheme for Herdr App, Ghostty, Alacritty — ${SITE}`;
     case "target":
       return `${page.target.title[locale]} — ${brand(locale)}`;
     case "guide":
@@ -146,20 +149,16 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
   }
 
   if (page.kind === "catalog" || page.kind === "family" || page.kind === "target") {
-    const themes =
-      page.kind === "family" ? themesOf(page.family.id) : page.kind === "target" ? [] : [];
-    const names =
-      page.kind === "family"
-        ? themes.map((theme) => theme.name)
-        : [];
+    const themes = page.kind === "family" ? themesOf(page.family.id) : allThemes();
     graph.push({
       "@type": "ItemList",
       name: titleFor(page),
-      numberOfItems: page.kind === "family" ? themes.length : undefined,
-      itemListElement: names.map((name, index) => ({
+      numberOfItems: themes.length,
+      itemListElement: themes.map((theme, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        name,
+        name: theme.name,
+        url: absoluteUrl(`themes/${theme.family}/${theme.slug}`),
       })),
     });
   }
