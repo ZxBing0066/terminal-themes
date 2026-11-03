@@ -257,8 +257,18 @@ export default function Editor() {
             {["Background", "Foreground", "Cursor", "Selection"].map((label, index) => (
               <div class="color-row" key={label}>
                 <span>{label}</span>
-                <input type="color" value={values[index]} onInput={(event) => update(index, event.currentTarget.value)} />
-                <input class="mono" value={values[index]} onChange={(event) => update(index, event.currentTarget.value)} />
+                <input
+                  type="color"
+                  aria-label={`${label} color`}
+                  value={values[index]}
+                  onInput={(event) => update(index, event.currentTarget.value)}
+                />
+                <input
+                  class="mono"
+                  aria-label={`${label} hex`}
+                  value={values[index]}
+                  onChange={(event) => update(index, event.currentTarget.value)}
+                />
               </div>
             ))}
           </div>
@@ -269,8 +279,18 @@ export default function Editor() {
               {ANSI_ORDER.map((key, index) => (
                 <div class="color-row" key={key}>
                   <span>{LABELS[key]}</span>
-                  <input type="color" value={values[4 + index]} onInput={(event) => update(4 + index, event.currentTarget.value)} />
-                  <input class="mono" value={values[4 + index]} onChange={(event) => update(4 + index, event.currentTarget.value)} />
+                  <input
+                    type="color"
+                    aria-label={`${LABELS[key]} color`}
+                    value={values[4 + index]}
+                    onInput={(event) => update(4 + index, event.currentTarget.value)}
+                  />
+                  <input
+                    class="mono"
+                    aria-label={`${LABELS[key]} hex`}
+                    value={values[4 + index]}
+                    onChange={(event) => update(4 + index, event.currentTarget.value)}
+                  />
                 </div>
               ))}
             </div>
@@ -293,10 +313,11 @@ export default function Editor() {
           <div class="editor-preview" dangerouslySetInnerHTML={{ __html: svg }} />
           <div class="panel">
             <div class="panel-title">Export</div>
-            <div class="port-tabs">
+            <div class="port-tabs" role="tablist">
               {ports.map((candidate) => (
                 <button
                   class="port-tab"
+                  role="tab"
                   aria-selected={candidate.slug === port.slug ? "true" : "false"}
                   onClick={() => setPortSlug(candidate.slug)}
                 >

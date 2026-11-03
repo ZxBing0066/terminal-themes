@@ -31,8 +31,11 @@
     --border-strong: #c4c4bd;
     --fg: #111311;
     --muted: #5c6560;
-    --dim: #7c857f;
+    --dim: #5f6862;
     --link: #111311;
+    --success: #1a7f37;
+    --warning: #9a6700;
+    --error: #cf222e;
   }
 }
 
@@ -428,7 +431,7 @@ pre {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--dim);
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 11px;
 }
@@ -803,6 +806,9 @@ th.mono {
 }
 
 .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   color: var(--muted);
   text-decoration: none;
 }

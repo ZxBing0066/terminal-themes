@@ -71,7 +71,7 @@ const brand = [
     <a class="skip" href="#main">{locale === "zh" ? "跳到主要内容" : "Skip to content"}</a>
     <header class="nav">
       <div class="wrap nav-inner">
-        <a class="brand" href={nav("")} aria-label={t(locale, "site.name")}>
+        <a class="brand" href={nav("")}>
           <span class="brand-bar" aria-hidden="true">
             {brand.map((color) => <span style={`background:${color}`}></span>)}
           </span>
