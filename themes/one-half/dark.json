@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "one-half/dark",
+  "family": "one-half",
+  "slug": "dark",
+  "name": "One Half Dark",
+  "appearance": "dark",
+  "palette": {
+    "background": "#282c34",
+    "foreground": "#dcdfe4",
+    "cursor": "#dcdfe4",
+    "cursorText": "#282c34",
+    "selectionBackground": "#444850",
+    "selectionForeground": "#dcdfe4",
+    "ansi": {
+      "black": "#282c34",
+      "red": "#e06c75",
+      "green": "#98c379",
+      "yellow": "#e5c07b",
+      "blue": "#61afef",
+      "magenta": "#c678dd",
+      "cyan": "#56b6c2",
+      "white": "#dcdfe4",
+      "brightBlack": "#282c34",
+      "brightRed": "#e06c75",
+      "brightGreen": "#98c379",
+      "brightYellow": "#e5c07b",
+      "brightBlue": "#61afef",
+      "brightMagenta": "#c678dd",
+      "brightCyan": "#56b6c2",
+      "brightWhite": "#dcdfe4"
+    }
+  },
+  "source": {
+    "author": "One Half",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/one-half/dark/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

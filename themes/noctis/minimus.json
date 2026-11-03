@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "noctis/minimus",
+  "family": "noctis",
+  "slug": "minimus",
+  "name": "Noctis Minimus",
+  "appearance": "dark",
+  "palette": {
+    "background": "#0e1920",
+    "foreground": "#c5cdd3",
+    "cursor": "#c5cdd3",
+    "cursorText": "#0e1920",
+    "selectionBackground": "#425866",
+    "selectionForeground": "#c5cdd3",
+    "ansi": {
+      "black": "#182a35",
+      "red": "#c08872",
+      "green": "#72c09f",
+      "yellow": "#c8a984",
+      "blue": "#6196b8",
+      "magenta": "#c28097",
+      "cyan": "#72b7c0",
+      "white": "#c5cdd3",
+      "brightBlack": "#425866",
+      "brightRed": "#ca8468",
+      "brightGreen": "#84c8ab",
+      "brightYellow": "#d1aa7b",
+      "brightBlue": "#68a4ca",
+      "brightMagenta": "#c88da2",
+      "brightCyan": "#84c0c8",
+      "brightWhite": "#c5d1d3"
+    }
+  },
+  "source": {
+    "author": "Noctis",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/noctis/minimus/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

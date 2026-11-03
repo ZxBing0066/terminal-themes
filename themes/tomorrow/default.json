@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "tomorrow/default",
+  "family": "tomorrow",
+  "slug": "default",
+  "name": "Tomorrow Default",
+  "appearance": "light",
+  "palette": {
+    "background": "#ffffff",
+    "foreground": "#4d4d4c",
+    "cursor": "#4d4d4c",
+    "cursorText": "#ffffff",
+    "selectionBackground": "#000000",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#000000",
+      "red": "#c82829",
+      "green": "#718c00",
+      "yellow": "#eab700",
+      "blue": "#4271ae",
+      "magenta": "#8959a8",
+      "cyan": "#3e999f",
+      "white": "#ffffff",
+      "brightBlack": "#000000",
+      "brightRed": "#c82829",
+      "brightGreen": "#718c00",
+      "brightYellow": "#eab700",
+      "brightBlue": "#4271ae",
+      "brightMagenta": "#8959a8",
+      "brightCyan": "#3e999f",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/chriskempson/tomorrow-theme",
+    "author": "Chris Kempson",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/chriskempson/tomorrow-theme/blob/master/LICENSE.md",
+    "reference": "https://terminalcolors.com/themes/tomorrow/default/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

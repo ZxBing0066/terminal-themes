@@ -1,0 +1,26 @@
+---
+import { breadcrumbFor } from "../lib/seo";
+import type { Page } from "../lib/routes";
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+const crumbs = breadcrumbFor(page).itemListElement;
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  {
+    crumbs.map((crumb, index) => (
+      <>
+        {index > 0 && <span>/</span>}
+        {index === crumbs.length - 1 ? (
+          <span aria-current="page">{crumb.name}</span>
+        ) : (
+          <a href={crumb.item}>{crumb.name}</a>
+        )}
+      </>
+    ))
+  }
+</nav>

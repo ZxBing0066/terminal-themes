@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "one/dark",
+  "family": "one",
+  "slug": "dark",
+  "name": "One Dark",
+  "appearance": "dark",
+  "palette": {
+    "background": "#282c34",
+    "foreground": "#abb2bf",
+    "cursor": "#abb2bf",
+    "cursorText": "#282c34",
+    "selectionBackground": "#5c6370",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#1e2127",
+      "red": "#e06c75",
+      "green": "#98c379",
+      "yellow": "#d19a66",
+      "blue": "#61afef",
+      "magenta": "#c678dd",
+      "cyan": "#56b6c2",
+      "white": "#abb2bf",
+      "brightBlack": "#5c6370",
+      "brightRed": "#e06c75",
+      "brightGreen": "#98c379",
+      "brightYellow": "#d19a66",
+      "brightBlue": "#61afef",
+      "brightMagenta": "#c678dd",
+      "brightCyan": "#56b6c2",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "author": "One",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/one/dark/"
+  },
+  "tags": [
+    "dark",
+    "balanced",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

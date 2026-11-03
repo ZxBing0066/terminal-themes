@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "noctis/obscuro",
+  "family": "noctis",
+  "slug": "obscuro",
+  "name": "Noctis Obscuro",
+  "appearance": "dark",
+  "palette": {
+    "background": "#020c0e",
+    "foreground": "#b2cacd",
+    "cursor": "#b2cacd",
+    "cursorText": "#020c0e",
+    "selectionBackground": "#47686c",
+    "selectionForeground": "#b2cacd",
+    "ansi": {
+      "black": "#324a4d",
+      "red": "#e66533",
+      "green": "#49e9a6",
+      "yellow": "#e4b781",
+      "blue": "#49ace9",
+      "magenta": "#df769b",
+      "cyan": "#49d6e9",
+      "white": "#b2cacd",
+      "brightBlack": "#47686c",
+      "brightRed": "#e97749",
+      "brightGreen": "#60ebb1",
+      "brightYellow": "#e69533",
+      "brightBlue": "#60b6eb",
+      "brightMagenta": "#e798b3",
+      "brightCyan": "#60dbeb",
+      "brightWhite": "#c1d4d7"
+    }
+  },
+  "source": {
+    "author": "Noctis",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/noctis/obscuro/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

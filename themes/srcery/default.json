@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "srcery/default",
+  "family": "srcery",
+  "slug": "default",
+  "name": "Srcery Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#1c1b19",
+    "foreground": "#fce8c3",
+    "cursor": "#fce8c3",
+    "cursorText": "#1c1b19",
+    "selectionBackground": "#918175",
+    "selectionForeground": "#fce8c3",
+    "ansi": {
+      "black": "#1c1b19",
+      "red": "#ef2f27",
+      "green": "#519f50",
+      "yellow": "#fbb829",
+      "blue": "#2c78bf",
+      "magenta": "#e02c6d",
+      "cyan": "#0aaeb3",
+      "white": "#baa67f",
+      "brightBlack": "#918175",
+      "brightRed": "#f75341",
+      "brightGreen": "#98bc37",
+      "brightYellow": "#fed06e",
+      "brightBlue": "#68a8e4",
+      "brightMagenta": "#ff5c8f",
+      "brightCyan": "#2be4d0",
+      "brightWhite": "#fce8c3"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/srcery-colors/srcery-vim",
+    "author": "Srcery",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/srcery-colors/srcery-vim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/srcery/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

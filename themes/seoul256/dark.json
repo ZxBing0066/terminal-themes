@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "seoul256/dark",
+  "family": "seoul256",
+  "slug": "dark",
+  "name": "Seoul256 Dark",
+  "appearance": "dark",
+  "palette": {
+    "background": "#3a3a3a",
+    "foreground": "#d0d0d0",
+    "cursor": "#d0d0d0",
+    "cursorText": "#3a3a3a",
+    "selectionBackground": "#626262",
+    "selectionForeground": "#d0d0d0",
+    "ansi": {
+      "black": "#4e4e4e",
+      "red": "#d68787",
+      "green": "#5f865f",
+      "yellow": "#d8af5f",
+      "blue": "#85add4",
+      "magenta": "#d7afaf",
+      "cyan": "#87afaf",
+      "white": "#d0d0d0",
+      "brightBlack": "#626262",
+      "brightRed": "#d75f87",
+      "brightGreen": "#87af87",
+      "brightYellow": "#ffd787",
+      "brightBlue": "#add4fb",
+      "brightMagenta": "#ffafaf",
+      "brightCyan": "#87d7d7",
+      "brightWhite": "#e4e4e4"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/junegunn/seoul256.vim",
+    "author": "Junegunn Choi",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/junegunn/seoul256.vim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/seoul256/dark/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

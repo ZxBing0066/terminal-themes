@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "nightfox/dayfox",
+  "family": "nightfox",
+  "slug": "dayfox",
+  "name": "Nightfox Dayfox",
+  "appearance": "light",
+  "palette": {
+    "background": "#f6f2ee",
+    "foreground": "#3d2b5a",
+    "cursor": "#3d2b5a",
+    "cursorText": "#f6f2ee",
+    "selectionBackground": "#534c45",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#352c24",
+      "red": "#a5222f",
+      "green": "#396847",
+      "yellow": "#ac5402",
+      "blue": "#2848a9",
+      "magenta": "#6e33ce",
+      "cyan": "#287980",
+      "white": "#f2e9e1",
+      "brightBlack": "#534c45",
+      "brightRed": "#b3434e",
+      "brightGreen": "#577f63",
+      "brightYellow": "#b86e28",
+      "brightBlue": "#4863b6",
+      "brightMagenta": "#8452d5",
+      "brightCyan": "#488d93",
+      "brightWhite": "#f4ece6"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/EdenEast/nightfox.nvim",
+    "author": "Eden East",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/EdenEast/nightfox.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/nightfox/dayfox/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

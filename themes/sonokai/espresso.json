@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "sonokai/espresso",
+  "family": "sonokai",
+  "slug": "espresso",
+  "name": "Sonokai Espresso",
+  "appearance": "dark",
+  "palette": {
+    "background": "#312c2b",
+    "foreground": "#e4e3e1",
+    "cursor": "#e4e3e1",
+    "cursorText": "#312c2b",
+    "selectionBackground": "#90817b",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#1f1e1c",
+      "red": "#f86882",
+      "green": "#a6cd77",
+      "yellow": "#f0c66f",
+      "blue": "#81d0c9",
+      "magenta": "#9fa0e1",
+      "cyan": "#f08d71",
+      "white": "#e4e3e1",
+      "brightBlack": "#90817b",
+      "brightRed": "#f86882",
+      "brightGreen": "#a6cd77",
+      "brightYellow": "#f0c66f",
+      "brightBlue": "#81d0c9",
+      "brightMagenta": "#9fa0e1",
+      "brightCyan": "#f08d71",
+      "brightWhite": "#e4e3e1"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/sainnhe/sonokai",
+    "author": "sainnhe",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/sainnhe/sonokai/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/sonokai/espresso/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

@@ -1,0 +1,48 @@
+import type { Theme } from "../src/lib/schema";
+
+export const catppuccinMocha: Theme = {
+  schemaVersion: 1,
+  id: "catppuccin/mocha",
+  family: "catppuccin",
+  slug: "mocha",
+  name: "Catppuccin Mocha",
+  appearance: "dark",
+  palette: {
+    background: "#1e1e2e",
+    foreground: "#cdd6f4",
+    cursor: "#cdd6f4",
+    cursorText: "#1e1e2e",
+    selectionBackground: "#585b70",
+    selectionForeground: "#cdd6f4",
+    ansi: {
+      black: "#45475a",
+      red: "#f38ba8",
+      green: "#a6e3a1",
+      yellow: "#f9e2af",
+      blue: "#89b4fa",
+      magenta: "#f5c2e7",
+      cyan: "#94e2d5",
+      white: "#a6adc8",
+      brightBlack: "#585b70",
+      brightRed: "#f37799",
+      brightGreen: "#89d88b",
+      brightYellow: "#ebd391",
+      brightBlue: "#74a8fc",
+      brightMagenta: "#f2aede",
+      brightCyan: "#6bd7ca",
+      brightWhite: "#bac2de",
+    },
+  },
+  source: {
+    upstream: "https://github.com/catppuccin/catppuccin",
+    reference: "https://terminalcolors.com/themes/catppuccin/mocha/",
+    author: "Catppuccin",
+    license: "MIT",
+    licenseUrl: "https://github.com/catppuccin/catppuccin/blob/main/LICENSE",
+  },
+  tags: ["dark", "pastel"],
+  meta: {
+    addedAt: "2026-11-03",
+    updatedAt: "2026-11-03",
+  },
+};

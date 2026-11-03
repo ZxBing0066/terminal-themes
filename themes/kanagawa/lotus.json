@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "kanagawa/lotus",
+  "family": "kanagawa",
+  "slug": "lotus",
+  "name": "Kanagawa Lotus",
+  "appearance": "light",
+  "palette": {
+    "background": "#f2ecbc",
+    "foreground": "#545464",
+    "cursor": "#545464",
+    "cursorText": "#f2ecbc",
+    "selectionBackground": "#8a8980",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#1f1f28",
+      "red": "#c84053",
+      "green": "#6f894e",
+      "yellow": "#77713f",
+      "blue": "#4d699b",
+      "magenta": "#b35b79",
+      "cyan": "#597b75",
+      "white": "#545464",
+      "brightBlack": "#8a8980",
+      "brightRed": "#d7474b",
+      "brightGreen": "#6e915f",
+      "brightYellow": "#836f4a",
+      "brightBlue": "#6693bf",
+      "brightMagenta": "#624c83",
+      "brightCyan": "#5e857a",
+      "brightWhite": "#43436c"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/rebelot/kanagawa.nvim",
+    "author": "Tommaso Laurenzi",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/rebelot/kanagawa.nvim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/kanagawa/lotus/"
+  },
+  "tags": [
+    "light",
+    "balanced",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

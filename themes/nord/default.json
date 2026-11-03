@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "nord/default",
+  "family": "nord",
+  "slug": "default",
+  "name": "Nord Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2e3440",
+    "foreground": "#d8dee9",
+    "cursor": "#d8dee9",
+    "cursorText": "#2e3440",
+    "selectionBackground": "#4c566a",
+    "selectionForeground": "#d8dee9",
+    "ansi": {
+      "black": "#3b4252",
+      "red": "#bf616a",
+      "green": "#a3be8c",
+      "yellow": "#ebcb8b",
+      "blue": "#81a1c1",
+      "magenta": "#b48ead",
+      "cyan": "#88c0d0",
+      "white": "#e5e9f0",
+      "brightBlack": "#4c566a",
+      "brightRed": "#bf616a",
+      "brightGreen": "#a3be8c",
+      "brightYellow": "#ebcb8b",
+      "brightBlue": "#81a1c1",
+      "brightMagenta": "#b48ead",
+      "brightCyan": "#8fbcbb",
+      "brightWhite": "#eceff4"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/nordtheme/nord",
+    "author": "Nord Theme",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/nordtheme/nord/blob/develop/license.md",
+    "reference": "https://terminalcolors.com/themes/nord/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

@@ -1,0 +1,92 @@
+---
+import { herdrTokens } from "../../data/herdrTokens";
+import { t } from "../../i18n/ui";
+import { allThemes, getTheme } from "../../lib/data";
+import { deriveHerdrAppColors } from "../../lib/ports/herdr-app";
+import { localized, type Page } from "../../lib/routes";
+import Breadcrumbs from "../Breadcrumbs.astro";
+import ThemeCard from "../ThemeCard.astro";
+
+const page = Astro.props.page as Extract<Page, { kind: "target" }>;
+const { target, locale } = page;
+const themes = allThemes();
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const sample = getTheme("catppuccin", "mocha");
+const sampleColors = sample ? deriveHerdrAppColors(sample) : undefined;
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <Breadcrumbs page={page} />
+    <p class="eyebrow">{themes.length} {t(locale, "common.themes")}</p>
+    <h1>{target.title[locale]}</h1>
+    <p class="lede">{target.description[locale]}</p>
+    <div class="chips" style="margin-top:18px">
+      {target.docs && <a class="chip" href={target.docs} rel="noopener">{t(locale, "target.docs")}</a>}
+      <a class="chip" href={href("themes")}>{t(locale, "nav.themes")}</a>
+      <a class="chip" href={href("editor")}>{t(locale, "nav.editor")}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "target.install")}</p>
+        <h2>{t(locale, "target.install")}</h2>
+      </div>
+    </div>
+    <div class="panel">
+      <ol class="prose" style="padding:0;margin:0">
+        {target.install[locale].map((step) => <li>{step}</li>)}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{target.slug === "herdr-app" && sampleColors && (
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">{locale === "zh" ? "主题 token" : "Theme tokens"}</p>
+          <h2>{locale === "zh" ? "22 个界面颜色" : "The 22 UI colors"}</h2>
+          <p>
+            {locale === "zh"
+              ? "主题文件先写终端调色板，再可选覆盖界面颜色。下面是 Catppuccin Mocha 的推导结果。"
+              : "A theme file writes the terminal palette first, then optionally overrides UI colors. Values below are derived from Catppuccin Mocha."}
+          </p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Token</th><th>Hex</th><th>{locale === "zh" ? "作用" : "Controls"}</th></tr></thead>
+          <tbody>
+            {herdrTokens.map(({ token, en, zh }) => (
+              <tr>
+                <td class="mono">{token}</td>
+                <td class="mono">{sampleColors[token as keyof typeof sampleColors]}</td>
+                <td class="muted">{locale === "zh" ? zh : en}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "target.allThemes")}</p>
+        <h2>{t(locale, "target.allThemes")}</h2>
+      </div>
+    </div>
+    <div class="grid">
+      {themes.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
+    </div>
+  </div>
+</section>

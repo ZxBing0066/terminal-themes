@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "zenbones/rosebones-dark",
+  "family": "zenbones",
+  "slug": "rosebones-dark",
+  "name": "Zenbones Rosebones Dark",
+  "appearance": "dark",
+  "palette": {
+    "background": "#1a1825",
+    "foreground": "#e1d4d4",
+    "cursor": "#e1d4d4",
+    "cursorText": "#1a1825",
+    "selectionBackground": "#3a3651",
+    "selectionForeground": "#e1d4d4",
+    "ansi": {
+      "black": "#1a1825",
+      "red": "#eb7193",
+      "green": "#317490",
+      "yellow": "#f6c074",
+      "blue": "#9ccfd8",
+      "magenta": "#c4a7e7",
+      "cyan": "#9ccfd8",
+      "white": "#e1d4d4",
+      "brightBlack": "#3a3651",
+      "brightRed": "#f289a4",
+      "brightGreen": "#358daf",
+      "brightYellow": "#f9ca8e",
+      "brightBlue": "#94dae6",
+      "brightMagenta": "#ceb3ef",
+      "brightCyan": "#94dae6",
+      "brightWhite": "#bf9b99"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/zenbones-theme/zenbones.nvim",
+    "author": "Zenbones",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/zenbones-theme/zenbones.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/zenbones/rosebones-dark/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

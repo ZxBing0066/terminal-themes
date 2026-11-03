@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "gruvbox/dark-soft-contrast",
+  "family": "gruvbox",
+  "slug": "dark-soft-contrast",
+  "name": "Gruvbox Dark Soft Contrast",
+  "appearance": "dark",
+  "palette": {
+    "background": "#32302f",
+    "foreground": "#ebdbb2",
+    "cursor": "#ebdbb2",
+    "cursorText": "#32302f",
+    "selectionBackground": "#928374",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#32302f",
+      "red": "#cc241d",
+      "green": "#98971a",
+      "yellow": "#d79921",
+      "blue": "#458588",
+      "magenta": "#b16286",
+      "cyan": "#689d6a",
+      "white": "#a89984",
+      "brightBlack": "#928374",
+      "brightRed": "#fb4934",
+      "brightGreen": "#b8bb26",
+      "brightYellow": "#fabd2f",
+      "brightBlue": "#83a598",
+      "brightMagenta": "#d3869b",
+      "brightCyan": "#8ec07c",
+      "brightWhite": "#ebdbb2"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/morhetz/gruvbox",
+    "author": "Pavel Pertsev",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/morhetz/gruvbox/blob/master/LICENSE.txt",
+    "reference": "https://terminalcolors.com/themes/gruvbox/dark-soft-contrast/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

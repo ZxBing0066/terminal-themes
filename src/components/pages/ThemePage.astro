@@ -1,0 +1,262 @@
+---
+import { t } from "../../i18n/ui";
+import { contrast } from "../../lib/color";
+import { contrastRatio, generatedDescription } from "../../lib/data";
+import { ansiPairs } from "../../lib/palette";
+import { ports, type PortTarget } from "../../lib/ports";
+import { localized, type Page } from "../../lib/routes";
+import { similarThemes } from "../../lib/similar";
+import Breadcrumbs from "../Breadcrumbs.astro";
+import ThemeCard from "../ThemeCard.astro";
+
+const page = Astro.props.page as Extract<Page, { kind: "theme" }>;
+const { theme, locale } = page;
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const ratio = contrastRatio(theme);
+const pairs = ansiPairs(theme.palette.ansi);
+const paletteJson = JSON.stringify(
+  {
+    name: theme.name,
+    appearance: theme.appearance,
+    ...theme.palette,
+  },
+  null,
+  2,
+);
+const serialized = ports.map((port) => ({ port, content: port.serialize(theme) }));
+const similar = similarThemes(theme, 4);
+const baseColors = [
+  { name: t(locale, "common.background"), hex: theme.palette.background },
+  { name: t(locale, "common.foreground"), hex: theme.palette.foreground },
+  { name: t(locale, "common.cursor"), hex: theme.palette.cursor },
+  { name: t(locale, "common.selection"), hex: theme.palette.selectionBackground },
+];
+const contrastRows = [
+  { name: t(locale, "common.foreground"), hex: theme.palette.foreground },
+  { name: t(locale, "common.cursor"), hex: theme.palette.cursor },
+  { name: t(locale, "common.selection"), hex: theme.palette.selectionBackground },
+  ...pairs.map(({ name, hex }) => ({ name, hex })),
+];
+const ratioClass = (value: number) => (value >= 7 ? "ratio-good" : value >= 4.5 ? "" : value >= 3 ? "ratio-warn" : "ratio-bad");
+const portFileName = (port: PortTarget) => `${theme.family}-${theme.slug}.${port.extension}`;
+const portPath = (port: PortTarget) => `/ports/${port.slug}/${portFileName(port)}`;
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <Breadcrumbs page={page} />
+    <p class="eyebrow">{theme.family} · {theme.appearance} · {theme.source.license}</p>
+    <h1>{theme.name}</h1>
+    <p class="lede">{generatedDescription(theme, locale)}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
+      <button class="btn" data-copy={paletteJson}>{t(locale, "common.copy")} JSON</button>
+      <a class="btn" href={portPath(ports[0])} download>{t(locale, "common.downloadTheme")}</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="theme-layout">
+    <div>
+      <div class="theme-preview">
+        <img
+          src={`/previews/${theme.family}-${theme.slug}.svg`}
+          alt={`${theme.name} preview in the Herdr app`}
+          width="1200"
+          height="720"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <div class="panel" style="margin-top:18px">
+        <div class="panel-title">
+          <span>{t(locale, "common.palette")}</span>
+          <button class="hex-button" data-copy={paletteJson}>{t(locale, "common.copy")}</button>
+        </div>
+        <div class="ansi-grid">
+          {pairs.map(({ name, hex }) => (
+            <div class="ansi-cell">
+              <div class="ansi-chip" style={`background:${hex}`}></div>
+              <div class="ansi-label">
+                <span>{name.replace("bright", "b.")}</span>
+                <button class="hex-button" data-copy={hex} title={`Copy ${hex}`}>{hex}</button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="ansi-grid" style="margin-top:6px">
+          {baseColors.map(({ name, hex }) => (
+            <div class="ansi-cell">
+              <div class="ansi-chip" style={`background:${hex}`}></div>
+              <div class="ansi-label">
+                <span>{name}</span>
+                <button class="hex-button" data-copy={hex} title={`Copy ${hex}`}>{hex}</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:18px">
+        <div class="panel-title">
+          <span>{t(locale, "common.contrast")}</span>
+          <span class="muted">WCAG · vs {theme.palette.background}</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Color</th><th>Hex</th><th>Ratio</th><th>Level</th></tr>
+            </thead>
+            <tbody>
+              {contrastRows.map(({ name, hex }) => {
+                const value = contrast(hex, theme.palette.background);
+                const level = value >= 7 ? "AAA" : value >= 4.5 ? "AA" : value >= 3 ? "AA large" : "—";
+                return (
+                  <tr>
+                    <td>{name}</td>
+                    <td class="mono">{hex}</td>
+                    <td class={`mono ${ratioClass(value)}`}>{value.toFixed(2)}:1</td>
+                    <td class="mono muted">{level}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side-stack">
+      <div class="panel">
+        <div class="panel-title">{t(locale, "common.themes")}</div>
+        <dl class="kv">
+          <dt>{t(locale, "common.family")}</dt><dd><a href={href(`themes/${theme.family}`)}>{theme.family}</a></dd>
+          <dt>{t(locale, "common.background")}</dt><dd class="mono">{theme.palette.background}</dd>
+          <dt>{t(locale, "common.foreground")}</dt><dd class="mono">{theme.palette.foreground}</dd>
+          <dt>{t(locale, "common.cursor")}</dt><dd class="mono">{theme.palette.cursor}</dd>
+          <dt>{t(locale, "common.selection")}</dt><dd class="mono">{theme.palette.selectionBackground}</dd>
+          <dt>{t(locale, "common.contrast")}</dt><dd class="mono">{ratio.toFixed(2)}:1</dd>
+          <dt>{t(locale, "common.updated")}</dt><dd class="mono">{theme.meta.updatedAt}</dd>
+        </dl>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">{t(locale, "common.provenance")}</div>
+        <dl class="kv">
+          <dt>{t(locale, "common.author")}</dt><dd>{theme.source.author}</dd>
+          <dt>{t(locale, "common.license")}</dt>
+          <dd>
+            {theme.source.licenseUrl
+              ? <a href={theme.source.licenseUrl} rel="noopener">{theme.source.license}</a>
+              : theme.source.license}
+          </dd>
+          {theme.source.upstream && <><dt>Upstream</dt><dd><a href={theme.source.upstream} rel="noopener">{theme.source.upstream}</a></dd></>}
+          {theme.source.reference && <><dt>Reference</dt><dd><a href={theme.source.reference} rel="noopener">{theme.source.reference}</a></dd></>}
+        </dl>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">{t(locale, "common.install")}</div>
+        <p class="muted small">
+          {locale === "zh"
+            ? "Herdr App：把 JSON 放进 ~/.config/herdr-app/themes/，然后在 设置 → 主题 中选择。"
+            : "Herdr app: save the JSON to ~/.config/herdr-app/themes/, then choose it in Settings → Theme."}
+        </p>
+        <div class="actions" style="margin-top:12px">
+          <a class="btn btn-small" href={href("herdr-app")}>{t(locale, "nav.herdr")}</a>
+          <a class="btn btn-small" href={href("guides/how-to-theme-herdr-app")}>{t(locale, "common.readGuide")}</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "common.ports")}</p>
+        <h2>{t(locale, "common.ports")}</h2>
+        <p>{locale === "zh" ? "复制或下载对应应用的配置。" : "Copy or download the configuration for each application."}</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="port-tabs" role="tablist">
+        {serialized.map(({ port }, index) => (
+          <button
+            class="port-tab"
+            role="tab"
+            data-port-tab={port.slug}
+            aria-selected={index === 0 ? "true" : "false"}
+          >
+            {port.name}
+          </button>
+        ))}
+      </div>
+      {serialized.map(({ port, content }, index) => (
+        <div class="port-panel" data-port-panel={port.slug} hidden={index !== 0 ? true : undefined}>
+          <div class="code-block">
+            <pre><code>{content}</code></pre>
+            <div class="code-actions">
+              <button class="btn btn-small" data-copy={content}>{t(locale, "common.copy")}</button>
+              <a class="btn btn-small" href={portPath(port)} download>{t(locale, "common.download")}</a>
+              <span class="mono small muted" style="margin-left:auto">{portFileName(port)}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "common.similar")}</p>
+        <h2>{t(locale, "common.similar")}</h2>
+      </div>
+    </div>
+    <div class="grid">
+      {similar.map(({ theme: candidate, distance }) => (
+        <div>
+          <ThemeCard theme={candidate} locale={locale} />
+          <p class="mono small muted" style="margin-top:6px">ΔE00 {distance.toFixed(1)}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-port-tab]").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const slug = tab.dataset.portTab;
+      document.querySelectorAll<HTMLElement>("[data-port-tab]").forEach((item) => {
+        item.setAttribute("aria-selected", item === tab ? "true" : "false");
+      });
+      document.querySelectorAll<HTMLElement>("[data-port-panel]").forEach((panel) => {
+        panel.hidden = panel.dataset.portPanel !== slug;
+      });
+    });
+  });
+
+  document.addEventListener("click", async (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLElement>("[data-copy]");
+    if (!button) return;
+    const value = button.dataset.copy;
+    if (!value) return;
+    const original = button.textContent;
+    try {
+      await navigator.clipboard.writeText(value);
+      button.textContent = "Copied";
+      window.setTimeout(() => {
+        button.textContent = original;
+      }, 1200);
+    } catch {
+      /* clipboard unavailable */
+    }
+  });
+</script>

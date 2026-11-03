@@ -1,0 +1,62 @@
+---
+import { t } from "../../i18n/ui";
+import { allFamilies, allThemes } from "../../lib/data";
+import { localized, type Page } from "../../lib/routes";
+import ThemeCard from "../ThemeCard.astro";
+
+const page = Astro.props.page as Extract<Page, { kind: "catalog" }>;
+const locale = page.locale;
+const themes = allThemes();
+const families = allFamilies();
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">{t(locale, "catalog.count")}: {themes.length}</p>
+    <h1>{t(locale, "catalog.title")}</h1>
+    <p class="lede">{t(locale, "catalog.description")}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="chips" data-filters>
+      <button class="chip" data-filter="all" aria-current="page">{t(locale, "common.all")}</button>
+      <button class="chip" data-filter="dark">{t(locale, "common.dark")}</button>
+      <button class="chip" data-filter="light">{t(locale, "common.light")}</button>
+    </div>
+    <div class="grid" data-theme-grid style="margin-top:18px">
+      {themes.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "common.family")}</p>
+        <h2>{t(locale, "common.family")}</h2>
+      </div>
+    </div>
+    <div class="chips">
+      {families.map((family) => <a class="chip" href={href(`themes/${family.id}`)}>{family.name}</a>)}
+    </div>
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const cards = document.querySelectorAll<HTMLElement>("[data-theme-grid] [data-appearance]");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+      buttons.forEach((item) => item.removeAttribute("aria-current"));
+      button.setAttribute("aria-current", "page");
+      cards.forEach((card) => {
+        card.hidden = filter !== "all" && card.dataset.appearance !== filter;
+      });
+    });
+  });
+</script>

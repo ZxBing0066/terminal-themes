@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "tomorrow/night-blue",
+  "family": "tomorrow",
+  "slug": "night-blue",
+  "name": "Tomorrow Night Blue",
+  "appearance": "dark",
+  "palette": {
+    "background": "#002451",
+    "foreground": "#ffffff",
+    "cursor": "#ffffff",
+    "cursorText": "#002451",
+    "selectionBackground": "#2b486f",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#000000",
+      "red": "#ff9da4",
+      "green": "#d1f1a9",
+      "yellow": "#ffeead",
+      "blue": "#bbdaff",
+      "magenta": "#ebbbff",
+      "cyan": "#99ffff",
+      "white": "#ffffff",
+      "brightBlack": "#000000",
+      "brightRed": "#ff9da4",
+      "brightGreen": "#d1f1a9",
+      "brightYellow": "#ffeead",
+      "brightBlue": "#bbdaff",
+      "brightMagenta": "#ebbbff",
+      "brightCyan": "#99ffff",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/chriskempson/tomorrow-theme",
+    "author": "Chris Kempson",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/chriskempson/tomorrow-theme/blob/master/LICENSE.md",
+    "reference": "https://terminalcolors.com/themes/tomorrow/night-blue/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "github/light-high-contrast",
+  "family": "github",
+  "slug": "light-high-contrast",
+  "name": "GitHub Light High Contrast",
+  "appearance": "light",
+  "palette": {
+    "background": "#ffffff",
+    "foreground": "#0e1116",
+    "cursor": "#0e1116",
+    "cursorText": "#ffffff",
+    "selectionBackground": "#4b535d",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#0e1116",
+      "red": "#a0111f",
+      "green": "#024c1a",
+      "yellow": "#3f2200",
+      "blue": "#0349b4",
+      "magenta": "#622cbc",
+      "cyan": "#1b7c83",
+      "white": "#66707b",
+      "brightBlack": "#4b535d",
+      "brightRed": "#86061d",
+      "brightGreen": "#055d20",
+      "brightYellow": "#4e2c00",
+      "brightBlue": "#1168e3",
+      "brightMagenta": "#844ae7",
+      "brightCyan": "#3192aa",
+      "brightWhite": "#88929d"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/primer/github-vscode-theme",
+    "author": "GitHub",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/primer/github-vscode-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/github/light-high-contrast/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

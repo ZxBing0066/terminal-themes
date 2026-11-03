@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "sonokai/andromeda",
+  "family": "sonokai",
+  "slug": "andromeda",
+  "name": "Sonokai Andromeda",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2b2d3a",
+    "foreground": "#e1e3e4",
+    "cursor": "#e1e3e4",
+    "cursorText": "#2b2d3a",
+    "selectionBackground": "#7e8294",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#181a1c",
+      "red": "#fb617e",
+      "green": "#9ed06c",
+      "yellow": "#edc763",
+      "blue": "#6dcae8",
+      "magenta": "#bb97ee",
+      "cyan": "#f89860",
+      "white": "#e1e3e4",
+      "brightBlack": "#7e8294",
+      "brightRed": "#fb617e",
+      "brightGreen": "#9ed06c",
+      "brightYellow": "#edc763",
+      "brightBlue": "#6dcae8",
+      "brightMagenta": "#bb97ee",
+      "brightCyan": "#f89860",
+      "brightWhite": "#e1e3e4"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/sainnhe/sonokai",
+    "author": "sainnhe",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/sainnhe/sonokai/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/sonokai/andromeda/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

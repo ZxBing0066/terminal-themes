@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "kanagawa",
+  "name": "Kanagawa",
+  "description": {
+    "en": "Kanagawa is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Kanagawa 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/rebelot/kanagawa.nvim",
+    "author": "Tommaso Laurenzi",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/rebelot/kanagawa.nvim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/kanagawa/"
+  },
+  "tags": []
+}

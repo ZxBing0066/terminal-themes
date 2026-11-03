@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "apprentice/default",
+  "family": "apprentice",
+  "slug": "default",
+  "name": "Apprentice Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#262626",
+    "foreground": "#bcbcbc",
+    "cursor": "#bcbcbc",
+    "cursorText": "#262626",
+    "selectionBackground": "#444444",
+    "selectionForeground": "#bcbcbc",
+    "ansi": {
+      "black": "#1c1c1c",
+      "red": "#af5f5f",
+      "green": "#5f875f",
+      "yellow": "#87875f",
+      "blue": "#5f87af",
+      "magenta": "#5f5f87",
+      "cyan": "#5f8787",
+      "white": "#6c6c6c",
+      "brightBlack": "#444444",
+      "brightRed": "#ff8700",
+      "brightGreen": "#87af87",
+      "brightYellow": "#ffffaf",
+      "brightBlue": "#87afd7",
+      "brightMagenta": "#8787af",
+      "brightCyan": "#5fafaf",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/romainl/Apprentice",
+    "author": "Romain Lafourcade",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/romainl/Apprentice/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/apprentice/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

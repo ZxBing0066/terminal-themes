@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "shades-of-purple/default",
+  "family": "shades-of-purple",
+  "slug": "default",
+  "name": "Shades of Purple Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#1e1e3f",
+    "foreground": "#ffffff",
+    "cursor": "#ffffff",
+    "cursorText": "#1e1e3f",
+    "selectionBackground": "#5c5c61",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#000000",
+      "red": "#e43937",
+      "green": "#3ad900",
+      "yellow": "#fad000",
+      "blue": "#7857fe",
+      "magenta": "#ff2c70",
+      "cyan": "#80fcff",
+      "white": "#ffffff",
+      "brightBlack": "#5c5c61",
+      "brightRed": "#e43937",
+      "brightGreen": "#3ad900",
+      "brightYellow": "#fad000",
+      "brightBlue": "#6943ff",
+      "brightMagenta": "#fb94ff",
+      "brightCyan": "#80fcff",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/ahmadawais/shades-of-purple-vscode",
+    "author": "Ahmad Awais",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/ahmadawais/shades-of-purple-vscode/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/shades-of-purple/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

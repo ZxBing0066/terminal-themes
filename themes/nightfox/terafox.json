@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "nightfox/terafox",
+  "family": "nightfox",
+  "slug": "terafox",
+  "name": "Nightfox Terafox",
+  "appearance": "dark",
+  "palette": {
+    "background": "#152528",
+    "foreground": "#e6eaea",
+    "cursor": "#e6eaea",
+    "cursorText": "#152528",
+    "selectionBackground": "#4e5157",
+    "selectionForeground": "#e6eaea",
+    "ansi": {
+      "black": "#2f3239",
+      "red": "#e85c51",
+      "green": "#7aa4a1",
+      "yellow": "#fda47f",
+      "blue": "#5a93aa",
+      "magenta": "#ad5c7c",
+      "cyan": "#a1cdd8",
+      "white": "#ebebeb",
+      "brightBlack": "#4e5157",
+      "brightRed": "#eb746b",
+      "brightGreen": "#8eb2af",
+      "brightYellow": "#fdb292",
+      "brightBlue": "#73a3b7",
+      "brightMagenta": "#b97490",
+      "brightCyan": "#afd4de",
+      "brightWhite": "#eeeeee"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/EdenEast/nightfox.nvim",
+    "author": "Eden East",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/EdenEast/nightfox.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/nightfox/terafox/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

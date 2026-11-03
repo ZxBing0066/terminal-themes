@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "one-half/light",
+  "family": "one-half",
+  "slug": "light",
+  "name": "One Half Light",
+  "appearance": "light",
+  "palette": {
+    "background": "#fafafa",
+    "foreground": "#383a42",
+    "cursor": "#383a42",
+    "cursorText": "#fafafa",
+    "selectionBackground": "#4f525e",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#383a42",
+      "red": "#e45649",
+      "green": "#50a14f",
+      "yellow": "#c18401",
+      "blue": "#0184bc",
+      "magenta": "#a626a4",
+      "cyan": "#0997b3",
+      "white": "#fafafa",
+      "brightBlack": "#4f525e",
+      "brightRed": "#e06c75",
+      "brightGreen": "#98c379",
+      "brightYellow": "#e5c07b",
+      "brightBlue": "#61afef",
+      "brightMagenta": "#c678dd",
+      "brightCyan": "#56b6c2",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "author": "One Half",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/one-half/light/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

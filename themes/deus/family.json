@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "deus",
+  "name": "Deus",
+  "description": {
+    "en": "Deus is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Deus 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "author": "Deus",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/deus/"
+  },
+  "tags": []
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "rose-pine/moon",
+  "family": "rose-pine",
+  "slug": "moon",
+  "name": "Rosé Pine Moon",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2a273f",
+    "foreground": "#e0def4",
+    "cursor": "#e0def4",
+    "cursorText": "#2a273f",
+    "selectionBackground": "#908caa",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#393552",
+      "red": "#eb6f92",
+      "green": "#3e8fb0",
+      "yellow": "#f6c177",
+      "blue": "#9ccfd8",
+      "magenta": "#c4a7e7",
+      "cyan": "#ea9a97",
+      "white": "#e0def4",
+      "brightBlack": "#908caa",
+      "brightRed": "#eb6f92",
+      "brightGreen": "#3e8fb0",
+      "brightYellow": "#f6c177",
+      "brightBlue": "#9ccfd8",
+      "brightMagenta": "#c4a7e7",
+      "brightCyan": "#ea9a97",
+      "brightWhite": "#e0def4"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/rose-pine/rose-pine-theme",
+    "author": "Rosé Pine",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/rose-pine/rose-pine-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/rose-pine/moon/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

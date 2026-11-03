@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "zenbones/forestbones-dark",
+  "family": "zenbones",
+  "slug": "forestbones-dark",
+  "name": "Zenbones Forestbones Dark",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2c343a",
+    "foreground": "#e7dcc4",
+    "cursor": "#e7dcc4",
+    "cursorText": "#2c343a",
+    "selectionBackground": "#45525c",
+    "selectionForeground": "#e7dcc4",
+    "ansi": {
+      "black": "#2c343a",
+      "red": "#e67c7f",
+      "green": "#a9c181",
+      "yellow": "#ddbd7f",
+      "blue": "#7fbcb4",
+      "magenta": "#d69ab7",
+      "cyan": "#83c193",
+      "white": "#e7dcc4",
+      "brightBlack": "#45525c",
+      "brightRed": "#ed9294",
+      "brightGreen": "#b0ce7b",
+      "brightYellow": "#edc77a",
+      "brightBlue": "#7ac9c0",
+      "brightMagenta": "#e5a7c4",
+      "brightCyan": "#7dd093",
+      "brightWhite": "#b2a790"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/zenbones-theme/zenbones.nvim",
+    "author": "Zenbones",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/zenbones-theme/zenbones.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/zenbones/forestbones-dark/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

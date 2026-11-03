@@ -1,0 +1,37 @@
+---
+import { t } from "../../i18n/ui";
+import { guides } from "../../lib/guides";
+import { localized, type Page } from "../../lib/routes";
+
+const page = Astro.props.page as Extract<Page, { kind: "guideIndex" }>;
+const { locale } = page;
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">{guides.length} {t(locale, "nav.guides")}</p>
+    <h1>{t(locale, "guide.indexTitle")}</h1>
+    <p class="lede">{t(locale, "guide.indexDescription")}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="grid">
+      {guides
+        .sort((a, b) => a.order - b.order)
+        .map((guide) => (
+          <a class="card" href={href(`guides/${guide.slug}`)}>
+            <div class="card-body">
+              <div class="card-title">
+                <span>{guide.title[locale]}</span>
+                <span class="badge">{String(guide.order).padStart(2, "0")}</span>
+              </div>
+              <p class="muted small">{guide.description[locale]}</p>
+            </div>
+          </a>
+        ))}
+    </div>
+  </div>
+</section>

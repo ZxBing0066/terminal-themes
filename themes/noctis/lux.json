@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "noctis/lux",
+  "family": "noctis",
+  "slug": "lux",
+  "name": "Noctis Lux",
+  "appearance": "light",
+  "palette": {
+    "background": "#f6edda",
+    "foreground": "#005661",
+    "cursor": "#005661",
+    "cursorText": "#f6edda",
+    "selectionBackground": "#004d57",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#003b42",
+      "red": "#e34e1c",
+      "green": "#00b368",
+      "yellow": "#f49725",
+      "blue": "#0094f0",
+      "magenta": "#ff5792",
+      "cyan": "#00bdd6",
+      "white": "#8ca6a6",
+      "brightBlack": "#004d57",
+      "brightRed": "#ff4000",
+      "brightGreen": "#00d17a",
+      "brightYellow": "#ff8c00",
+      "brightBlue": "#0fa3ff",
+      "brightMagenta": "#ff6b9f",
+      "brightCyan": "#00cbe6",
+      "brightWhite": "#bbc3c4"
+    }
+  },
+  "source": {
+    "author": "Noctis",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/noctis/lux/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

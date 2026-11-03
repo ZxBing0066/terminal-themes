@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "noctis/azureus",
+  "family": "noctis",
+  "slug": "azureus",
+  "name": "Noctis Azureus",
+  "appearance": "dark",
+  "palette": {
+    "background": "#051b29",
+    "foreground": "#becfda",
+    "cursor": "#becfda",
+    "cursorText": "#051b29",
+    "selectionBackground": "#475e6c",
+    "selectionForeground": "#becfda",
+    "ansi": {
+      "black": "#28353e",
+      "red": "#e66533",
+      "green": "#49e9a6",
+      "yellow": "#e4b781",
+      "blue": "#49ace9",
+      "magenta": "#df769b",
+      "cyan": "#49d6e9",
+      "white": "#aec3d0",
+      "brightBlack": "#475e6c",
+      "brightRed": "#e97749",
+      "brightGreen": "#60ebb1",
+      "brightYellow": "#e69533",
+      "brightBlue": "#60b6eb",
+      "brightMagenta": "#e798b3",
+      "brightCyan": "#60dbeb",
+      "brightWhite": "#becfda"
+    }
+  },
+  "source": {
+    "author": "Noctis",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/noctis/azureus/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

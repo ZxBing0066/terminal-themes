@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "jellybeans",
+  "name": "Jellybeans",
+  "description": {
+    "en": "Jellybeans is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Jellybeans 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/nanotech/jellybeans.vim",
+    "author": "nanotech",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/nanotech/jellybeans.vim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/jellybeans/"
+  },
+  "tags": []
+}

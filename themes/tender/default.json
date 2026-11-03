@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "tender/default",
+  "family": "tender",
+  "slug": "default",
+  "name": "Tender Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#282828",
+    "foreground": "#eeeeee",
+    "cursor": "#eeeeee",
+    "cursorText": "#282828",
+    "selectionBackground": "#474747",
+    "selectionForeground": "#eeeeee",
+    "ansi": {
+      "black": "#282828",
+      "red": "#f43753",
+      "green": "#c9d05c",
+      "yellow": "#ffc24b",
+      "blue": "#b3deef",
+      "magenta": "#d3b987",
+      "cyan": "#73cef4",
+      "white": "#eeeeee",
+      "brightBlack": "#1d1d1d",
+      "brightRed": "#f43753",
+      "brightGreen": "#c9d05c",
+      "brightYellow": "#ffc24b",
+      "brightBlue": "#b3deef",
+      "brightMagenta": "#d3b987",
+      "brightCyan": "#73cef4",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "author": "Tender",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/tender/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

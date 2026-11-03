@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "sonokai/default",
+  "family": "sonokai",
+  "slug": "default",
+  "name": "Sonokai Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2c2e34",
+    "foreground": "#e2e2e3",
+    "cursor": "#e2e2e3",
+    "cursorText": "#2c2e34",
+    "selectionBackground": "#7f8490",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#181819",
+      "red": "#fc5d7c",
+      "green": "#9ed072",
+      "yellow": "#e7c664",
+      "blue": "#76cce0",
+      "magenta": "#b39df3",
+      "cyan": "#f39660",
+      "white": "#e2e2e3",
+      "brightBlack": "#7f8490",
+      "brightRed": "#fc5d7c",
+      "brightGreen": "#9ed072",
+      "brightYellow": "#e7c664",
+      "brightBlue": "#76cce0",
+      "brightMagenta": "#b39df3",
+      "brightCyan": "#f39660",
+      "brightWhite": "#e2e2e3"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/sainnhe/sonokai",
+    "author": "sainnhe",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/sainnhe/sonokai/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/sonokai/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

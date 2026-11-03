@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "night-owl/dark",
+  "family": "night-owl",
+  "slug": "dark",
+  "name": "Night Owl Dark",
+  "appearance": "dark",
+  "palette": {
+    "background": "#011627",
+    "foreground": "#cccccc",
+    "cursor": "#cccccc",
+    "cursorText": "#011627",
+    "selectionBackground": "#575656",
+    "selectionForeground": "#cccccc",
+    "ansi": {
+      "black": "#011627",
+      "red": "#ef5350",
+      "green": "#22da6e",
+      "yellow": "#c5e478",
+      "blue": "#82aaff",
+      "magenta": "#c792ea",
+      "cyan": "#21c7a8",
+      "white": "#ffffff",
+      "brightBlack": "#575656",
+      "brightRed": "#ef5350",
+      "brightGreen": "#22da6e",
+      "brightYellow": "#ffeb95",
+      "brightBlue": "#82aaff",
+      "brightMagenta": "#c792ea",
+      "brightCyan": "#7fdbca",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/sdras/night-owl-vscode-theme",
+    "author": "Sarah Drasner",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/sdras/night-owl-vscode-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/night-owl/dark/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

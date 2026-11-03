@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "noctis/viola",
+  "family": "noctis",
+  "slug": "viola",
+  "name": "Noctis Viola",
+  "appearance": "dark",
+  "palette": {
+    "background": "#291d35",
+    "foreground": "#ccbfd9",
+    "cursor": "#ccbfd9",
+    "cursorText": "#291d35",
+    "selectionBackground": "#594e65",
+    "selectionForeground": "#ccbfd9",
+    "ansi": {
+      "black": "#362f3d",
+      "red": "#e66533",
+      "green": "#49e9a6",
+      "yellow": "#e4b781",
+      "blue": "#49ace9",
+      "magenta": "#df769b",
+      "cyan": "#49d6e9",
+      "white": "#bfafcf",
+      "brightBlack": "#594e65",
+      "brightRed": "#e97749",
+      "brightGreen": "#60ebb1",
+      "brightYellow": "#e69533",
+      "brightBlue": "#60b6eb",
+      "brightMagenta": "#e798b3",
+      "brightCyan": "#60dbeb",
+      "brightWhite": "#ccbfd9"
+    }
+  },
+  "source": {
+    "author": "Noctis",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/noctis/viola/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

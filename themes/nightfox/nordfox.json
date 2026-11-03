@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "nightfox/nordfox",
+  "family": "nightfox",
+  "slug": "nordfox",
+  "name": "Nightfox Nordfox",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2e3440",
+    "foreground": "#cdcecf",
+    "cursor": "#cdcecf",
+    "cursorText": "#2e3440",
+    "selectionBackground": "#465780",
+    "selectionForeground": "#cdcecf",
+    "ansi": {
+      "black": "#3b4252",
+      "red": "#bf616a",
+      "green": "#a3be8c",
+      "yellow": "#ebcb8b",
+      "blue": "#81a1c1",
+      "magenta": "#b48ead",
+      "cyan": "#88c0d0",
+      "white": "#e5e9f0",
+      "brightBlack": "#465780",
+      "brightRed": "#d06f79",
+      "brightGreen": "#b1d196",
+      "brightYellow": "#f0d399",
+      "brightBlue": "#8cafd2",
+      "brightMagenta": "#c895bf",
+      "brightCyan": "#93ccdc",
+      "brightWhite": "#e7ecf4"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/EdenEast/nightfox.nvim",
+    "author": "Eden East",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/EdenEast/nightfox.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/nightfox/nordfox/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

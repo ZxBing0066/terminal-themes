@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "catppuccin/frappe",
+  "family": "catppuccin",
+  "slug": "frappe",
+  "name": "Catppuccin Frappé",
+  "appearance": "dark",
+  "palette": {
+    "background": "#303446",
+    "foreground": "#c6d0f5",
+    "cursor": "#c6d0f5",
+    "cursorText": "#303446",
+    "selectionBackground": "#626880",
+    "selectionForeground": "#c6d0f5",
+    "ansi": {
+      "black": "#51576d",
+      "red": "#e78284",
+      "green": "#a6d189",
+      "yellow": "#e5c890",
+      "blue": "#8caaee",
+      "magenta": "#f4b8e4",
+      "cyan": "#81c8be",
+      "white": "#a5adce",
+      "brightBlack": "#626880",
+      "brightRed": "#e67172",
+      "brightGreen": "#8ec772",
+      "brightYellow": "#d9ba73",
+      "brightBlue": "#7b9ef0",
+      "brightMagenta": "#f2a4db",
+      "brightCyan": "#5abfb5",
+      "brightWhite": "#b5bfe2"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/catppuccin/catppuccin",
+    "author": "Catppuccin",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/catppuccin/catppuccin/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/catppuccin/frappe/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

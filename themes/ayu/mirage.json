@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "ayu/mirage",
+  "family": "ayu",
+  "slug": "mirage",
+  "name": "Ayu Mirage",
+  "appearance": "dark",
+  "palette": {
+    "background": "#1f2430",
+    "foreground": "#cccac2",
+    "cursor": "#cccac2",
+    "cursorText": "#1f2430",
+    "selectionBackground": "#686868",
+    "selectionForeground": "#cccac2",
+    "ansi": {
+      "black": "#171b24",
+      "red": "#ed8274",
+      "green": "#87d96c",
+      "yellow": "#facc6e",
+      "blue": "#6dcbfa",
+      "magenta": "#dabafa",
+      "cyan": "#90e1c6",
+      "white": "#c7c7c7",
+      "brightBlack": "#686868",
+      "brightRed": "#f28779",
+      "brightGreen": "#d5ff80",
+      "brightYellow": "#ffd173",
+      "brightBlue": "#73d0ff",
+      "brightMagenta": "#dfbfff",
+      "brightCyan": "#95e6cb",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/ayu-theme/ayu-colors",
+    "author": "Ayu Theme",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/ayu-theme/ayu-colors/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/ayu/mirage/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

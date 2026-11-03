@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "github/light-legacy",
+  "family": "github",
+  "slug": "light-legacy",
+  "name": "GitHub Light Legacy",
+  "appearance": "light",
+  "palette": {
+    "background": "#f6f8fa",
+    "foreground": "#586069",
+    "cursor": "#586069",
+    "cursorText": "#f6f8fa",
+    "selectionBackground": "#959da5",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#24292e",
+      "red": "#d73a49",
+      "green": "#28a745",
+      "yellow": "#dbab09",
+      "blue": "#0366d6",
+      "magenta": "#5a32a3",
+      "cyan": "#1b7c83",
+      "white": "#6a737d",
+      "brightBlack": "#959da5",
+      "brightRed": "#cb2431",
+      "brightGreen": "#22863a",
+      "brightYellow": "#b08800",
+      "brightBlue": "#005cc5",
+      "brightMagenta": "#5a32a3",
+      "brightCyan": "#3192aa",
+      "brightWhite": "#d1d5da"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/primer/github-vscode-theme",
+    "author": "GitHub",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/primer/github-vscode-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/github/light-legacy/"
+  },
+  "tags": [
+    "light",
+    "balanced",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

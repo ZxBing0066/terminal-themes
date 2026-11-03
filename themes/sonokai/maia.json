@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "sonokai/maia",
+  "family": "sonokai",
+  "slug": "maia",
+  "name": "Sonokai Maia",
+  "appearance": "dark",
+  "palette": {
+    "background": "#273136",
+    "foreground": "#e1e2e3",
+    "cursor": "#e1e2e3",
+    "cursorText": "#273136",
+    "selectionBackground": "#82878b",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#1c1e1f",
+      "red": "#f76c7c",
+      "green": "#9cd57b",
+      "yellow": "#e3d367",
+      "blue": "#78cee9",
+      "magenta": "#baa0f8",
+      "cyan": "#f3a96a",
+      "white": "#e1e2e3",
+      "brightBlack": "#82878b",
+      "brightRed": "#f76c7c",
+      "brightGreen": "#9cd57b",
+      "brightYellow": "#e3d367",
+      "brightBlue": "#78cee9",
+      "brightMagenta": "#baa0f8",
+      "brightCyan": "#f3a96a",
+      "brightWhite": "#e1e2e3"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/sainnhe/sonokai",
+    "author": "sainnhe",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/sainnhe/sonokai/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/sonokai/maia/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

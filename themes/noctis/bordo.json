@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "noctis/bordo",
+  "family": "noctis",
+  "slug": "bordo",
+  "name": "Noctis Bordo",
+  "appearance": "dark",
+  "palette": {
+    "background": "#272022",
+    "foreground": "#cbbec2",
+    "cursor": "#cbbec2",
+    "cursorText": "#272022",
+    "selectionBackground": "#69545b",
+    "selectionForeground": "#cbbec2",
+    "ansi": {
+      "black": "#47393e",
+      "red": "#e66533",
+      "green": "#49e9a6",
+      "yellow": "#e4b781",
+      "blue": "#49ace9",
+      "magenta": "#df769b",
+      "cyan": "#49d6e9",
+      "white": "#b9acb0",
+      "brightBlack": "#69545b",
+      "brightRed": "#e97749",
+      "brightGreen": "#60ebb1",
+      "brightYellow": "#e69533",
+      "brightBlue": "#60b6eb",
+      "brightMagenta": "#e798b3",
+      "brightCyan": "#60dbeb",
+      "brightWhite": "#cbbec2"
+    }
+  },
+  "source": {
+    "author": "Noctis",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/noctis/bordo/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

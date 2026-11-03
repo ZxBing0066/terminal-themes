@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "jellybeans/default",
+  "family": "jellybeans",
+  "slug": "default",
+  "name": "Jellybeans Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#121212",
+    "foreground": "#dedede",
+    "cursor": "#dedede",
+    "cursorText": "#121212",
+    "selectionBackground": "#bdbdbd",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#929292",
+      "red": "#e27373",
+      "green": "#94b979",
+      "yellow": "#ffba7b",
+      "blue": "#97bedc",
+      "magenta": "#e1c0fa",
+      "cyan": "#00988e",
+      "white": "#dedede",
+      "brightBlack": "#bdbdbd",
+      "brightRed": "#ffa1a1",
+      "brightGreen": "#bddeab",
+      "brightYellow": "#ffdca0",
+      "brightBlue": "#b1d8f6",
+      "brightMagenta": "#fbdaff",
+      "brightCyan": "#1ab2a8",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/nanotech/jellybeans.vim",
+    "author": "nanotech",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/nanotech/jellybeans.vim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/jellybeans/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

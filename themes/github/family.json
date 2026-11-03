@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "github",
+  "name": "GitHub",
+  "description": {
+    "en": "GitHub is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "GitHub 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/primer/github-vscode-theme",
+    "author": "GitHub",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/primer/github-vscode-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/github/"
+  },
+  "tags": []
+}

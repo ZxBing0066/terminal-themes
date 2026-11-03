@@ -1,0 +1,201 @@
+---
+import Editor from "../editor/Editor";
+import { t } from "../../i18n/ui";
+import { localized, type Page } from "../../lib/routes";
+
+const page = Astro.props.page as Extract<Page, { kind: "static" }>;
+const { locale, slug } = page;
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const github = "https://github.com/ZxBing0066/terminal-themes";
+---
+
+{slug === "editor" && (
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">{t(locale, "nav.editor")}</p>
+      <h1>{t(locale, "editor.title")}</h1>
+      <p class="lede">{t(locale, "editor.description")}</p>
+    </div>
+  </section>
+  <div class="wrap">
+    <Editor client:load />
+  </div>
+)}
+
+{slug === "search" && (
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">{t(locale, "nav.search")}</p>
+      <h1>{t(locale, "nav.search")}</h1>
+      <p class="lede">{t(locale, "common.searchPlaceholder")}</p>
+    </div>
+  </section>
+  <div class="wrap" style="padding:28px 0 60px">
+    <div id="search"></div>
+    <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+    <script is:inline>
+      // The shared worker path fails under static preview servers; the index is small.
+      window.Worker = undefined;
+      window.SharedWorker = undefined;
+    </script>
+    <script is:inline src="/pagefind/pagefind-ui.js"></script>
+    <script is:inline>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (window.PagefindUI) {
+          new window.PagefindUI({
+            element: "#search",
+            bundlePath: "/pagefind/",
+            showSubResults: true,
+            showImages: false,
+            resetStyles: false,
+          });
+        }
+      });
+    </script>
+  </div>
+)}
+
+{slug === "contribute" && (
+  <>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="eyebrow">{t(locale, "nav.contribute")}</p>
+        <h1>{locale === "zh" ? "提交一个主题" : "Submit a theme"}</h1>
+        <p class="lede">
+          {locale === "zh"
+            ? "主题是一个 JSON 文件。用编辑器调好颜色，复制 JSON，在 GitHub 上新建文件并提交 PR；CI 会校验 schema、颜色、重复项和构建。"
+            : "A theme is one JSON file. Tune it in the editor, copy the JSON, open a new file on GitHub, and send a pull request; CI validates the schema, colors, duplicates, and the build."}
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href={href("editor")}>{t(locale, "nav.editor")}</a>
+          <a class="btn" href={`${github}/blob/main/CONTRIBUTING.md`}>CONTRIBUTING.md</a>
+        </div>
+      </div>
+    </section>
+    <div class="wrap">
+      <article class="prose">
+        <h2>{locale === "zh" ? "流程" : "Workflow"}</h2>
+        <ol>
+          <li>{locale === "zh" ? "在编辑器里从任意主题开始，调整 16 色 ANSI 和背景、前景、光标、选区。" : "Start from any catalog theme in the editor and adjust the 16 ANSI colors plus background, foreground, cursor, and selection."}</li>
+          <li>{locale === "zh" ? "填好 family、slug 和名称，点击 Submit。编辑器会复制 JSON 并打开 GitHub 新建文件页。" : "Fill in family, slug, and name, then press Submit. The editor copies the JSON and opens the GitHub new-file page."}</li>
+          <li>{locale === "zh" ? "粘贴 JSON，提交 PR。CI 会运行 schema、重复色、对比度和完整构建检查。" : "Paste the JSON and open the pull request. CI runs schema, duplicate, contrast, and full-build checks."}</li>
+          <li>{locale === "zh" ? "维护者检查来源、命名和中文文案后合并，页面会自动部署。" : "A maintainer checks provenance, naming, and Chinese copy, then merges; the site deploys automatically."}</li>
+        </ol>
+        <h2>{locale === "zh" ? "要求" : "Requirements"}</h2>
+        <ul>
+          <li>{locale === "zh" ? "22 个颜色值，全部是 #rrggbb。" : "22 color values, all #rrggbb."}</li>
+          <li>{locale === "zh" ? "记录 upstream、author 和 license；未知许可标记为 unknown。" : "Record upstream, author, and license; mark unknown licenses as unknown."}</li>
+          <li>{locale === "zh" ? "不要提交上游文件、截图或文案。" : "Do not submit upstream files, screenshots, or copied prose."}</li>
+        </ul>
+        <p>
+          <a href={`${github}/blob/main/CONTEXT.md`}>{locale === "zh" ? "术语表" : "Glossary"}</a>
+          {" · "}
+          <a href={`${github}/blob/main/src/lib/schema.ts`}>{locale === "zh" ? "数据 schema" : "Data schema"}</a>
+        </p>
+      </article>
+    </div>
+  </>
+)}
+
+{slug === "about" && (
+  <>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="eyebrow">{locale === "zh" ? "关于" : "About"}</p>
+        <h1>{locale === "zh" ? "关于 Terminal Themes" : "About Terminal Themes"}</h1>
+      </div>
+    </section>
+    <div class="wrap">
+      <article class="prose">
+        <p>
+          {locale === "zh"
+            ? "Terminal Themes 是一个静态、开源的终端配色目录。每个主题只存一份调色板数据，再生成 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的配置。"
+            : "Terminal Themes is a static, open-source catalog of terminal color schemes. Each theme is stored once as palette data, then rendered into configuration files for the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal."}
+        </p>
+        <h2>{locale === "zh" ? "Herdr App，不是 Herdr TUI" : "Herdr app, not Herdr TUI"}</h2>
+        <p>
+          {locale === "zh"
+            ? "本站的 Herdr 目标是原生桌面应用：每个主题是一个 JSON 文件，放在 ~/.config/herdr-app/themes/。Herdr TUI 使用 config.toml，是另一个产品，不在本期范围内。"
+            : "The Herdr target here is the native desktop app: one JSON file per theme in ~/.config/herdr-app/themes/. Herdr TUI uses config.toml and is a separate product, out of scope for this release."}
+        </p>
+        <h2>{locale === "zh" ? "数据来源" : "Data"}</h2>
+        <p>
+          {locale === "zh"
+            ? "颜色值优先来自上游项目；缺失时从参考目录的 HTML 与调色板 SVG 中提取颜色值，不保存或再分发图片。每个主题记录上游、作者和许可。"
+            : "Palette values come from upstream projects first; when missing, they are read from the reference catalog's HTML and palette SVG. Images are never stored or redistributed. Every theme records its upstream, author, and license."}
+        </p>
+        <h2>{locale === "zh" ? "预览" : "Previews"}</h2>
+        <p>
+          {locale === "zh"
+            ? "预览由调色板在构建时生成，是 Herdr App 的风格化示意图，不是第三方截图。"
+            : "Previews are generated from palette data at build time. They are stylized Herdr app mockups, not third-party screenshots."}
+        </p>
+      </article>
+    </div>
+  </>
+)}
+
+{slug === "license" && (
+  <>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="eyebrow">{t(locale, "footer.license")}</p>
+        <h1>{t(locale, "footer.license")}</h1>
+      </div>
+    </section>
+    <div class="wrap">
+      <article class="prose">
+        <ul>
+          <li>{locale === "zh" ? "站点代码：MIT。" : "Site code: MIT."}</li>
+          <li>{locale === "zh" ? "教程与站点文案：CC BY 4.0。" : "Guides and site prose: CC BY 4.0."}</li>
+          <li>{locale === "zh" ? "每个主题的调色板保留其上游许可；主题页的 Provenance 区块列出作者与许可。" : "Each theme's palette keeps its upstream license; the Provenance block on every theme page lists the author and license."}</li>
+          <li>{locale === "zh" ? "本站不托管上游主题文件、截图或文案。" : "The site does not host upstream theme files, screenshots, or copied prose."}</li>
+        </ul>
+        <p>{locale === "zh" ? "如你是权利人并认为某条记录需要更正或移除，请开 issue。" : "If you are a rights holder and believe a record needs correction or removal, open an issue."}</p>
+      </article>
+    </div>
+  </>
+)}
+
+{slug === "privacy" && (
+  <>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="eyebrow">{t(locale, "footer.privacy")}</p>
+        <h1>{t(locale, "footer.privacy")}</h1>
+      </div>
+    </section>
+    <div class="wrap">
+      <article class="prose">
+        <ul>
+          <li>{locale === "zh" ? "没有账号、登录、评论或服务端存储。" : "No accounts, login, comments, or server-side storage."}</li>
+          <li>{locale === "zh" ? "编辑器的调色板只存在 URL hash 和你的浏览器里。" : "Editor palettes live only in the URL hash and your browser."}</li>
+          <li>{locale === "zh" ? "默认不加载第三方分析脚本。" : "No third-party analytics scripts are loaded by default."}</li>
+          <li>{locale === "zh" ? "托管在 Cloudflare Pages；访问日志由 Cloudflare 按其政策处理。" : "Hosted on Cloudflare Pages; access logs are handled by Cloudflare under its policies."}</li>
+        </ul>
+      </article>
+    </div>
+  </>
+)}
+
+{slug === "changelog" && (
+  <>
+    <section class="page-head">
+      <div class="wrap">
+        <p class="eyebrow">{t(locale, "footer.changelog")}</p>
+        <h1>{t(locale, "footer.changelog")}</h1>
+      </div>
+    </section>
+    <div class="wrap">
+      <article class="prose">
+        <h2>2026-11-03</h2>
+        <ul>
+          <li>{locale === "zh" ? "首批 112 个主题、36 个家族。" : "Initial catalog: 112 themes across 36 families."}</li>
+          <li>{locale === "zh" ? "六种导出目标，包括 Herdr App JSON 主题。" : "Six export targets, including Herdr app JSON themes."}</li>
+          <li>{locale === "zh" ? "构建时生成预览、OG 图、JSON API、llms.txt 和中英文页面。" : "Build-time previews, OG images, JSON API, llms.txt, and English/Chinese pages."}</li>
+          <li>{locale === "zh" ? "浏览器端调色板编辑器。" : "Browser-side palette editor."}</li>
+        </ul>
+      </article>
+    </div>
+  </>
+)}

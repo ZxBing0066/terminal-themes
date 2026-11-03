@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "noctis/lilac",
+  "family": "noctis",
+  "slug": "lilac",
+  "name": "Noctis Lilac",
+  "appearance": "light",
+  "palette": {
+    "background": "#e9e7f3",
+    "foreground": "#0c006b",
+    "cursor": "#0c006b",
+    "cursorText": "#e9e7f3",
+    "selectionBackground": "#0f0080",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#0c006b",
+      "red": "#e34e1c",
+      "green": "#00b368",
+      "yellow": "#f49725",
+      "blue": "#0094f0",
+      "magenta": "#ff5792",
+      "cyan": "#00bdd6",
+      "white": "#8ca6a6",
+      "brightBlack": "#0f0080",
+      "brightRed": "#ff4000",
+      "brightGreen": "#00d17a",
+      "brightYellow": "#ff8c00",
+      "brightBlue": "#0fa3ff",
+      "brightMagenta": "#ff6b9f",
+      "brightCyan": "#00cbe6",
+      "brightWhite": "#bbc3c4"
+    }
+  },
+  "source": {
+    "author": "Noctis",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/noctis/lilac/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

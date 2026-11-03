@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "zenbones/rosebones-light",
+  "family": "zenbones",
+  "slug": "rosebones-light",
+  "name": "Zenbones Rosebones Light",
+  "appearance": "light",
+  "palette": {
+    "background": "#fbf6f0",
+    "foreground": "#724341",
+    "cursor": "#724341",
+    "cursorText": "#fbf6f0",
+    "selectionBackground": "#e8c48b",
+    "selectionForeground": "#724341",
+    "ansi": {
+      "black": "#fbf6f0",
+      "red": "#b5637a",
+      "green": "#286a84",
+      "yellow": "#ec9d33",
+      "blue": "#5795a0",
+      "magenta": "#917ba9",
+      "cyan": "#5795a0",
+      "white": "#724341",
+      "brightBlack": "#e8c48b",
+      "brightRed": "#a54a66",
+      "brightGreen": "#1c5970",
+      "brightYellow": "#c68223",
+      "brightBlue": "#407d88",
+      "brightMagenta": "#855aac",
+      "brightCyan": "#407d88",
+      "brightWhite": "#a4635f"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/zenbones-theme/zenbones.nvim",
+    "author": "Zenbones",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/zenbones-theme/zenbones.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/zenbones/rosebones-light/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

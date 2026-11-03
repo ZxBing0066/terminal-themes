@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "ayu",
+  "name": "Ayu",
+  "description": {
+    "en": "Ayu is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Ayu 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/ayu-theme/ayu-colors",
+    "author": "Ayu Theme",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/ayu-theme/ayu-colors/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/ayu/"
+  },
+  "tags": []
+}

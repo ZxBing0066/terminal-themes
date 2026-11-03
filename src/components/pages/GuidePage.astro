@@ -1,0 +1,41 @@
+---
+import { t } from "../../i18n/ui";
+import { readGuide } from "../../lib/guides";
+import { localized, type Page } from "../../lib/routes";
+import Breadcrumbs from "../Breadcrumbs.astro";
+
+const page = Astro.props.page as Extract<Page, { kind: "guide" }>;
+const { guide, locale } = page;
+const { html, usedLocale } = readGuide(locale, guide.slug);
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <Breadcrumbs page={page} />
+    <p class="eyebrow">{t(locale, "nav.guides")}</p>
+    <h1>{guide.title[locale]}</h1>
+    <p class="lede">{guide.description[locale]}</p>
+  </div>
+</section>
+
+<div class="wrap">
+  {usedLocale !== locale && (
+    <p class="panel muted" style="margin-top:20px">
+      {locale === "zh" ? "这篇教程暂未翻译，以下为英文原文。" : "This guide is not translated yet."}
+    </p>
+  )}
+  <article class="prose" set:html={html}></article>
+
+  <section class="section" style="padding-top:0">
+    <div class="panel">
+      <div class="panel-title">{t(locale, "guide.related")}</div>
+      <div class="chips">
+        <a class="chip" href={href("themes")}>{t(locale, "nav.themes")}</a>
+        <a class="chip" href={href("herdr-app")}>{t(locale, "nav.herdr")}</a>
+        <a class="chip" href={href("editor")}>{t(locale, "nav.editor")}</a>
+        <a class="chip" href={href("guides")}>{t(locale, "nav.guides")}</a>
+      </div>
+    </div>
+  </section>
+</div>

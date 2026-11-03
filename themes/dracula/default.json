@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "dracula/default",
+  "family": "dracula",
+  "slug": "default",
+  "name": "Dracula Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#282a36",
+    "foreground": "#f8f8f2",
+    "cursor": "#f8f8f2",
+    "cursorText": "#282a36",
+    "selectionBackground": "#6272a4",
+    "selectionForeground": "#f8f8f2",
+    "ansi": {
+      "black": "#21222c",
+      "red": "#ff5555",
+      "green": "#50fa7b",
+      "yellow": "#f1fa8c",
+      "blue": "#bd93f9",
+      "magenta": "#ff79c6",
+      "cyan": "#8be9fd",
+      "white": "#f8f8f2",
+      "brightBlack": "#6272a4",
+      "brightRed": "#ff6e6e",
+      "brightGreen": "#69ff94",
+      "brightYellow": "#ffffa5",
+      "brightBlue": "#d6acff",
+      "brightMagenta": "#ff92df",
+      "brightCyan": "#a4ffff",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/dracula/dracula-theme",
+    "author": "Dracula Theme",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/dracula/dracula-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/dracula/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

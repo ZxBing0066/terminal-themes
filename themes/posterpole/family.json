@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "posterpole",
+  "name": "Posterpole",
+  "description": {
+    "en": "Posterpole is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Posterpole 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "author": "Posterpole",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/posterpole/"
+  },
+  "tags": []
+}

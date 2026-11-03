@@ -1,0 +1,117 @@
+---
+import { targets } from "../../data/targets";
+import { t } from "../../i18n/ui";
+import { allFamilies, allThemes } from "../../lib/data";
+import { localized, type Page } from "../../lib/routes";
+import ThemeCard from "../ThemeCard.astro";
+
+const page = Astro.props.page as Extract<Page, { kind: "home" }>;
+const locale = page.locale;
+const themes = allThemes();
+const families = allFamilies();
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+
+const featuredIds = [
+  "catppuccin/mocha",
+  "tokyo-night/storm",
+  "gruvbox/dark",
+  "nord/default",
+  "rose-pine/moon",
+  "kanagawa/wave",
+  "everforest/dark",
+  "solarized/light",
+  "github/dark",
+  "dracula/default",
+  "one/dark",
+  "night-owl/dark",
+];
+const featured = featuredIds
+  .map((id) => themes.find((theme) => theme.id === id))
+  .filter((theme): theme is NonNullable<typeof theme> => Boolean(theme));
+const latest = themes.filter((theme) => !featuredIds.includes(theme.id)).slice(0, 8);
+---
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">{t(locale, "home.kicker")}</p>
+    <h1>{t(locale, "home.title")}</h1>
+    <p class="lede">{t(locale, "home.description")}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={href("themes")}>{t(locale, "home.ctaThemes")}</a>
+      <a class="btn" href={href("editor")}>{t(locale, "home.ctaEditor")}</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><strong>{themes.length}</strong><span>{t(locale, "home.statsThemes")}</span></div>
+      <div class="stat"><strong>{families.length}</strong><span>{t(locale, "home.statsFamilies")}</span></div>
+      <div class="stat"><strong>{targets.length}</strong><span>{t(locale, "home.statsTargets")}</span></div>
+      <div class="stat"><strong>2</strong><span>{t(locale, "home.statsLanguages")}</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "home.featured")}</p>
+        <h2>{t(locale, "home.featured")}</h2>
+      </div>
+      <a class="mono small" href={href("themes")}>{t(locale, "common.viewAll")} →</a>
+    </div>
+    <div class="grid">
+      {featured.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "home.byTarget")}</p>
+        <h2>{t(locale, "home.byTarget")}</h2>
+      </div>
+    </div>
+    <div class="grid">
+      {targets.map((target) => (
+        <a class="card" href={href(target.slug)}>
+          <div class="card-body">
+            <div class="card-title">
+              <span>{target.name}</span>
+              <span class="badge">{themes.length}</span>
+            </div>
+            <p class="muted small">{target.title[locale]}</p>
+            <div class="card-meta"><span>{target.slug}</span></div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "home.latest")}</p>
+        <h2>{t(locale, "home.latest")}</h2>
+      </div>
+    </div>
+    <div class="grid">
+      {latest.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "nav.editor")}</p>
+        <h2>{t(locale, "editor.title")}</h2>
+        <p>{t(locale, "editor.description")}</p>
+      </div>
+      <a class="btn" href={href("editor")}>{t(locale, "home.ctaEditor")}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "lucario/default",
+  "family": "lucario",
+  "slug": "default",
+  "name": "Lucario Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2b3e50",
+    "foreground": "#f8f8f2",
+    "cursor": "#f8f8f2",
+    "cursorText": "#2b3e50",
+    "selectionBackground": "#455f68",
+    "selectionForeground": "#f8f8f2",
+    "ansi": {
+      "black": "#19242f",
+      "red": "#e94b35",
+      "green": "#199c4b",
+      "yellow": "#f0cc04",
+      "blue": "#5c98cd",
+      "magenta": "#ca94ff",
+      "cyan": "#8be0fd",
+      "white": "#f8f8f2",
+      "brightBlack": "#2f3943",
+      "brightRed": "#ff6541",
+      "brightGreen": "#72cc5a",
+      "brightYellow": "#ffffa5",
+      "brightBlue": "#d6acff",
+      "brightMagenta": "#d4a9ff",
+      "brightCyan": "#b9ecfd",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "author": "Lucario",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/lucario/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

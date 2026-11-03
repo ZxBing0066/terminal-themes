@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "sonokai",
+  "name": "Sonokai",
+  "description": {
+    "en": "Sonokai is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Sonokai 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/sainnhe/sonokai",
+    "author": "sainnhe",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/sainnhe/sonokai/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/sonokai/"
+  },
+  "tags": []
+}

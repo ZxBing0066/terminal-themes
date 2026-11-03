@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "tomorrow/night",
+  "family": "tomorrow",
+  "slug": "night",
+  "name": "Tomorrow Night",
+  "appearance": "dark",
+  "palette": {
+    "background": "#1d1f21",
+    "foreground": "#c5c8c6",
+    "cursor": "#c5c8c6",
+    "cursorText": "#1d1f21",
+    "selectionBackground": "#373a3b",
+    "selectionForeground": "#c5c8c6",
+    "ansi": {
+      "black": "#000000",
+      "red": "#cc6666",
+      "green": "#b5bd68",
+      "yellow": "#f0c674",
+      "blue": "#81a2be",
+      "magenta": "#b294bb",
+      "cyan": "#8abeb7",
+      "white": "#ffffff",
+      "brightBlack": "#000000",
+      "brightRed": "#cc6666",
+      "brightGreen": "#b5bd68",
+      "brightYellow": "#f0c674",
+      "brightBlue": "#81a2be",
+      "brightMagenta": "#b294bb",
+      "brightCyan": "#8abeb7",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/chriskempson/tomorrow-theme",
+    "author": "Chris Kempson",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/chriskempson/tomorrow-theme/blob/master/LICENSE.md",
+    "reference": "https://terminalcolors.com/themes/tomorrow/night/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

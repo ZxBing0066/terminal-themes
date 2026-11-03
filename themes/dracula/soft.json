@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "dracula/soft",
+  "family": "dracula",
+  "slug": "soft",
+  "name": "Dracula Soft",
+  "appearance": "dark",
+  "palette": {
+    "background": "#282a36",
+    "foreground": "#f6f6f4",
+    "cursor": "#f6f6f4",
+    "cursorText": "#282a36",
+    "selectionBackground": "#7b7f8b",
+    "selectionForeground": "#f6f6f4",
+    "ansi": {
+      "black": "#262626",
+      "red": "#ee6666",
+      "green": "#62e884",
+      "yellow": "#e7ee98",
+      "blue": "#bf9eee",
+      "magenta": "#f286c4",
+      "cyan": "#97e1f1",
+      "white": "#f6f6f4",
+      "brightBlack": "#7b7f8b",
+      "brightRed": "#f07c7c",
+      "brightGreen": "#78f09a",
+      "brightYellow": "#f6f6ae",
+      "brightBlue": "#d6b4f7",
+      "brightMagenta": "#f49dda",
+      "brightCyan": "#adf6f6",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/dracula/dracula-theme",
+    "author": "Dracula Theme",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/dracula/dracula-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/dracula/soft/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

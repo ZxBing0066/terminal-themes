@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "github/light-colorblind",
+  "family": "github",
+  "slug": "light-colorblind",
+  "name": "GitHub Light Colorblind",
+  "appearance": "light",
+  "palette": {
+    "background": "#f6f8fa",
+    "foreground": "#24292f",
+    "cursor": "#24292f",
+    "cursorText": "#f6f8fa",
+    "selectionBackground": "#57606a",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#24292f",
+      "red": "#b35900",
+      "green": "#0550ae",
+      "yellow": "#4d2d00",
+      "blue": "#0969da",
+      "magenta": "#8250df",
+      "cyan": "#1b7c83",
+      "white": "#6e7781",
+      "brightBlack": "#57606a",
+      "brightRed": "#8a4600",
+      "brightGreen": "#0969da",
+      "brightYellow": "#633c01",
+      "brightBlue": "#218bff",
+      "brightMagenta": "#a475f9",
+      "brightCyan": "#3192aa",
+      "brightWhite": "#8c959f"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/primer/github-vscode-theme",
+    "author": "GitHub",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/primer/github-vscode-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/github/light-colorblind/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

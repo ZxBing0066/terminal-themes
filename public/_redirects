@@ -1,0 +1,3 @@
+/herdr /herdr-app/ 301
+/themes/:family /themes/:family/ 301
+/themes/:family/:slug /themes/:family/:slug/ 301

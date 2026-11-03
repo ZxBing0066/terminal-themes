@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "moonfly/default",
+  "family": "moonfly",
+  "slug": "default",
+  "name": "Moonfly Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#080808",
+    "foreground": "#bdbdbd",
+    "cursor": "#bdbdbd",
+    "cursorText": "#080808",
+    "selectionBackground": "#949494",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#323437",
+      "red": "#ff5454",
+      "green": "#8cc85f",
+      "yellow": "#e3c78a",
+      "blue": "#80a0ff",
+      "magenta": "#cf87e8",
+      "cyan": "#79dac8",
+      "white": "#c6c6c6",
+      "brightBlack": "#949494",
+      "brightRed": "#ff5189",
+      "brightGreen": "#36c692",
+      "brightYellow": "#c6c684",
+      "brightBlue": "#74b2ff",
+      "brightMagenta": "#ae81ff",
+      "brightCyan": "#85dc85",
+      "brightWhite": "#e4e4e4"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/bluz71/vim-moonfly-colors",
+    "author": "bluz71",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/bluz71/vim-moonfly-colors/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/moonfly/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "zenbones/seoulbones-dark",
+  "family": "zenbones",
+  "slug": "seoulbones-dark",
+  "name": "Zenbones Seoulbones Dark",
+  "appearance": "dark",
+  "palette": {
+    "background": "#4b4b4b",
+    "foreground": "#dddddd",
+    "cursor": "#dddddd",
+    "cursorText": "#4b4b4b",
+    "selectionBackground": "#6c6465",
+    "selectionForeground": "#dddddd",
+    "ansi": {
+      "black": "#4b4b4b",
+      "red": "#e388a3",
+      "green": "#98bd99",
+      "yellow": "#ffdf9b",
+      "blue": "#97bdde",
+      "magenta": "#a5a6c5",
+      "cyan": "#6fbdbe",
+      "white": "#dddddd",
+      "brightBlack": "#6c6465",
+      "brightRed": "#eb99b1",
+      "brightGreen": "#8fcd92",
+      "brightYellow": "#ffe5b3",
+      "brightBlue": "#a2c8e9",
+      "brightMagenta": "#b2b3da",
+      "brightCyan": "#6bcacb",
+      "brightWhite": "#a8a8a8"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/zenbones-theme/zenbones.nvim",
+    "author": "Zenbones",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/zenbones-theme/zenbones.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/zenbones/seoulbones-dark/"
+  },
+  "tags": [
+    "dark",
+    "balanced",
+    "cool"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

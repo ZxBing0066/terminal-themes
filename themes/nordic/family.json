@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "nordic",
+  "name": "Nordic",
+  "description": {
+    "en": "Nordic is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Nordic 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "author": "Nordic",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/nordic/"
+  },
+  "tags": []
+}

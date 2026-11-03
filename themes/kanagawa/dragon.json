@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "kanagawa/dragon",
+  "family": "kanagawa",
+  "slug": "dragon",
+  "name": "Kanagawa Dragon",
+  "appearance": "dark",
+  "palette": {
+    "background": "#181616",
+    "foreground": "#c5c9c5",
+    "cursor": "#c5c9c5",
+    "cursorText": "#181616",
+    "selectionBackground": "#a6a69c",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#0d0c0c",
+      "red": "#c4746e",
+      "green": "#8a9a7b",
+      "yellow": "#c4b28a",
+      "blue": "#8ba4b0",
+      "magenta": "#a292a3",
+      "cyan": "#8ea4a2",
+      "white": "#c8c093",
+      "brightBlack": "#a6a69c",
+      "brightRed": "#e46876",
+      "brightGreen": "#87a987",
+      "brightYellow": "#e6c384",
+      "brightBlue": "#7fb4ca",
+      "brightMagenta": "#938aa9",
+      "brightCyan": "#7aa89f",
+      "brightWhite": "#c5c9c5"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/rebelot/kanagawa.nvim",
+    "author": "Tommaso Laurenzi",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/rebelot/kanagawa.nvim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/kanagawa/dragon/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

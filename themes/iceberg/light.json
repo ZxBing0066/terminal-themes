@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "iceberg/light",
+  "family": "iceberg",
+  "slug": "light",
+  "name": "Iceberg Light",
+  "appearance": "light",
+  "palette": {
+    "background": "#e8e9ec",
+    "foreground": "#33374c",
+    "cursor": "#33374c",
+    "cursorText": "#e8e9ec",
+    "selectionBackground": "#8389a3",
+    "selectionForeground": "#33374c",
+    "ansi": {
+      "black": "#dcdfe7",
+      "red": "#cc517a",
+      "green": "#668e3d",
+      "yellow": "#c57339",
+      "blue": "#2d539e",
+      "magenta": "#7759b4",
+      "cyan": "#3f83a6",
+      "white": "#33374c",
+      "brightBlack": "#8389a3",
+      "brightRed": "#cc3768",
+      "brightGreen": "#598030",
+      "brightYellow": "#b6662d",
+      "brightBlue": "#22478e",
+      "brightMagenta": "#6845ad",
+      "brightCyan": "#327698",
+      "brightWhite": "#262a3f"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/cocopon/iceberg.vim",
+    "author": "cocopon",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/cocopon/iceberg.vim/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/iceberg/light/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

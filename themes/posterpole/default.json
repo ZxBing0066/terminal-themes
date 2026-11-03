@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "posterpole/default",
+  "family": "posterpole",
+  "slug": "default",
+  "name": "Posterpole Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#25222a",
+    "foreground": "#c6c0b9",
+    "cursor": "#c6c0b9",
+    "cursorText": "#25222a",
+    "selectionBackground": "#a5a59c",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#2c2c30",
+      "red": "#a97070",
+      "green": "#778c73",
+      "yellow": "#cc9166",
+      "blue": "#6c7f93",
+      "magenta": "#b894af",
+      "cyan": "#8ea4a2",
+      "white": "#afa79d",
+      "brightBlack": "#a5a59c",
+      "brightRed": "#bc8f8f",
+      "brightGreen": "#92a38f",
+      "brightYellow": "#d9ac8c",
+      "brightBlue": "#8a99a8",
+      "brightMagenta": "#ccb3c6",
+      "brightCyan": "#aabbba",
+      "brightWhite": "#c6c0b9"
+    }
+  },
+  "source": {
+    "author": "Posterpole",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/posterpole/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

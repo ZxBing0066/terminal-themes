@@ -1,0 +1,237 @@
+import { contrast } from "./color";
+import { deriveHerdrAppColors } from "./ports/herdr-app";
+import { ansiList } from "./palette";
+import type { Theme } from "./schema";
+
+interface PreviewOptions {
+  height?: number;
+  og?: boolean;
+}
+
+function esc(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function text(
+  x: number,
+  y: number,
+  value: string,
+  fill: string,
+  size = 13,
+  extra = "",
+): string {
+  return `<text x="${x}" y="${y}" fill="${fill}" font-size="${size}" font-family="JetBrains Mono, monospace" ${extra}>${esc(value)}</text>`;
+}
+
+function dot(x: number, y: number, color: string): string {
+  return `<circle cx="${x}" cy="${y}" r="3" fill="${color}" />`;
+}
+
+function pane(
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  theme: Theme,
+  title: string,
+  status: string,
+  body: string[],
+): string {
+  const c = deriveHerdrAppColors(theme);
+  const header = 26;
+  return `<g>
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${theme.palette.background}" stroke="${c.border}" />
+    <path d="M${x} ${y + 6} a6 6 0 0 1 6 -6 h${w - 12} a6 6 0 0 1 6 6 v${header - 6} h-${w} z" fill="${c.chrome}" />
+    ${dot(x + 14, y + 13, status)}
+    ${text(x + 24, y + 17, title, c.muted, 11)}
+    <line x1="${x}" y1="${y + header}" x2="${x + w}" y2="${y + header}" stroke="${c.border}" />
+    ${body.join("\n")}
+  </g>`;
+}
+
+export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}): string {
+  const W = 1200;
+  const H = options.height ?? 720;
+  const og = options.og ?? false;
+  const brandBar = og ? 46 : 0;
+  const appH = H - brandBar;
+  const title = 40;
+  const status = 28;
+  const sidebar = 300;
+  const tabbar = 38;
+  const c = deriveHerdrAppColors(theme);
+  const ansi = ansiList(theme.palette.ansi);
+  const a = theme.palette.ansi;
+  const mainX = sidebar;
+  const mainW = W - sidebar;
+  const contentY = title + tabbar;
+  const contentH = appH - contentY - status;
+  const pad = 12;
+  const paneY = contentY + pad;
+  const paneH = contentH - pad * 2;
+  const leftW = Math.round((mainW - pad * 3) * 0.6);
+  const rightW = mainW - pad * 3 - leftW;
+  const leftX = mainX + pad;
+  const rightX = leftX + leftW + pad;
+
+  const prompt = (x: number, y: number) =>
+    `${text(x, y, "~ /dev/terminal-themes", c.accent, 12)}${text(x, y + 20, "❯", a.green, 13)}${text(x + 18, y + 20, "git status", c.foreground, 13)}`;
+
+  const leftBody = [
+    prompt(leftX + 16, paneY + 54),
+    text(leftX + 16, paneY + 96, "On branch main", c.muted, 12),
+    text(leftX + 16, paneY + 118, "Changes not staged for commit:", c.foreground, 12),
+    text(leftX + 16, paneY + 140, "  modified:   themes/mocha.json", a.yellow, 12),
+    text(leftX + 16, paneY + 162, "  new file:   previews/herdr-app.svg", a.green, 12),
+    text(leftX + 16, paneY + 184, "no changes added to commit", c.muted, 12),
+    `<line x1="${leftX + 16}" y1="${paneY + 202}" x2="${leftX + leftW - 16}" y2="${paneY + 202}" stroke="${c.border}" />`,
+    text(leftX + 16, paneY + 228, "❯", a.green, 13),
+    text(leftX + 34, paneY + 228, "pnpm build", c.foreground, 12),
+    text(leftX + 16, paneY + 252, "✓ built 340 pages in 4.2s", a.green, 12),
+    text(leftX + 16, paneY + 274, "✓ 112 previews", a.blue, 12),
+    text(leftX + 16, paneY + 296, "✓ 224 OG images", a.cyan, 12),
+    `<rect x="${leftX + 34}" y="${paneY + 314}" width="7" height="13" fill="${c.foreground}" opacity="0.8" />`,
+  ].join("\n");
+
+  const rightBody = [
+    text(rightX + 16, paneY + 54, "theme.json", c.muted, 11),
+    text(rightX + 16, paneY + 82, `+ "background": "${theme.palette.background}",`, a.green, 10),
+    text(rightX + 16, paneY + 102, `+ "foreground": "${theme.palette.foreground}",`, a.green, 10),
+    text(rightX + 16, paneY + 122, `- "surface": "${c.surface}",`, a.red, 10),
+    text(rightX + 16, paneY + 142, `+ "accent": "${c.accent}"`, a.green, 10),
+    text(rightX + 16, paneY + 174, "contrast", c.muted, 10),
+    text(rightX + 16, paneY + 194, `${contrast(theme.palette.foreground, theme.palette.background).toFixed(2)}:1`, a.cyan, 12),
+    ...ansi.slice(0, 8).map((hex, index) => {
+      const size = (rightW - 32 - 7 * 4) / 8;
+      return `<rect x="${rightX + 16 + index * (size + 4)}" y="${paneY + 214}" width="${size}" height="16" rx="2" fill="${hex}" />`;
+    }),
+    ...ansi.slice(8).map((hex, index) => {
+      const size = (rightW - 32 - 7 * 4) / 8;
+      return `<rect x="${rightX + 16 + index * (size + 4)}" y="${paneY + 236}" width="${size}" height="16" rx="2" fill="${hex}" />`;
+    }),
+    text(rightX + 16, paneY + 286, "herdr-app", c.muted, 10),
+    text(rightX + 16, paneY + 306, "22 ui colors", c.dim, 10),
+  ].join("\n");
+
+  const agents = [
+    { name: "claude code", state: "working", color: c.working, y: 142, active: true },
+    { name: "codex", state: "done", color: c.done, y: 170, active: false },
+    { name: "tests", state: "idle", color: c.idle, y: 198, active: false },
+  ];
+
+  const sidebarRows = [
+    text(20, 76, "SPACES", c.dim, 10, 'letter-spacing="1.2"'),
+    `<rect x="10" y="88" width="280" height="26" rx="5" fill="${c.selected}" />`,
+    text(20, 105, "terminal-themes", c.foreground, 12),
+    ...agents.map(
+      (agent) =>
+        `${dot(24, agent.y - 4, agent.color)}${text(36, agent.y, agent.name, agent.active ? c.foreground : c.muted, 11)}${text(286, agent.y, agent.state, c.dim, 9, 'text-anchor="end"')}`,
+    ),
+    `<line x1="10" y1="220" x2="290" y2="220" stroke="${c.border}" />`,
+    text(20, 244, "api", c.foreground, 12),
+    `${dot(24, 266, c.blocked)}${text(36, 270, "codex", c.muted, 11)}${text(286, 270, "blocked", c.dim, 9, 'text-anchor="end"')}`,
+    `${dot(24, 292, c.working)}${text(36, 296, "reviewer", c.muted, 11)}${text(286, 296, "working", c.dim, 9, 'text-anchor="end"')}`,
+    `<line x1="10" y1="322" x2="290" y2="322" stroke="${c.border}" />`,
+    text(20, 346, "MACHINES", c.dim, 10, 'letter-spacing="1.2"'),
+    text(20, 370, "local", c.muted, 11),
+    text(286, 370, "2", c.dim, 10, 'text-anchor="end"'),
+    text(20, 394, "vps", c.muted, 11),
+    text(286, 394, "1", c.dim, 10, 'text-anchor="end"'),
+    `<line x1="10" y1="${appH - 58}" x2="290" y2="${appH - 58}" stroke="${c.border}" />`,
+    text(20, appH - 34, "5 agents · 2 working", c.dim, 10),
+  ].join("\n");
+
+  const tabs = [
+    `<rect x="${mainX}" y="${title}" width="${mainW}" height="${tabbar}" fill="${c.chrome}" />`,
+    `<line x1="${mainX}" y1="${title + tabbar}" x2="${W}" y2="${title + tabbar}" stroke="${c.border}" />`,
+    `<rect x="${mainX + 8}" y="${title + 6}" width="104" height="${tabbar - 8}" rx="5" fill="${c.surface}" />`,
+    text(mainX + 20, title + 24, "main", c.foreground, 11),
+    text(mainX + 132, title + 24, "tokens", c.muted, 11),
+    text(mainX + 208, title + 24, "preview", c.muted, 11),
+    text(W - 24, title + 24, "⌘K", c.dim, 10, 'text-anchor="end"'),
+  ].join("\n");
+
+  const statusBar = [
+    `<rect x="0" y="${appH - status}" width="${W}" height="${status}" fill="${c.chrome}" />`,
+    `<line x1="0" y1="${appH - status}" x2="${W}" y2="${appH - status}" stroke="${c.border}" />`,
+    text(14, appH - 10, "herdr", c.accent, 10),
+    text(58, appH - 10, "3 spaces · 5 agents", c.dim, 10),
+    text(W - 14, appH - 10, "main · 2 panes", c.dim, 10, 'text-anchor="end"'),
+  ].join("\n");
+
+  const brand = og
+    ? `<rect x="0" y="${appH}" width="${W}" height="${brandBar}" fill="${c.canvas}" />
+       <line x1="0" y1="${appH}" x2="${W}" y2="${appH}" stroke="${c.border}" />
+       ${text(24, appH + 28, theme.name, c.foreground, 14)}
+       ${text(W - 24, appH + 28, "terminalthemes.iwwi.app", c.muted, 11, 'text-anchor="end"')}`
+    : "";
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(theme.name)} theme preview">
+  <rect width="${W}" height="${H}" fill="${c.canvas}" />
+  <rect x="0" y="0" width="${W}" height="${appH}" rx="10" fill="${c.canvas}" />
+  <rect x="0" y="0" width="${W}" height="${title}" rx="10" fill="${c.chrome}" />
+  <rect x="0" y="${title - 10}" width="${W}" height="10" fill="${c.chrome}" />
+  <line x1="0" y1="${title}" x2="${W}" y2="${title}" stroke="${c.border}" />
+  <circle cx="18" cy="20" r="5" fill="#ff5f57" />
+  <circle cx="36" cy="20" r="5" fill="#febc2e" />
+  <circle cx="54" cy="20" r="5" fill="#28c840" />
+  ${text(W / 2, 24, "Herdr", c.muted, 11, 'text-anchor="middle"')}
+  <rect x="0" y="${title}" width="${sidebar}" height="${appH - title}" fill="${c.surface}" />
+  <line x1="${sidebar}" y1="${title}" x2="${sidebar}" y2="${appH}" stroke="${c.border}" />
+  ${sidebarRows}
+  ${tabs}
+  ${pane(leftX, paneY, leftW, paneH, theme, "claude code", c.working, [])}
+  ${leftBody}
+  ${pane(rightX, paneY, rightW, paneH, theme, "codex", c.done, [])}
+  ${rightBody}
+  ${statusBar}
+  ${brand}
+</svg>`;
+}
+
+export function renderDefaultOg(locale: "en" | "zh"): string {
+  const width = 1200;
+  const height = 630;
+  const fg = "#e6e8eb";
+  const muted = "#9aa4af";
+  const dim = "#6f7a86";
+  const bg = "#08090a";
+  const panel = "#0e1012";
+  const border = "#23282e";
+  const bar = [
+    "#45475a", "#f38ba8", "#a6e3a1", "#f9e2af",
+    "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8",
+    "#585b70", "#f37799", "#89d88b", "#ebd391",
+    "#74a8fc", "#f2aede", "#6bd7ca", "#bac2de",
+  ];
+  const title = "terminalthemes";
+  const subtitle =
+    locale === "zh"
+      ? "终端配色，直接用到你的应用"
+      : "Terminal color schemes, ready for your app";
+  const stats =
+    locale === "zh"
+      ? "112 个主题 · 36 个家族 · 6 种应用"
+      : "112 themes · 36 families · 6 targets";
+  const cells = bar
+    .map(
+      (color, index) =>
+        `<rect x="${80 + index * 65}" y="120" width="60" height="60" rx="6" fill="${color}" />`,
+    )
+    .join("\n");
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
+  <rect width="${width}" height="${height}" fill="${bg}" />
+  <rect x="40" y="40" width="${width - 80}" height="${height - 80}" rx="12" fill="${panel}" stroke="${border}" />
+  <line x1="40" y1="250" x2="${width - 40}" y2="250" stroke="${border}" />
+  ${cells}
+  ${text(80, 330, title, fg, 56, 'font-weight="500"')}
+  ${text(80, 400, subtitle, muted, 26)}
+  ${text(80, 468, stats, dim, 18)}
+  ${text(80, 540, "terminalthemes.iwwi.app", dim, 16)}
+</svg>`;
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "zenbones/tokyobones-light",
+  "family": "zenbones",
+  "slug": "tokyobones-light",
+  "name": "Zenbones Tokyobones Light",
+  "appearance": "light",
+  "palette": {
+    "background": "#d6d7dc",
+    "foreground": "#333a57",
+    "cursor": "#333a57",
+    "cursorText": "#d6d7dc",
+    "selectionBackground": "#adb0bd",
+    "selectionForeground": "#333a57",
+    "ansi": {
+      "black": "#d6d7dc",
+      "red": "#8b4351",
+      "green": "#34645d",
+      "yellow": "#8f5e14",
+      "blue": "#34548c",
+      "magenta": "#5a4a79",
+      "cyan": "#176775",
+      "white": "#333a57",
+      "brightBlack": "#adb0bd",
+      "brightRed": "#7e3242",
+      "brightGreen": "#26554f",
+      "brightYellow": "#794e0d",
+      "brightBlue": "#26467a",
+      "brightMagenta": "#503875",
+      "brightCyan": "#34645d",
+      "brightWhite": "#56618d"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/zenbones-theme/zenbones.nvim",
+    "author": "Zenbones",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/zenbones-theme/zenbones.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/zenbones/tokyobones-light/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

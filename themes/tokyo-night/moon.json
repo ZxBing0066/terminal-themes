@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "tokyo-night/moon",
+  "family": "tokyo-night",
+  "slug": "moon",
+  "name": "Tokyo Night Moon",
+  "appearance": "dark",
+  "palette": {
+    "background": "#222436",
+    "foreground": "#c8d3f5",
+    "cursor": "#c8d3f5",
+    "cursorText": "#222436",
+    "selectionBackground": "#444a73",
+    "selectionForeground": "#c8d3f5",
+    "ansi": {
+      "black": "#1b1d2b",
+      "red": "#ff757f",
+      "green": "#c3e88d",
+      "yellow": "#ffc777",
+      "blue": "#82aaff",
+      "magenta": "#c099ff",
+      "cyan": "#86e1fc",
+      "white": "#828bb8",
+      "brightBlack": "#444a73",
+      "brightRed": "#ff757f",
+      "brightGreen": "#c3e88d",
+      "brightYellow": "#ffc777",
+      "brightBlue": "#82aaff",
+      "brightMagenta": "#c099ff",
+      "brightCyan": "#86e1fc",
+      "brightWhite": "#c8d3f5"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/folke/tokyonight.nvim",
+    "author": "Folke Lemaitre",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/folke/tokyonight.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/tokyo-night/moon/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

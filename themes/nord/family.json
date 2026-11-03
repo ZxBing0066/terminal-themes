@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "nord",
+  "name": "Nord",
+  "description": {
+    "en": "Nord is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Nord 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/nordtheme/nord",
+    "author": "Nord Theme",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/nordtheme/nord/blob/develop/license.md",
+    "reference": "https://terminalcolors.com/themes/nord/"
+  },
+  "tags": []
+}

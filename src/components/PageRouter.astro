@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import type { Page } from "../lib/routes";
+import Catalog from "./pages/Catalog.astro";
+import FamilyPage from "./pages/FamilyPage.astro";
+import GuideIndex from "./pages/GuideIndex.astro";
+import GuidePage from "./pages/GuidePage.astro";
+import Home from "./pages/Home.astro";
+import StaticPage from "./pages/StaticPage.astro";
+import TargetPage from "./pages/TargetPage.astro";
+import ThemePage from "./pages/ThemePage.astro";
+
+const page = Astro.props.page as Page;
+const noindex = page.kind === "static" && page.slug === "search";
+---
+
+<Base page={page} noindex={noindex}>
+  {page.kind === "home" && <Home page={page} />}
+  {page.kind === "catalog" && <Catalog page={page} />}
+  {page.kind === "family" && <FamilyPage page={page} />}
+  {page.kind === "theme" && <ThemePage page={page} />}
+  {page.kind === "target" && <TargetPage page={page} />}
+  {page.kind === "guide" && <GuidePage page={page} />}
+  {page.kind === "guideIndex" && <GuideIndex page={page} />}
+  {page.kind === "static" && <StaticPage page={page} />}
+</Base>

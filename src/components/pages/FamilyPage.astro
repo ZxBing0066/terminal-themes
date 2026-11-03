@@ -1,0 +1,52 @@
+---
+import { t } from "../../i18n/ui";
+import { familyDescription, familyStats, themesOf } from "../../lib/data";
+import { localized, type Page } from "../../lib/routes";
+import Breadcrumbs from "../Breadcrumbs.astro";
+import ThemeCard from "../ThemeCard.astro";
+
+const page = Astro.props.page as Extract<Page, { kind: "family" }>;
+const { family, locale } = page;
+const themes = themesOf(family.id);
+const stats = familyStats(family);
+const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <Breadcrumbs page={page} />
+    <p class="mono small muted">
+      {stats.count} {t(locale, "common.variants")} · {stats.dark} {t(locale, "common.dark")} · {stats.light} {t(locale, "common.light")}
+    </p>
+    <h1>{family.name} <span class="muted">{t(locale, "family.title")}</span></h1>
+    <p class="lede">{familyDescription(family, locale)}</p>
+    <div class="chips" style="margin-top:18px">
+      <a class="chip" href={href("themes")}>{t(locale, "nav.themes")}</a>
+      <a class="chip" href={href("herdr-app")}>{t(locale, "nav.herdr")}</a>
+      {family.source.upstream && <a class="chip" href={family.source.upstream} rel="noopener">Upstream</a>}
+      <span class="chip">{family.source.license}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="grid">
+      {themes.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="panel">
+      <div class="panel-title">{t(locale, "family.about")}</div>
+      <p class="muted">{familyDescription(family, locale)}</p>
+      <dl class="kv" style="margin-top:16px">
+        <dt>{t(locale, "common.author")}</dt><dd>{family.source.author}</dd>
+        <dt>{t(locale, "common.license")}</dt><dd>{family.source.license}</dd>
+        {family.source.reference && <><dt>{t(locale, "common.source")}</dt><dd><a href={family.source.reference} rel="noopener">{family.source.reference}</a></dd></>}
+      </dl>
+    </div>
+  </div>
+</section>

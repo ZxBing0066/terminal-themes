@@ -1,0 +1,15 @@
+---
+import PageRouter from "../components/PageRouter.astro";
+import { buildRoutes } from "../lib/routes";
+
+export function getStaticPaths() {
+  return buildRoutes().map((page) => ({
+    params: { path: page.path || undefined },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+<PageRouter page={page} />

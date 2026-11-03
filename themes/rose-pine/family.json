@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "rose-pine",
+  "name": "Rosé Pine",
+  "description": {
+    "en": "Rosé Pine is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Rosé Pine 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/rose-pine/rose-pine-theme",
+    "author": "Rosé Pine",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/rose-pine/rose-pine-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/rose-pine/"
+  },
+  "tags": []
+}

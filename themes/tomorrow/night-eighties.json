@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "tomorrow/night-eighties",
+  "family": "tomorrow",
+  "slug": "night-eighties",
+  "name": "Tomorrow Night Eighties",
+  "appearance": "dark",
+  "palette": {
+    "background": "#2d2d2d",
+    "foreground": "#cccccc",
+    "cursor": "#cccccc",
+    "cursorText": "#2d2d2d",
+    "selectionBackground": "#000000",
+    "selectionForeground": "#cccccc",
+    "ansi": {
+      "black": "#000000",
+      "red": "#f2777a",
+      "green": "#99cc99",
+      "yellow": "#ffcc66",
+      "blue": "#6699cc",
+      "magenta": "#cc99cc",
+      "cyan": "#66cccc",
+      "white": "#ffffff",
+      "brightBlack": "#000000",
+      "brightRed": "#f2777a",
+      "brightGreen": "#99cc99",
+      "brightYellow": "#ffcc66",
+      "brightBlue": "#6699cc",
+      "brightMagenta": "#cc99cc",
+      "brightCyan": "#66cccc",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/chriskempson/tomorrow-theme",
+    "author": "Chris Kempson",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/chriskempson/tomorrow-theme/blob/master/LICENSE.md",
+    "reference": "https://terminalcolors.com/themes/tomorrow/night-eighties/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "nightfox/carbonfox",
+  "family": "nightfox",
+  "slug": "carbonfox",
+  "name": "Nightfox Carbonfox",
+  "appearance": "dark",
+  "palette": {
+    "background": "#161616",
+    "foreground": "#f2f4f8",
+    "cursor": "#f2f4f8",
+    "cursorText": "#161616",
+    "selectionBackground": "#484848",
+    "selectionForeground": "#f2f4f8",
+    "ansi": {
+      "black": "#282828",
+      "red": "#ee5396",
+      "green": "#25be6a",
+      "yellow": "#08bdba",
+      "blue": "#78a9ff",
+      "magenta": "#be95ff",
+      "cyan": "#33b1ff",
+      "white": "#dfdfe0",
+      "brightBlack": "#484848",
+      "brightRed": "#f16da6",
+      "brightGreen": "#46c880",
+      "brightYellow": "#2dc7c4",
+      "brightBlue": "#8cb6ff",
+      "brightMagenta": "#c8a5ff",
+      "brightCyan": "#52bdff",
+      "brightWhite": "#e4e4e5"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/EdenEast/nightfox.nvim",
+    "author": "Eden East",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/EdenEast/nightfox.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/nightfox/carbonfox/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

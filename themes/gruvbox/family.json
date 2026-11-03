@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "gruvbox",
+  "name": "Gruvbox",
+  "description": {
+    "en": "Gruvbox is a terminal color scheme family with cataloged variants for Herdr, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "zh": "Gruvbox 是一套终端配色方案家族，提供适配 Herdr、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的变体。"
+  },
+  "source": {
+    "upstream": "https://github.com/morhetz/gruvbox",
+    "author": "Pavel Pertsev",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/morhetz/gruvbox/blob/master/LICENSE.txt",
+    "reference": "https://terminalcolors.com/themes/gruvbox/"
+  },
+  "tags": []
+}

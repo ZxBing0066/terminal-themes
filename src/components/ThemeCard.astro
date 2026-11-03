@@ -1,0 +1,40 @@
+---
+import type { Locale } from "../i18n/ui";
+import { ansiList } from "../lib/palette";
+import type { Theme } from "../lib/schema";
+
+interface Props {
+  theme: Theme;
+  locale: Locale;
+}
+
+const { theme, locale } = Astro.props;
+const href = `/${locale === "zh" ? "zh/" : ""}themes/${theme.family}/${theme.slug}/`;
+const colors = ansiList(theme.palette.ansi).slice(0, 8);
+---
+
+<a class="card" href={href} data-appearance={theme.appearance}>
+  <div class="card-media">
+    <img
+      src={`/previews/${theme.family}-${theme.slug}.svg`}
+      alt={`${theme.name} preview`}
+      loading="lazy"
+      width="1200"
+      height="720"
+    />
+  </div>
+  <div class="card-body">
+    <div class="card-title">
+      <span>{theme.name}</span>
+      <span class="badge">{theme.appearance}</span>
+    </div>
+    <div class="card-meta">
+      <span>{theme.family}</span>
+      <span>·</span>
+      <span>{theme.source.license}</span>
+    </div>
+    <div class="swatches" aria-hidden="true">
+      {colors.map((color) => <span class="swatch" style={`background:${color}`}></span>)}
+    </div>
+  </div>
+</a>

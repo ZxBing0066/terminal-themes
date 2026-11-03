@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "cobalt2/default",
+  "family": "cobalt2",
+  "slug": "default",
+  "name": "Cobalt2 Default",
+  "appearance": "dark",
+  "palette": {
+    "background": "#122738",
+    "foreground": "#ffffff",
+    "cursor": "#ffffff",
+    "cursorText": "#122738",
+    "selectionBackground": "#0050a4",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#000000",
+      "red": "#ff628c",
+      "green": "#3ad900",
+      "yellow": "#ffc600",
+      "blue": "#0088ff",
+      "magenta": "#fb94ff",
+      "cyan": "#80fcff",
+      "white": "#ffffff",
+      "brightBlack": "#0050a4",
+      "brightRed": "#ff628c",
+      "brightGreen": "#3ad900",
+      "brightYellow": "#ffc600",
+      "brightBlue": "#0088ff",
+      "brightMagenta": "#fb94ff",
+      "brightCyan": "#80fcff",
+      "brightWhite": "#ffffff"
+    }
+  },
+  "source": {
+    "author": "Cobalt2",
+    "license": "unknown",
+    "reference": "https://terminalcolors.com/themes/cobalt2/default/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "cool"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

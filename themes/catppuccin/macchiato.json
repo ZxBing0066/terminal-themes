@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "catppuccin/macchiato",
+  "family": "catppuccin",
+  "slug": "macchiato",
+  "name": "Catppuccin Macchiato",
+  "appearance": "dark",
+  "palette": {
+    "background": "#24273a",
+    "foreground": "#cad3f5",
+    "cursor": "#cad3f5",
+    "cursorText": "#24273a",
+    "selectionBackground": "#5b6078",
+    "selectionForeground": "#cad3f5",
+    "ansi": {
+      "black": "#494d64",
+      "red": "#ed8796",
+      "green": "#a6da95",
+      "yellow": "#eed49f",
+      "blue": "#8aadf4",
+      "magenta": "#f5bde6",
+      "cyan": "#8bd5ca",
+      "white": "#a5adcb",
+      "brightBlack": "#5b6078",
+      "brightRed": "#ec7486",
+      "brightGreen": "#8ccf7f",
+      "brightYellow": "#e1c682",
+      "brightBlue": "#78a1f6",
+      "brightMagenta": "#f2a9dd",
+      "brightCyan": "#63cbc0",
+      "brightWhite": "#b8c0e0"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/catppuccin/catppuccin",
+    "author": "Catppuccin",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/catppuccin/catppuccin/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/catppuccin/macchiato/"
+  },
+  "tags": [
+    "dark",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

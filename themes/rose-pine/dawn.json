@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "rose-pine/dawn",
+  "family": "rose-pine",
+  "slug": "dawn",
+  "name": "Rosé Pine Dawn",
+  "appearance": "light",
+  "palette": {
+    "background": "#fffaf3",
+    "foreground": "#575279",
+    "cursor": "#575279",
+    "cursorText": "#fffaf3",
+    "selectionBackground": "#797593",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#f2e9e1",
+      "red": "#b4637a",
+      "green": "#286983",
+      "yellow": "#ea9d34",
+      "blue": "#56949f",
+      "magenta": "#907aa9",
+      "cyan": "#d7827e",
+      "white": "#575279",
+      "brightBlack": "#797593",
+      "brightRed": "#b4637a",
+      "brightGreen": "#286983",
+      "brightYellow": "#ea9d34",
+      "brightBlue": "#56949f",
+      "brightMagenta": "#907aa9",
+      "brightCyan": "#d7827e",
+      "brightWhite": "#575279"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/rose-pine/rose-pine-theme",
+    "author": "Rosé Pine",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/rose-pine/rose-pine-theme/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/rose-pine/dawn/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

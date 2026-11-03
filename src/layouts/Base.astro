@@ -1,0 +1,132 @@
+---
+import { t } from "../i18n/ui";
+import { alternatesFor, localized, type Page } from "../lib/routes";
+import { headFor, jsonLdFor } from "../lib/seo";
+import "../styles/global.css";
+
+interface Props {
+  page: Page;
+  noindex?: boolean;
+}
+
+const { page, noindex = false } = Astro.props;
+const locale = page.locale;
+const head = headFor(page);
+const alternates = alternatesFor(page);
+const nav = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const altHref = (target: "en" | "zh") => `/${alternates[target]}${alternates[target] ? "/" : ""}`;
+const github = "https://github.com/ZxBing0066/terminal-themes";
+const brand = [
+  "#45475a",
+  "#f38ba8",
+  "#a6e3a1",
+  "#f9e2af",
+  "#89b4fa",
+  "#f5c2e7",
+  "#94e2d5",
+  "#a6adc8",
+  "#585b70",
+  "#f37799",
+  "#89d88b",
+  "#ebd391",
+  "#74a8fc",
+  "#f2aede",
+  "#6bd7ca",
+  "#bac2de",
+];
+---
+
+<!doctype html>
+<html lang={locale === "zh" ? "zh-CN" : "en"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{head.title}</title>
+    <meta name="description" content={head.description} />
+    <link rel="canonical" href={head.canonical} />
+    <link rel="alternate" hreflang="en" href={head.en} />
+    <link rel="alternate" hreflang="zh" href={head.zh} />
+    <link rel="alternate" hreflang="x-default" href={head.en} />
+    <link rel="alternate" type="application/rss+xml" title="Terminal Themes" href="/feed.xml" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:type" content={page.kind === "theme" ? "article" : "website"} />
+    <meta property="og:site_name" content={t(locale, "site.name")} />
+    <meta property="og:title" content={head.title} />
+    <meta property="og:description" content={head.description} />
+    <meta property="og:url" content={head.canonical} />
+    <meta property="og:image" content={head.image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
+    <meta property="og:locale:alternate" content={locale === "zh" ? "en_US" : "zh_CN"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={head.title} />
+    <meta name="twitter:description" content={head.description} />
+    <meta name="twitter:image" content={head.image} />
+    <meta name="theme-color" content="#08090a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdFor(page))} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{locale === "zh" ? "跳到主要内容" : "Skip to content"}</a>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href={nav("")} aria-label={t(locale, "site.name")}>
+          <span class="brand-bar" aria-hidden="true">
+            {brand.map((color) => <span style={`background:${color}`}></span>)}
+          </span>
+          <span class="brand-name">terminalthemes</span>
+        </a>
+        <nav class="nav-links" aria-label={t(locale, "site.name")}>
+          <a href={nav("themes")}>{t(locale, "nav.themes")}</a>
+          <a href={nav("herdr-app")}>{t(locale, "nav.herdr")}</a>
+          <a href={nav("guides")}>{t(locale, "nav.guides")}</a>
+          <a href={nav("editor")}>{t(locale, "nav.editor")}</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="icon-link" href={nav("search")} aria-label={t(locale, "nav.search")}>⌕</a>
+          <a class="locale" href={altHref(locale === "zh" ? "en" : "zh")}>
+            {locale === "zh" ? "EN" : "中文"}
+          </a>
+          <a class="ghost-link" href={github} rel="me">GitHub</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" data-pagefind-body={noindex ? undefined : ""}>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-grid">
+        <div>
+          <div class="brand brand-small">
+            <span class="brand-bar" aria-hidden="true">
+              {brand.map((color) => <span style={`background:${color}`}></span>)}
+            </span>
+            <span class="brand-name">terminalthemes</span>
+          </div>
+          <p class="muted footer-note">{t(locale, "footer.dataNote")}</p>
+        </div>
+        <div class="footer-links">
+          <a href={nav("themes")}>{t(locale, "nav.themes")}</a>
+          <a href={nav("guides")}>{t(locale, "nav.guides")}</a>
+          <a href={nav("editor")}>{t(locale, "nav.editor")}</a>
+          <a href={nav("contribute")}>{t(locale, "footer.contribute")}</a>
+        </div>
+        <div class="footer-links">
+          <a href={nav("about")}>{locale === "zh" ? "关于" : "About"}</a>
+          <a href={nav("license")}>{t(locale, "footer.license")}</a>
+          <a href={nav("privacy")}>{t(locale, "footer.privacy")}</a>
+          <a href={nav("changelog")}>{t(locale, "footer.changelog")}</a>
+          <a href="/feed.xml">RSS</a>
+          <a href={github}>GitHub</a>
+        </div>
+      </div>
+      <div class="wrap footer-bottom">
+        <span>© 2026 Terminal Themes</span>
+        <span class="mono">{locale === "zh" ? "数据与预览在构建时生成" : "Data and previews generated at build time"}</span>
+      </div>
+    </footer>
+  </body>
+</html>

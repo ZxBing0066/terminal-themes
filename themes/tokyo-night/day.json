@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "tokyo-night/day",
+  "family": "tokyo-night",
+  "slug": "day",
+  "name": "Tokyo Night Day",
+  "appearance": "light",
+  "palette": {
+    "background": "#e1e2e7",
+    "foreground": "#3760bf",
+    "cursor": "#3760bf",
+    "cursorText": "#e1e2e7",
+    "selectionBackground": "#a1a6c5",
+    "selectionForeground": "#000000",
+    "ansi": {
+      "black": "#b4b5b9",
+      "red": "#f52a65",
+      "green": "#587539",
+      "yellow": "#8c6c3e",
+      "blue": "#2e7de9",
+      "magenta": "#9854f1",
+      "cyan": "#007197",
+      "white": "#6172b0",
+      "brightBlack": "#a1a6c5",
+      "brightRed": "#f52a65",
+      "brightGreen": "#587539",
+      "brightYellow": "#8c6c3e",
+      "brightBlue": "#2e7de9",
+      "brightMagenta": "#9854f1",
+      "brightCyan": "#007197",
+      "brightWhite": "#3760bf"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/folke/tokyonight.nvim",
+    "author": "Folke Lemaitre",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/folke/tokyonight.nvim/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/tokyo-night/day/"
+  },
+  "tags": [
+    "light",
+    "balanced",
+    "cool"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

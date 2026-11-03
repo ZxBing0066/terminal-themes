@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "catppuccin/latte",
+  "family": "catppuccin",
+  "slug": "latte",
+  "name": "Catppuccin Latte",
+  "appearance": "light",
+  "palette": {
+    "background": "#eff1f5",
+    "foreground": "#4c4f69",
+    "cursor": "#4c4f69",
+    "cursorText": "#eff1f5",
+    "selectionBackground": "#6c6f85",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#5c5f77",
+      "red": "#d20f39",
+      "green": "#40a02b",
+      "yellow": "#df8e1d",
+      "blue": "#1e66f5",
+      "magenta": "#ea76cb",
+      "cyan": "#179299",
+      "white": "#acb0be",
+      "brightBlack": "#6c6f85",
+      "brightRed": "#de293e",
+      "brightGreen": "#49af3d",
+      "brightYellow": "#eea02d",
+      "brightBlue": "#456eff",
+      "brightMagenta": "#fe85d8",
+      "brightCyan": "#2d9fa8",
+      "brightWhite": "#bcc0cc"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/catppuccin/catppuccin",
+    "author": "Catppuccin",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/catppuccin/catppuccin/blob/main/LICENSE",
+    "reference": "https://terminalcolors.com/themes/catppuccin/latte/"
+  },
+  "tags": [
+    "light",
+    "high-contrast",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}

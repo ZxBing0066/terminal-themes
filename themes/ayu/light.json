@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "ayu/light",
+  "family": "ayu",
+  "slug": "light",
+  "name": "Ayu Light",
+  "appearance": "light",
+  "palette": {
+    "background": "#f8f9fa",
+    "foreground": "#5c6166",
+    "cursor": "#5c6166",
+    "cursorText": "#f8f9fa",
+    "selectionBackground": "#686868",
+    "selectionForeground": "#ffffff",
+    "ansi": {
+      "black": "#000000",
+      "red": "#ea6c6d",
+      "green": "#6cbf43",
+      "yellow": "#eca944",
+      "blue": "#3199e1",
+      "magenta": "#9e75c7",
+      "cyan": "#46ba94",
+      "white": "#c7c7c7",
+      "brightBlack": "#686868",
+      "brightRed": "#f07171",
+      "brightGreen": "#86b300",
+      "brightYellow": "#f2ae49",
+      "brightBlue": "#399ee6",
+      "brightMagenta": "#a37acc",
+      "brightCyan": "#4cbf99",
+      "brightWhite": "#d1d1d1"
+    }
+  },
+  "source": {
+    "upstream": "https://github.com/ayu-theme/ayu-colors",
+    "author": "Ayu Theme",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/ayu-theme/ayu-colors/blob/master/LICENSE",
+    "reference": "https://terminalcolors.com/themes/ayu/light/"
+  },
+  "tags": [
+    "light",
+    "balanced",
+    "warm"
+  ],
+  "meta": {
+    "addedAt": "2026-11-03",
+    "updatedAt": "2026-11-03"
+  }
+}
