@@ -44,6 +44,12 @@ const portPath = (port: PortTarget) => `/ports/${port.slug}/${portFileName(port)
 const portUrl = (port: PortTarget) => absoluteFileUrl(portPath(port));
 const commandFor = (port: PortTarget) => installCommand(port.slug, theme, portUrl(port));
 const herdrCommand = commandFor(ports[0]);
+const installLabel = (port: PortTarget) =>
+  port.slug === "windows-terminal"
+    ? "PowerShell"
+    : ["alacritty", "iterm2"].includes(port.slug)
+      ? t(locale, "common.download")
+      : t(locale, "theme.installCommand");
 ---
 
 <section class="page-head">
@@ -211,7 +217,7 @@ const herdrCommand = commandFor(ports[0]);
             </div>
           </div>
           <div class="install-command">
-            <span class="mono small muted">{port.slug === "windows-terminal" ? "PowerShell" : t(locale, "theme.installCommand")}</span>
+            <span class="mono small muted">{installLabel(port)}</span>
             <code>{commandFor(port)}</code>
             <button class="btn btn-small" data-copy={commandFor(port)}>{t(locale, "common.copyCommand")}</button>
           </div>
