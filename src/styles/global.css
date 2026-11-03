@@ -538,6 +538,7 @@ pre {
   border-radius: var(--radius);
   background: var(--panel);
   padding: 16px;
+  min-width: 0;
 }
 
 .panel-title {
@@ -693,27 +694,45 @@ th.mono {
   border-color: var(--fg);
 }
 
+.port-panel {
+  min-width: 0;
+}
+
 .port-panel[hidden] {
   display: none;
 }
 
 .code-block {
   position: relative;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--panel-2);
   max-height: 420px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .code-block pre {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
   padding: 14px;
 }
 
 .code-actions {
+  flex: none;
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   padding: 8px;
   border-top: 1px solid var(--border);
+}
+
+.code-actions > .mono {
+  white-space: nowrap;
 }
 
 /* prose */
@@ -1118,4 +1137,68 @@ th.mono {
 .pagefind-ui__search-input:focus {
   outline: 2px solid var(--border-strong);
   outline-offset: 1px;
+}
+
+
+/* install commands */
+
+.install-steps {
+  margin: 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.install-steps li {
+  padding-left: 4px;
+  line-height: 1.55;
+}
+
+.install-command {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  min-width: 0;
+}
+
+.install-command > span {
+  padding-top: 8px;
+  white-space: nowrap;
+}
+
+.install-command code {
+  display: block;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel-2);
+  padding: 8px 10px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.install-command > .btn {
+  margin-top: 4px;
+}
+
+@media (max-width: 720px) {
+  .install-command {
+    grid-template-columns: 1fr;
+  }
+
+  .install-command > span {
+    padding-top: 0;
+  }
+
+  .install-command > .btn {
+    justify-self: start;
+  }
 }

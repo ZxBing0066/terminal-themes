@@ -3,7 +3,9 @@ import { herdrTokens } from "../../data/herdrTokens";
 import { t } from "../../i18n/ui";
 import { allThemes, getTheme } from "../../lib/data";
 import { deriveHerdrAppColors } from "../../lib/ports/herdr-app";
-import { localized, type Page } from "../../lib/routes";
+import { installCommand } from "../../lib/ports/install";
+import { portFileName, ports } from "../../lib/ports";
+import { absoluteFileUrl, localized, type Page } from "../../lib/routes";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import ThemeCard from "../ThemeCard.astro";
 
@@ -13,6 +15,12 @@ const themes = allThemes();
 const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
 const sample = getTheme("catppuccin", "mocha");
 const sampleColors = sample ? deriveHerdrAppColors(sample) : undefined;
+const samplePort = ports.find((port) => port.slug === target.slug);
+const sampleUrl =
+  sample && samplePort
+    ? absoluteFileUrl(`/ports/${target.slug}/${portFileName(sample, samplePort)}`)
+    : "";
+const sampleCommand = sample ? installCommand(target.slug, sample, sampleUrl) : "";
 ---
 
 <section class="page-head">
@@ -38,9 +46,19 @@ const sampleColors = sample ? deriveHerdrAppColors(sample) : undefined;
       </div>
     </div>
     <div class="panel">
-      <ol class="prose" style="padding:0;margin:0">
+      <ol class="install-steps">
         {target.install[locale].map((step) => <li>{step}</li>)}
       </ol>
+      {sample && (
+        <div class="install-command">
+          <span class="mono small muted">{target.slug === "windows-terminal" ? "PowerShell" : t(locale, "target.oneLineInstall")}</span>
+          <code>{sampleCommand}</code>
+          <button class="btn btn-small" data-copy={sampleCommand}>{t(locale, "common.copyCommand")}</button>
+        </div>
+        <p class="small muted" style="margin:10px 0 0">
+          {t(locale, "target.installExample")} <a href={`/${locale}/themes/`}>{t(locale, "target.allThemes")}</a>
+        </p>
+      )}
     </div>
   </div>
 </section>

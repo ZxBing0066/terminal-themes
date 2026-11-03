@@ -4,7 +4,8 @@ import { contrast } from "../../lib/color";
 import { contrastRatio, generatedDescription } from "../../lib/data";
 import { ansiPairs } from "../../lib/palette";
 import { ports, type PortTarget } from "../../lib/ports";
-import { localized, type Page } from "../../lib/routes";
+import { installCommand } from "../../lib/ports/install";
+import { absoluteFileUrl, localized, type Page } from "../../lib/routes";
 import { similarThemes } from "../../lib/similar";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import ThemeCard from "../ThemeCard.astro";
@@ -40,6 +41,9 @@ const contrastRows = [
 const ratioClass = (value: number) => (value >= 7 ? "ratio-good" : value >= 4.5 ? "" : value >= 3 ? "ratio-warn" : "ratio-bad");
 const portFileName = (port: PortTarget) => `${theme.family}-${theme.slug}.${port.extension}`;
 const portPath = (port: PortTarget) => `/ports/${port.slug}/${portFileName(port)}`;
+const portUrl = (port: PortTarget) => absoluteFileUrl(portPath(port));
+const commandFor = (port: PortTarget) => installCommand(port.slug, theme, portUrl(port));
+const herdrCommand = commandFor(ports[0]);
 ---
 
 <section class="page-head">
@@ -50,6 +54,7 @@ const portPath = (port: PortTarget) => `/ports/${port.slug}/${portFileName(port)
     <p class="lede">{generatedDescription(theme, locale)}</p>
     <div class="actions">
       <a class="btn btn-primary" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
+      <button class="btn" data-copy={herdrCommand}>{t(locale, "theme.copyInstall")}</button>
       <button class="btn" data-copy={paletteJson}>{t(locale, "common.copy")} JSON</button>
       <a class="btn" href={portPath(ports[0])} download>{t(locale, "common.downloadTheme")}</a>
     </div>
@@ -204,6 +209,11 @@ const portPath = (port: PortTarget) => `/ports/${port.slug}/${portFileName(port)
               <a class="btn btn-small" href={portPath(port)} download>{t(locale, "common.download")}</a>
               <span class="mono small muted" style="margin-left:auto">{portFileName(port)}</span>
             </div>
+          </div>
+          <div class="install-command">
+            <span class="mono small muted">{port.slug === "windows-terminal" ? "PowerShell" : t(locale, "theme.installCommand")}</span>
+            <code>{commandFor(port)}</code>
+            <button class="btn btn-small" data-copy={commandFor(port)}>{t(locale, "common.copyCommand")}</button>
           </div>
         </div>
       ))}
