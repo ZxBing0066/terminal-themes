@@ -244,8 +244,22 @@ pre {
 }
 
 .icon-link {
-  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   line-height: 1;
+}
+
+.icon-link:hover {
+  background: var(--panel-2);
+}
+
+.icon-link svg {
+  width: 16px;
+  height: 16px;
 }
 
 .locale,

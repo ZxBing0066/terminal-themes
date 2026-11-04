@@ -94,7 +94,12 @@ const brand = [
           <a href={nav("editor")}>{t(locale, "nav.editor")}</a>
         </nav>
         <div class="nav-actions">
-          <a class="icon-link" href={nav("search")} aria-label={t(locale, "nav.search")}>⌕</a>
+          <a class="icon-link" href={nav("search")} aria-label={t(locale, "nav.search")}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="7" cy="7" r="4.5" stroke="currentColor" />
+              <path d="M10.5 10.5 14 14" stroke="currentColor" stroke-linecap="round" />
+            </svg>
+          </a>
           <a class="locale" href={altHref(locale === "zh" ? "en" : "zh")}>
             {locale === "zh" ? "EN" : "中文"}
           </a>

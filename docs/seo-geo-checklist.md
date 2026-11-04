@@ -77,7 +77,7 @@ so all essential content must exist in the HTML before JavaScript runs.
 - [x] Static HTML is the primary render path.
 - [x] Lighthouse Accessibility, Best Practices, and SEO are 100 on representative pages.
 - [x] No horizontal overflow at 390 px.
-- [ ] Interactive controls have accessible names and ≥24 px touch targets. The search icon is handled in the next commit.
+- [x] Interactive controls have accessible names and ≥24 px touch targets.
 - [x] Images reserve width/height and lazy-load below the fold.
 - [x] `prefers-reduced-motion` disables non-essential animation.
 
