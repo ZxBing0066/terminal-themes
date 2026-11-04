@@ -6,6 +6,16 @@ import { ports } from "../../lib/ports";
 import { renderHerdrAppPreview } from "../../lib/preview";
 import type { Theme } from "../../lib/schema";
 
+type AppearanceChoice = "auto" | "dark" | "light";
+
+interface Snapshot {
+  values: string[];
+  name: string;
+  family: string;
+  slug: string;
+  appearance: AppearanceChoice;
+}
+
 const DEFAULT = [
   "#1e1e2e",
   "#cdd6f4",
@@ -60,15 +70,40 @@ function fromBase64Url(value: string): Uint8Array {
   return Uint8Array.from(binary, (char) => char.charCodeAt(0));
 }
 
-function encode(values: string[]): string {
-  return toBase64Url(deflateSync(strToU8(JSON.stringify(values))));
+function validValues(value: unknown): value is string[] {
+  return Array.isArray(value) && value.length === 20 && value.every((item) => typeof item === "string");
 }
 
-function decode(value: string): string[] | undefined {
+function encode(snapshot: Snapshot): string {
+  return toBase64Url(
+    deflateSync(
+      strToU8(
+        JSON.stringify({
+          v: snapshot.values,
+          n: snapshot.name,
+          f: snapshot.family,
+          s: snapshot.slug,
+          a: snapshot.appearance,
+        }),
+      ),
+    ),
+  );
+}
+
+type DecodedSnapshot = Pick<Snapshot, "values"> & Partial<Omit<Snapshot, "values">>;
+
+function decode(value: string): DecodedSnapshot | undefined {
   try {
     const parsed = JSON.parse(strFromU8(inflateSync(fromBase64Url(value))));
-    if (Array.isArray(parsed) && parsed.length === 20 && parsed.every((item) => typeof item === "string")) {
-      return parsed;
+    if (validValues(parsed)) return { values: parsed };
+    if (parsed && typeof parsed === "object" && validValues(parsed.v)) {
+      return {
+        values: parsed.v,
+        name: typeof parsed.n === "string" ? parsed.n : undefined,
+        family: typeof parsed.f === "string" ? parsed.f : undefined,
+        slug: typeof parsed.s === "string" ? parsed.s : undefined,
+        appearance: ["auto", "dark", "light"].includes(parsed.a) ? (parsed.a as AppearanceChoice) : undefined,
+      };
     }
   } catch {
     return undefined;
@@ -76,7 +111,7 @@ function decode(value: string): string[] | undefined {
   return undefined;
 }
 
-function makeTheme(values: string[], name: string, family: string, slug: string): Theme {
+function makeTheme(values: string[], name: string, family: string, slug: string, appearanceChoice: AppearanceChoice): Theme {
   const [background, foreground, cursor, selection, ...ansi] = values;
   return {
     schemaVersion: 1,
@@ -84,7 +119,7 @@ function makeTheme(values: string[], name: string, family: string, slug: string)
     family,
     slug,
     name,
-    appearance: isDark(background) ? "dark" : "light",
+    appearance: appearanceChoice === "auto" ? (isDark(background) ? "dark" : "light") : appearanceChoice,
     palette: {
       background,
       foreground,
@@ -119,6 +154,7 @@ export default function Editor() {
   const [name, setName] = useState("My Terminal Theme");
   const [family, setFamily] = useState("custom");
   const [slug, setSlug] = useState("my-theme");
+  const [appearance, setAppearance] = useState<AppearanceChoice>("auto");
   const [portSlug, setPortSlug] = useState(ports[0].slug);
   const [status, setStatus] = useState("");
   const [themes, setThemes] = useState<Theme[]>([]);
@@ -127,7 +163,13 @@ export default function Editor() {
     const hash = window.location.hash;
     if (hash.startsWith("#p=")) {
       const decoded = decode(hash.slice(3));
-      if (decoded) setValues(decoded);
+      if (decoded) {
+        setValues(decoded.values);
+        if (decoded.name !== undefined) setName(decoded.name);
+        if (decoded.family !== undefined) setFamily(decoded.family);
+        if (decoded.slug !== undefined) setSlug(decoded.slug);
+        if (decoded.appearance !== undefined) setAppearance(decoded.appearance);
+      }
     }
     fetch("/themes.json")
       .then((response) => response.json())
@@ -147,6 +189,7 @@ export default function Editor() {
             setName(found.name);
             setFamily(found.family);
             setSlug(`${found.slug}-custom`);
+            setAppearance("auto");
           }
         }
       })
@@ -155,12 +198,19 @@ export default function Editor() {
 
   useEffect(() => {
     const id = window.setTimeout(() => {
-      window.history.replaceState(null, "", `#p=${encode(values)}`);
+      window.history.replaceState(
+        null,
+        "",
+        `#p=${encode({ values, name, family, slug, appearance })}`,
+      );
     }, 250);
     return () => window.clearTimeout(id);
-  }, [values]);
+  }, [values, name, family, slug, appearance]);
 
-  const theme = useMemo(() => makeTheme(values, name, family, slug), [values, name, family, slug]);
+  const theme = useMemo(
+    () => makeTheme(values, name, family, slug, appearance),
+    [values, name, family, slug, appearance],
+  );
   const svg = useMemo(() => renderHerdrAppPreview(theme), [theme]);
   const port = ports.find((candidate) => candidate.slug === portSlug) ?? ports[0];
   const output = useMemo(() => port.serialize(theme), [port, theme]);
@@ -191,19 +241,17 @@ export default function Editor() {
   };
 
   const share = () => {
-    const url = `${window.location.origin}${window.location.pathname}#p=${encode(values)}`;
+    const url = `${window.location.origin}${window.location.pathname}#p=${encode({ values, name, family, slug, appearance })}`;
     copy(url, "Share link copied");
   };
 
   const submit = async () => {
-    const record = { ...theme, id: `${family}/${slug}`, family, slug, name };
-    const json = `${JSON.stringify(record, null, 2)}\n`;
+    const json = `${JSON.stringify(theme, null, 2)}\n`;
     await copy(json, "Theme JSON copied");
-    window.open(
-      `https://github.com/ZxBing0066/terminal-themes/new/main?filename=themes/${family}/${slug}.json`,
-      "_blank",
-      "noopener",
-    );
+    const filename = `themes/${family}/${slug}.json`;
+    const base = "https://github.com/ZxBing0066/terminal-themes/new/main";
+    const withContent = `${base}?filename=${encodeURIComponent(filename)}&value=${encodeURIComponent(json)}`;
+    window.open(withContent.length < 7500 ? withContent : `${base}?filename=${encodeURIComponent(filename)}`, "_blank", "noopener");
   };
 
   return (
@@ -225,6 +273,7 @@ export default function Editor() {
               setName(found.name);
               setFamily(found.family);
               setSlug(`${found.slug}-custom`);
+              setAppearance("auto");
             }}
           >
             <option value="">Choose a catalog theme</option>
@@ -242,6 +291,14 @@ export default function Editor() {
         <label class="field">
           <span>Slug</span>
           <input value={slug} onInput={(event) => setSlug(event.currentTarget.value)} />
+        </label>
+        <label class="field">
+          <span>Appearance</span>
+          <select value={appearance} onChange={(event) => setAppearance(event.currentTarget.value as AppearanceChoice)}>
+            <option value="auto">Auto ({theme.appearance})</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
         </label>
         <div class="editor-actions">
           <button class="btn btn-small" onClick={share}>Share</button>
