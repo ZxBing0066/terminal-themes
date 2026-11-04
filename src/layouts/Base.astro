@@ -147,6 +147,11 @@ const brand = [
       </div>
     </footer>
 
+    <div class="lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label={locale === "zh" ? "图片预览" : "Image preview"}>
+      <button class="lightbox-close" type="button" data-lightbox-close aria-label={locale === "zh" ? "关闭" : "Close"}>×</button>
+      <img data-lightbox-image alt="" />
+    </div>
+
     <script>
       const canonicalOrigin = "https://terminalthemes.iwwi.app";
       const currentOrigin = window.location.origin;
@@ -179,6 +184,51 @@ const brand = [
         } catch {
           /* clipboard unavailable */
         }
+      });
+
+      const lightbox = document.querySelector<HTMLElement>("[data-lightbox]");
+      const lightboxImage = document.querySelector<HTMLImageElement>("[data-lightbox-image]");
+      const lightboxClose = document.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+      let zoomTrigger: HTMLElement | null = null;
+
+      const openLightbox = (src: string, alt: string, trigger: HTMLElement) => {
+        if (!lightbox || !lightboxImage) return;
+        lightboxImage.src = src;
+        lightboxImage.alt = alt;
+        lightbox.hidden = false;
+        document.body.classList.add("lightbox-open");
+        zoomTrigger = trigger;
+        lightboxClose?.focus();
+      };
+
+      const closeLightbox = () => {
+        if (!lightbox || !lightboxImage) return;
+        lightbox.hidden = true;
+        lightboxImage.removeAttribute("src");
+        document.body.classList.remove("lightbox-open");
+        zoomTrigger?.focus();
+        zoomTrigger = null;
+      };
+
+      document.addEventListener("click", (event) => {
+        const trigger = (event.target as HTMLElement).closest<HTMLElement>("[data-zoom]");
+        if (!trigger) return;
+        const image = trigger.tagName === "IMG"
+          ? (trigger as HTMLImageElement)
+          : trigger.querySelector<HTMLImageElement>("img");
+        const src = trigger.dataset.zoomSrc || image?.currentSrc || image?.src;
+        if (!src) return;
+        event.preventDefault();
+        event.stopPropagation();
+        openLightbox(src, trigger.dataset.zoomAlt ?? image?.alt ?? "", trigger);
+      });
+
+      lightboxClose?.addEventListener("click", closeLightbox);
+      lightbox?.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && lightbox && !lightbox.hidden) closeLightbox();
       });
     </script>
   </body>

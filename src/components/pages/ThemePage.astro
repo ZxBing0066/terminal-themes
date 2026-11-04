@@ -74,15 +74,23 @@ const installLabel = (port: PortTarget) =>
   <div class="theme-layout">
     <div>
       <div class="theme-preview">
-        <img
-          data-theme-preview
-          src={previewFor(ports[0])}
-          alt={previewAlt(ports[0])}
-          width="1200"
-          height="720"
-          loading="eager"
-          decoding="async"
-        />
+        <button
+          class="preview-zoom"
+          type="button"
+          data-zoom
+          aria-label={locale === "zh" ? "查看大图" : "View larger preview"}
+        >
+          <img
+            data-theme-preview
+            src={previewFor(ports[0])}
+            alt={previewAlt(ports[0])}
+            width="1200"
+            height="720"
+            loading="eager"
+            decoding="async"
+          />
+          <span class="preview-zoom-icon" aria-hidden="true">⤢</span>
+        </button>
       </div>
 
       <div class="panel" style="margin-top:18px">

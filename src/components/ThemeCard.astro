@@ -13,16 +13,18 @@ const href = `/${locale === "zh" ? "zh/" : ""}themes/${theme.family}/${theme.slu
 const colors = ansiList(theme.palette.ansi).slice(0, 8);
 ---
 
-<a class="card" href={href} data-appearance={theme.appearance}>
-  <div class="card-media">
-    <img
-      src={`/previews/${theme.family}-${theme.slug}.svg`}
-      alt={`${theme.name} preview`}
-      loading="lazy"
-      width="1200"
-      height="720"
-    />
-  </div>
+<div class="card-wrap" data-appearance={theme.appearance}>
+  <a class="card" href={href}>
+    <div class="card-media">
+      <img
+        src={`/previews/${theme.family}-${theme.slug}.svg`}
+        alt={`${theme.name} preview`}
+        loading="lazy"
+        width="1200"
+        height="720"
+        data-zoom
+      />
+    </div>
   <div class="card-body">
     <div class="card-title">
       <span>{theme.name}</span>
@@ -36,5 +38,14 @@ const colors = ansiList(theme.palette.ansi).slice(0, 8);
     <div class="swatches" aria-hidden="true">
       {colors.map((color) => <span class="swatch" style={`background:${color}`}></span>)}
     </div>
-  </div>
-</a>
+    </div>
+  </a>
+  <button
+    class="card-zoom"
+    type="button"
+    data-zoom
+    data-zoom-src={`/previews/${theme.family}-${theme.slug}.svg`}
+    data-zoom-alt={`${theme.name} preview`}
+    aria-label={locale === "zh" ? `查看 ${theme.name} 大图` : `View larger preview of ${theme.name}`}
+  >⤢</button>
+</div>
