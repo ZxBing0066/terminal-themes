@@ -30,6 +30,19 @@ pnpm astro check    # TypeScript check
 pnpm import:themes  # refresh palette data from the reference catalog
 ```
 
+## Deployment
+
+The site is deployed from the Cloudflare console as an asset-only Worker. [wrangler.jsonc](wrangler.jsonc) points at `dist/` and handles Astro's trailing-slash routes and `404.html`. Do not deploy locally; Cloudflare builds and deploys the site.
+
+Cloudflare build settings:
+
+- Build command: `pnpm build`
+- Deploy command: `npx wrangler deploy`
+- Root directory: `/`
+- Environment: `NODE_VERSION=22`
+
+The existing `dist/_redirects` and `dist/_headers` files are parsed by Workers Static Assets. Add `terminalthemes.iwwi.app` as a custom domain after testing the `workers.dev` URL; a hostname cannot be attached to both Pages and Workers at once.
+
 ## Structure
 
 ```
