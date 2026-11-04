@@ -33,11 +33,18 @@ const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
           {t(locale, "common.light")} <span class="chip-count">{themes.filter((theme) => theme.appearance === "light").length}</span>
         </button>
       </div>
-      <p class="filter-status small muted" data-filter-status data-label={t(locale, "catalog.count")} aria-live="polite">
-        {themes.length} {t(locale, "catalog.count")}
-      </p>
+      <div class="filter-tools">
+        <p class="filter-status small muted" data-filter-status data-label={t(locale, "catalog.count")} aria-live="polite">
+          {themes.length} {t(locale, "catalog.count")}
+        </p>
+        <div class="view-switch" role="group" aria-label={t(locale, "catalog.view")}>
+          <button class="view-button" type="button" data-view="grid" aria-pressed="true">{t(locale, "catalog.viewGrid")}</button>
+          <button class="view-button" type="button" data-view="list" aria-pressed="false">{t(locale, "catalog.viewList")}</button>
+          <button class="view-button" type="button" data-view="large" aria-pressed="false">{t(locale, "catalog.viewLarge")}</button>
+        </div>
+      </div>
     </div>
-    <div class="grid" data-theme-grid style="margin-top:18px">
+    <div class="grid" data-theme-grid data-view="grid" style="margin-top:18px">
       {themes.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
     </div>
   </div>
@@ -88,4 +95,42 @@ const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
   });
 
   apply(new URLSearchParams(window.location.search).get("appearance") ?? "all", false);
+
+  const grid = document.querySelector<HTMLElement>("[data-theme-grid]");
+  const viewButtons = document.querySelectorAll<HTMLButtonElement>(".view-button[data-view]");
+  const views = new Set(["grid", "list", "large"]);
+  const storedView = (() => {
+    try {
+      return localStorage.getItem("theme-view");
+    } catch {
+      return null;
+    }
+  })();
+  const queryView = new URLSearchParams(window.location.search).get("view");
+  const initialView = queryView ?? storedView ?? "grid";
+
+  const applyView = (view: string, syncUrl: boolean) => {
+    const active = views.has(view) ? view : "grid";
+    if (grid) grid.dataset.view = active;
+    viewButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.view === active));
+    });
+    try {
+      localStorage.setItem("theme-view", active);
+    } catch {
+      /* storage unavailable */
+    }
+    if (syncUrl) {
+      const url = new URL(window.location.href);
+      if (active === "grid") url.searchParams.delete("view");
+      else url.searchParams.set("view", active);
+      history.replaceState(null, "", url);
+    }
+  };
+
+  viewButtons.forEach((button) => {
+    button.addEventListener("click", () => applyView(button.dataset.view ?? "grid", true));
+  });
+
+  applyView(initialView, false);
 </script>
