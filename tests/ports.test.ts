@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { contrast, mix, shade } from "../src/lib/color";
 import { ports } from "../src/lib/ports";
 import { deriveHerdrAppColors } from "../src/lib/ports/herdr-app";
+import { installCommand } from "../src/lib/ports/install";
 import { catppuccinMocha } from "./fixtures";
 
 describe("color math", () => {
@@ -49,6 +50,12 @@ describe("port serializers", () => {
     expect(file.background).toBe("#1e1e2e");
     expect(file.ansi).toHaveLength(16);
     expect(file.colors.accent).toMatch(/^#[0-9a-f]{6}$/);
+  });
+
+  it("activates a herdr app theme with the app.theme command", () => {
+    const command = installCommand("herdr-app", catppuccinMocha, "https://example.com/theme.json");
+    expect(command).toContain("herdr-app do app.theme --name 'catppuccin-mocha'");
+    expect(command).not.toContain("--name app.theme");
   });
 
   it("ghostty output uses palette lines", () => {

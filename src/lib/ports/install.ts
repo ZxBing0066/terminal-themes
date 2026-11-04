@@ -10,7 +10,7 @@ export function installCommand(slug: string, theme: Theme, url: string): string 
   switch (slug) {
     case "herdr-app":
       return [
-        `mkdir -p "$HOME/.config/herdr-app/themes" && curl -fsSL "${url}" -o "$HOME/.config/herdr-app/themes/${name}.json" && { command -v herdr-app >/dev/null && herdr-app do --name app.theme --argv '["${name}"]' || true; }`,
+        `mkdir -p "$HOME/.config/herdr-app/themes" && curl -fsSL "${url}" -o "$HOME/.config/herdr-app/themes/${name}.json" && { command -v herdr-app >/dev/null && herdr-app do app.theme --name '${name}' || true; }`,
         `# If activation did not run, choose ${name} in Herdr -> Settings -> Theme.`,
       ].join("\n");
     case "ghostty":
