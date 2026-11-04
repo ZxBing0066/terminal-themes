@@ -79,15 +79,19 @@ const sampleCommand = sample ? installCommand(target.slug, sample, sampleUrl) : 
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Token</th><th>Hex</th><th>{locale === "zh" ? "作用" : "Controls"}</th></tr></thead>
+          <thead><tr><th>Token</th><th>{locale === "zh" ? "色块" : "Color"}</th><th>Hex</th><th>{locale === "zh" ? "作用" : "Controls"}</th></tr></thead>
           <tbody>
-            {herdrTokens.map(({ token, en, zh }) => (
-              <tr>
-                <td class="mono">{token}</td>
-                <td class="mono">{sampleColors[token as keyof typeof sampleColors]}</td>
-                <td class="muted">{locale === "zh" ? zh : en}</td>
-              </tr>
-            ))}
+            {herdrTokens.map(({ token, en, zh }) => {
+              const hex = sampleColors[token as keyof typeof sampleColors];
+              return (
+                <tr>
+                  <td class="mono">{token}</td>
+                  <td><span class="token-swatch" style={`background:${hex}`} aria-hidden="true"></span></td>
+                  <td class="mono">{hex}</td>
+                  <td class="muted">{locale === "zh" ? zh : en}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
