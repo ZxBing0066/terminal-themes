@@ -58,7 +58,7 @@ const faq = faqFor(locale);
         <p class="eyebrow">{t(locale, "home.featured")}</p>
         <h2>{t(locale, "home.featured")}</h2>
       </div>
-      <a class="mono small" href={href("themes")}>{t(locale, "common.viewAll")} →</a>
+      <a class="mono small view-all" href={href("themes")}>{t(locale, "common.viewAll")} <span aria-hidden="true">→</span></a>
     </div>
     <div class="grid">
       {featured.map((theme) => <ThemeCard theme={theme} locale={locale} />)}

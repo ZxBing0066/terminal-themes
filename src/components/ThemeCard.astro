@@ -2,6 +2,7 @@
 import type { Locale } from "../i18n/ui";
 import { ansiList } from "../lib/palette";
 import type { Theme } from "../lib/schema";
+import ZoomIcon from "./ZoomIcon.astro";
 
 interface Props {
   theme: Theme;
@@ -41,11 +42,13 @@ const colors = ansiList(theme.palette.ansi).slice(0, 8);
     </div>
   </a>
   <button
-    class="card-zoom"
+    class="zoom-chip"
     type="button"
     data-zoom
     data-zoom-src={`/previews/${theme.family}-${theme.slug}.svg`}
     data-zoom-alt={`${theme.name} preview`}
     aria-label={locale === "zh" ? `查看 ${theme.name} 大图` : `View larger preview of ${theme.name}`}
-  >⤢</button>
+  >
+    <ZoomIcon />
+  </button>
 </div>

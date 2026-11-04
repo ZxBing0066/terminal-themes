@@ -8,6 +8,7 @@ import { installCommand } from "../../lib/ports/install";
 import { absoluteFileUrl, localizedHref, type Page } from "../../lib/routes";
 import { similarThemes } from "../../lib/similar";
 import Breadcrumbs from "../Breadcrumbs.astro";
+import ZoomIcon from "../ZoomIcon.astro";
 import ThemeCard from "../ThemeCard.astro";
 
 const page = Astro.props.page as Extract<Page, { kind: "theme" }>;
@@ -89,7 +90,7 @@ const installLabel = (port: PortTarget) =>
             loading="eager"
             decoding="async"
           />
-          <span class="preview-zoom-icon" aria-hidden="true">⤢</span>
+          <span class="zoom-chip" aria-hidden="true"><ZoomIcon /></span>
         </button>
       </div>
 

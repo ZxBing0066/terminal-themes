@@ -430,36 +430,41 @@ pre {
   text-decoration: none;
 }
 
-.card-zoom {
+.zoom-chip {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 10px;
   z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border: 1px solid var(--border);
-  border-radius: 50%;
+  border-radius: 6px;
   background: var(--panel);
   color: var(--fg);
-  font-size: 15px;
   line-height: 1;
   cursor: zoom-in;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+  opacity: 0.9;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
 }
 
-.card-wrap:hover .card-zoom,
-.card-zoom:focus-visible {
+.zoom-chip:hover,
+.zoom-chip:focus-visible {
+  border-color: var(--border-strong);
   opacity: 1;
 }
 
-@media (hover: none) {
-  .card-zoom {
-    opacity: 1;
-  }
+.zoom-chip svg {
+  display: block;
+}
+
+[data-theme-grid][data-view="list"] .zoom-chip {
+  top: auto;
+  right: auto;
+  bottom: 8px;
+  left: 8px;
 }
 
 .card-media {
@@ -1443,23 +1448,6 @@ th.mono {
   outline-offset: 3px;
 }
 
-.preview-zoom-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  background: var(--panel);
-  color: var(--fg);
-  font-size: 16px;
-  opacity: 0.85;
-}
-
 .lightbox {
   position: fixed;
   inset: 0;
@@ -1504,3 +1492,25 @@ body.lightbox-open {
   overflow: hidden;
 }
 
+
+
+.view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.view-all:hover {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.view-all span {
+  transition: transform 0.15s ease;
+}
+
+.view-all:hover span {
+  transform: translateX(2px);
+}
