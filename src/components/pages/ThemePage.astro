@@ -42,6 +42,9 @@ const ratioClass = (value: number) => (value >= 7 ? "ratio-good" : value >= 4.5 
 const portFileName = (port: PortTarget) => `${theme.family}-${theme.slug}.${port.extension}`;
 const portPath = (port: PortTarget) => `/ports/${port.slug}/${portFileName(port)}`;
 const portUrl = (port: PortTarget) => absoluteFileUrl(portPath(port));
+const previewFor = (port: PortTarget) => `/previews/${theme.family}-${theme.slug}-${port.slug}.svg`;
+const previewAlt = (port: PortTarget) =>
+  locale === "zh" ? `${theme.name} 在 ${port.name} 中的预览` : `${theme.name} preview in ${port.name}`;
 const commandFor = (port: PortTarget) => installCommand(port.slug, theme, portUrl(port));
 const herdrCommand = commandFor(ports[0]);
 const installLabel = (port: PortTarget) =>
@@ -72,8 +75,9 @@ const installLabel = (port: PortTarget) =>
     <div>
       <div class="theme-preview">
         <img
-          src={`/previews/${theme.family}-${theme.slug}.svg`}
-          alt={`${theme.name} preview in the Herdr app`}
+          data-theme-preview
+          src={previewFor(ports[0])}
+          alt={previewAlt(ports[0])}
           width="1200"
           height="720"
           loading="eager"
@@ -198,8 +202,11 @@ const installLabel = (port: PortTarget) =>
         {serialized.map(({ port }, index) => (
           <button
             class="port-tab"
+            type="button"
             role="tab"
             data-port-tab={port.slug}
+            data-preview={previewFor(port)}
+            data-preview-alt={previewAlt(port)}
             aria-selected={index === 0 ? "true" : "false"}
           >
             {port.name}
@@ -251,6 +258,7 @@ const installLabel = (port: PortTarget) =>
 
   const tabs = [...document.querySelectorAll<HTMLElement>("[data-port-tab]")];
   const panels = [...document.querySelectorAll<HTMLElement>("[data-port-panel]")];
+  const preview = document.querySelector<HTMLImageElement>("[data-theme-preview]");
 
   const selectPort = (slug: string, persist: boolean) => {
     const tab = tabs.find((item) => item.dataset.portTab === slug) ?? tabs[0];
@@ -261,6 +269,10 @@ const installLabel = (port: PortTarget) =>
     panels.forEach((panel) => {
       panel.hidden = panel.dataset.portPanel !== tab.dataset.portTab;
     });
+    if (preview && tab.dataset.preview) {
+      preview.src = tab.dataset.preview;
+      if (tab.dataset.previewAlt) preview.alt = tab.dataset.previewAlt;
+    }
     if (persist) rememberPort(tab.dataset.portTab ?? "");
   };
 

@@ -4,7 +4,7 @@ import { contrast, isDark } from "../../lib/color";
 import { ANSI_ORDER } from "../../lib/palette";
 import { ports } from "../../lib/ports";
 import { rememberPort, savedPortSlug } from "../../lib/ports/preference";
-import { renderHerdrAppPreview } from "../../lib/preview";
+import { renderPortPreview } from "../../lib/preview";
 import type { Theme } from "../../lib/schema";
 
 type AppearanceChoice = "auto" | "dark" | "light";
@@ -217,8 +217,8 @@ export default function Editor() {
     () => makeTheme(values, name, family, slug, appearance),
     [values, name, family, slug, appearance],
   );
-  const svg = useMemo(() => renderHerdrAppPreview(theme), [theme]);
   const port = ports.find((candidate) => candidate.slug === portSlug) ?? ports[0];
+  const svg = useMemo(() => renderPortPreview(theme, port), [theme, port]);
   const output = useMemo(() => port.serialize(theme), [port, theme]);
   const fgRatio = contrast(values[1], values[0]);
   const weak = ANSI_ORDER.map((key, index) => ({
