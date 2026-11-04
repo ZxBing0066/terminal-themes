@@ -247,15 +247,26 @@ const installLabel = (port: PortTarget) =>
 </section>
 
 <script>
-  document.querySelectorAll<HTMLElement>("[data-port-tab]").forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const slug = tab.dataset.portTab;
-      document.querySelectorAll<HTMLElement>("[data-port-tab]").forEach((item) => {
-        item.setAttribute("aria-selected", item === tab ? "true" : "false");
-      });
-      document.querySelectorAll<HTMLElement>("[data-port-panel]").forEach((panel) => {
-        panel.hidden = panel.dataset.portPanel !== slug;
-      });
+  import { rememberPort, savedPortSlug } from "../../lib/ports/preference";
+
+  const tabs = [...document.querySelectorAll<HTMLElement>("[data-port-tab]")];
+  const panels = [...document.querySelectorAll<HTMLElement>("[data-port-panel]")];
+
+  const selectPort = (slug: string, persist: boolean) => {
+    const tab = tabs.find((item) => item.dataset.portTab === slug) ?? tabs[0];
+    if (!tab) return;
+    tabs.forEach((item) => {
+      item.setAttribute("aria-selected", String(item === tab));
     });
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.portPanel !== tab.dataset.portTab;
+    });
+    if (persist) rememberPort(tab.dataset.portTab ?? "");
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => selectPort(tab.dataset.portTab ?? "", true));
   });
+
+  selectPort(savedPortSlug() ?? tabs[0]?.dataset.portTab ?? "", false);
 </script>

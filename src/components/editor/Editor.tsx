@@ -3,6 +3,7 @@ import { deflateSync, inflateSync, strFromU8, strToU8 } from "fflate";
 import { contrast, isDark } from "../../lib/color";
 import { ANSI_ORDER } from "../../lib/palette";
 import { ports } from "../../lib/ports";
+import { rememberPort, savedPortSlug } from "../../lib/ports/preference";
 import { renderHerdrAppPreview } from "../../lib/preview";
 import type { Theme } from "../../lib/schema";
 
@@ -158,6 +159,11 @@ export default function Editor() {
   const [portSlug, setPortSlug] = useState(ports[0].slug);
   const [status, setStatus] = useState("");
   const [themes, setThemes] = useState<Theme[]>([]);
+
+  useEffect(() => {
+    const saved = savedPortSlug();
+    if (saved && ports.some((candidate) => candidate.slug === saved)) setPortSlug(saved);
+  }, []);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -376,7 +382,10 @@ export default function Editor() {
                   class="port-tab"
                   role="tab"
                   aria-selected={candidate.slug === port.slug ? "true" : "false"}
-                  onClick={() => setPortSlug(candidate.slug)}
+                  onClick={() => {
+                    setPortSlug(candidate.slug);
+                    rememberPort(candidate.slug);
+                  }}
                 >
                   {candidate.name}
                 </button>
