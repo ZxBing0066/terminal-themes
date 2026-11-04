@@ -1,14 +1,14 @@
 ---
 import { t } from "../../i18n/ui";
 import { allFamilies, allThemes } from "../../lib/data";
-import { localized, type Page } from "../../lib/routes";
+import { localizedHref, type Page } from "../../lib/routes";
 import ThemeCard from "../ThemeCard.astro";
 
 const page = Astro.props.page as Extract<Page, { kind: "catalog" }>;
 const locale = page.locale;
 const themes = allThemes();
 const families = allFamilies();
-const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const href = (bare: string) => localizedHref(locale, bare);
 ---
 
 <section class="page-head">

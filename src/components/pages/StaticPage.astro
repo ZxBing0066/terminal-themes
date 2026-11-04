@@ -1,11 +1,11 @@
 ---
 import Editor from "../editor/Editor";
 import { t } from "../../i18n/ui";
-import { localized, type Page } from "../../lib/routes";
+import { localizedHref, type Page } from "../../lib/routes";
 
 const page = Astro.props.page as Extract<Page, { kind: "static" }>;
 const { locale, slug } = page;
-const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const href = (bare: string) => localizedHref(locale, bare);
 const github = "https://github.com/ZxBing0066/terminal-themes";
 ---
 

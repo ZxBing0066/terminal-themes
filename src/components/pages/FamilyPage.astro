@@ -1,7 +1,7 @@
 ---
 import { t } from "../../i18n/ui";
 import { familyDescription, familyStats, themesOf } from "../../lib/data";
-import { localized, type Page } from "../../lib/routes";
+import { localizedHref, type Page } from "../../lib/routes";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import ThemeCard from "../ThemeCard.astro";
 
@@ -9,7 +9,7 @@ const page = Astro.props.page as Extract<Page, { kind: "family" }>;
 const { family, locale } = page;
 const themes = themesOf(family.id);
 const stats = familyStats(family);
-const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const href = (bare: string) => localizedHref(locale, bare);
 ---
 
 <section class="page-head">

@@ -5,14 +5,14 @@ import { contrastRatio, generatedDescription } from "../../lib/data";
 import { ansiPairs } from "../../lib/palette";
 import { ports, type PortTarget } from "../../lib/ports";
 import { installCommand } from "../../lib/ports/install";
-import { absoluteFileUrl, localized, type Page } from "../../lib/routes";
+import { absoluteFileUrl, localizedHref, type Page } from "../../lib/routes";
 import { similarThemes } from "../../lib/similar";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import ThemeCard from "../ThemeCard.astro";
 
 const page = Astro.props.page as Extract<Page, { kind: "theme" }>;
 const { theme, locale } = page;
-const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const href = (bare: string) => localizedHref(locale, bare);
 const ratio = contrastRatio(theme);
 const pairs = ansiPairs(theme.palette.ansi);
 const paletteJson = JSON.stringify(

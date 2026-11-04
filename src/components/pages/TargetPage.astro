@@ -5,14 +5,14 @@ import { allThemes, getTheme } from "../../lib/data";
 import { deriveHerdrAppColors } from "../../lib/ports/herdr-app";
 import { installCommand } from "../../lib/ports/install";
 import { portFileName, ports } from "../../lib/ports";
-import { absoluteFileUrl, localized, type Page } from "../../lib/routes";
+import { absoluteFileUrl, localizedHref, type Page } from "../../lib/routes";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import ThemeCard from "../ThemeCard.astro";
 
 const page = Astro.props.page as Extract<Page, { kind: "target" }>;
 const { target, locale } = page;
 const themes = allThemes();
-const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const href = (bare: string) => localizedHref(locale, bare);
 const sample = getTheme("catppuccin", "mocha");
 const sampleColors = sample ? deriveHerdrAppColors(sample) : undefined;
 const samplePort = ports.find((port) => port.slug === target.slug);

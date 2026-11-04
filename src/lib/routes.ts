@@ -43,6 +43,11 @@ export function localized(locale: Locale, bare: string): string {
   return bare ? `zh/${bare}` : "zh";
 }
 
+export function localizedHref(locale: Locale, bare: string): string {
+  const path = localized(locale, bare);
+  return `/${path}${path ? "/" : ""}`;
+}
+
 export function stripLocale(path: string): string {
   return path === "zh" ? "" : path.replace(/^zh\//, "");
 }

@@ -1,13 +1,13 @@
 ---
 import { t } from "../../i18n/ui";
 import { readGuide } from "../../lib/guides";
-import { localized, type Page } from "../../lib/routes";
+import { localizedHref, type Page } from "../../lib/routes";
 import Breadcrumbs from "../Breadcrumbs.astro";
 
 const page = Astro.props.page as Extract<Page, { kind: "guide" }>;
 const { guide, locale } = page;
 const { html, usedLocale } = readGuide(locale, guide.slug);
-const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
+const href = (bare: string) => localizedHref(locale, bare);
 ---
 
 <section class="page-head">
