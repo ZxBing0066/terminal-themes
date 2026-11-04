@@ -190,19 +190,28 @@ const brand = [
       const lightboxImage = document.querySelector<HTMLImageElement>("[data-lightbox-image]");
       const lightboxClose = document.querySelector<HTMLButtonElement>("[data-lightbox-close]");
       let zoomTrigger: HTMLElement | null = null;
+      let zoomRequest = 0;
 
       const openLightbox = (src: string, alt: string, trigger: HTMLElement) => {
         if (!lightbox || !lightboxImage) return;
-        lightboxImage.src = src;
-        lightboxImage.alt = alt;
-        lightbox.hidden = false;
-        document.body.classList.add("lightbox-open");
-        zoomTrigger = trigger;
-        lightboxClose?.focus();
+        const request = ++zoomRequest;
+        const preload = new Image();
+        preload.decoding = "async";
+        preload.onload = () => {
+          if (request !== zoomRequest) return;
+          lightboxImage.src = src;
+          lightboxImage.alt = alt;
+          lightbox.hidden = false;
+          document.body.classList.add("lightbox-open");
+          zoomTrigger = trigger;
+          lightboxClose?.focus();
+        };
+        preload.src = src;
       };
 
       const closeLightbox = () => {
         if (!lightbox || !lightboxImage) return;
+        zoomRequest += 1;
         lightbox.hidden = true;
         lightboxImage.removeAttribute("src");
         document.body.classList.remove("lightbox-open");
