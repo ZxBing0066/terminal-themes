@@ -21,10 +21,21 @@ const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
 
 <section class="section">
   <div class="wrap">
-    <div class="chips" data-filters>
-      <button class="chip" data-filter="all" aria-current="page">{t(locale, "common.all")}</button>
-      <button class="chip" data-filter="dark">{t(locale, "common.dark")}</button>
-      <button class="chip" data-filter="light">{t(locale, "common.light")}</button>
+    <div class="filter-bar">
+      <div class="chips" data-filters>
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">
+          {t(locale, "common.all")} <span class="chip-count">{themes.length}</span>
+        </button>
+        <button class="chip" type="button" data-filter="dark" aria-pressed="false">
+          {t(locale, "common.dark")} <span class="chip-count">{themes.filter((theme) => theme.appearance === "dark").length}</span>
+        </button>
+        <button class="chip" type="button" data-filter="light" aria-pressed="false">
+          {t(locale, "common.light")} <span class="chip-count">{themes.filter((theme) => theme.appearance === "light").length}</span>
+        </button>
+      </div>
+      <p class="filter-status small muted" data-filter-status data-label={t(locale, "catalog.count")} aria-live="polite">
+        {themes.length} {t(locale, "catalog.count")}
+      </p>
     </div>
     <div class="grid" data-theme-grid style="margin-top:18px">
       {themes.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
@@ -49,14 +60,32 @@ const href = (bare: string) => `/${localized(locale, bare)}${bare ? "/" : ""}`;
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
   const cards = document.querySelectorAll<HTMLElement>("[data-theme-grid] [data-appearance]");
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const filter = button.dataset.filter;
-      buttons.forEach((item) => item.removeAttribute("aria-current"));
-      button.setAttribute("aria-current", "page");
-      cards.forEach((card) => {
-        card.hidden = filter !== "all" && card.dataset.appearance !== filter;
-      });
+  const status = document.querySelector<HTMLElement>("[data-filter-status]");
+  const valid = new Set(["all", "dark", "light"]);
+
+  const apply = (filter: string, syncUrl: boolean) => {
+    const active = valid.has(filter) ? filter : "all";
+    let visible = 0;
+    cards.forEach((card) => {
+      const show = active === "all" || card.dataset.appearance === active;
+      card.hidden = !show;
+      if (show) visible += 1;
     });
+    buttons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.filter === active));
+    });
+    if (status) status.textContent = `${visible} ${status.dataset.label ?? ""}`.trim();
+    if (syncUrl) {
+      const url = new URL(window.location.href);
+      if (active === "all") url.searchParams.delete("appearance");
+      else url.searchParams.set("appearance", active);
+      history.replaceState(null, "", url);
+    }
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => apply(button.dataset.filter ?? "all", true));
   });
+
+  apply(new URLSearchParams(window.location.search).get("appearance") ?? "all", false);
 </script>

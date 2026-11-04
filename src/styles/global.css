@@ -868,13 +868,17 @@ th.mono {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  appearance: none;
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 3px 9px;
+  background: transparent;
+  min-height: 24px;
+  padding: 3px 10px;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--muted);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .chip:hover,
@@ -882,6 +886,29 @@ th.mono {
   border-color: var(--border-strong);
   color: var(--fg);
   text-decoration: none;
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.chip-count {
+  opacity: 0.55;
+  font-size: 10px;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.filter-status {
+  margin: 0;
 }
 
 .hr {
