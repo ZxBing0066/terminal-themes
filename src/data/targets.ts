@@ -21,7 +21,7 @@ export const targets: Target[] = [
       zh: "Herdr App 主题",
     },
     description: {
-      en: "Herdr is a native desktop app for running coding agents. Drop a JSON theme into ~/.config/herdr-app/themes and pick it in Settings. Each file carries the terminal palette plus the app's 22 UI colors.",
+      en: "Herdr is a native desktop app for coding agents. Put a JSON theme in ~/.config/herdr-app/themes and pick it in Settings; each file has 16 ANSI + 22 UI colors.",
       zh: "Herdr 是运行编码代理的原生桌面应用。把 JSON 主题放进 ~/.config/herdr-app/themes，在设置里选择即可。每个文件同时包含终端调色板和应用界面的 22 个颜色 token。",
     },
     install: {
@@ -45,7 +45,7 @@ export const targets: Target[] = [
     name: "Ghostty",
     title: { en: "Ghostty themes", zh: "Ghostty 主题" },
     description: {
-      en: "Ghostty reads a theme file from its config directory and applies it with one line. The exported file contains the full 16-color palette plus cursor and selection colors.",
+      en: "Ghostty reads themes from its config directory and applies one with a single line. Each exported file has the full 16-color palette plus cursor and selection.",
       zh: "Ghostty 从配置目录读取主题文件，一行配置即可启用。导出的文件包含完整的 16 色 ANSI 调色板以及光标和选区颜色。",
     },
     install: {

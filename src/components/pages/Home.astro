@@ -2,6 +2,7 @@
 import { targets } from "../../data/targets";
 import { t } from "../../i18n/ui";
 import { allFamilies, allThemes } from "../../lib/data";
+import { faqFor } from "../../lib/faq";
 import { localized, type Page } from "../../lib/routes";
 import ThemeCard from "../ThemeCard.astro";
 
@@ -29,6 +30,7 @@ const featured = featuredIds
   .map((id) => themes.find((theme) => theme.id === id))
   .filter((theme): theme is NonNullable<typeof theme> => Boolean(theme));
 const latest = themes.filter((theme) => !featuredIds.includes(theme.id)).slice(0, 8);
+const faq = faqFor(locale);
 ---
 
 <section class="hero">
@@ -112,6 +114,25 @@ const latest = themes.filter((theme) => !featuredIds.includes(theme.id)).slice(0
         <p>{t(locale, "editor.description")}</p>
       </div>
       <a class="btn" href={href("editor")}>{t(locale, "home.ctaEditor")}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2>{locale === "zh" ? "常见问题" : "Frequently asked questions"}</h2>
+      </div>
+    </div>
+    <div class="faq">
+      {faq.map((item) => (
+        <details class="faq-item">
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
     </div>
   </div>
 </section>

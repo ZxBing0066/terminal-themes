@@ -895,7 +895,6 @@ th.mono {
 }
 
 .chip-count {
-  opacity: 0.55;
   font-size: 10px;
 }
 
@@ -1318,4 +1317,32 @@ th.mono {
   .install-command > .btn {
     justify-self: start;
   }
+}
+
+
+/* FAQ */
+
+.faq {
+  display: grid;
+  gap: 8px;
+  max-width: 900px;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  padding: 0 14px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 12px 0;
+  font-weight: 550;
+}
+
+.faq-item p {
+  margin: 0 0 12px;
+  max-width: 75ch;
+  color: var(--muted);
 }

@@ -2,15 +2,21 @@ import { t } from "../i18n/ui";
 import {
   allThemes,
   familyDescription,
-  generatedDescription,
+  themeMetaDescription,
   themesOf,
 } from "./data";
-import { absoluteUrl, alternatesFor, type Page } from "./routes";
+import { faqFor } from "./faq";
+import { absoluteFileUrl, absoluteUrl, alternatesFor, type Page } from "./routes";
 
 const SITE = "Terminal Themes";
+const GITHUB = "https://github.com/ZxBing0066/terminal-themes";
 
 function brand(locale: "en" | "zh"): string {
   return locale === "zh" ? "终端主题" : SITE;
+}
+
+function languageFor(locale: "en" | "zh"): string {
+  return locale === "zh" ? "zh-CN" : "en";
 }
 
 export function titleFor(page: Page): string {
@@ -18,20 +24,31 @@ export function titleFor(page: Page): string {
   switch (page.kind) {
     case "home":
       return page.locale === "zh"
-        ? "终端主题 — 为 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 提供配色"
-        : `${SITE} — Color schemes for the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal`;
+        ? "终端主题 — Herdr App、Ghostty、Alacritty 配色方案"
+        : `${SITE} — Herdr App, Ghostty, Alacritty schemes`;
     case "catalog":
       return `${t(locale, "catalog.title")} — ${brand(locale)}`;
     case "family":
       return `${page.family.name} ${t(locale, "family.title")} — ${brand(locale)}`;
-    case "theme":
-      return locale === "zh"
-        ? `${page.theme.name} — Herdr App、Ghostty、Alacritty 终端配色方案 — 终端主题`
-        : `${page.theme.name} — Terminal Color Scheme for Herdr App, Ghostty, Alacritty — ${SITE}`;
+    case "theme": {
+      const suffix =
+        page.theme.name.length > 18
+          ? locale === "zh"
+            ? "终端主题"
+            : "Terminal theme"
+          : locale === "zh"
+            ? "Herdr App、Ghostty、Alacritty 终端主题"
+            : "Herdr App, Ghostty, Alacritty themes";
+      return `${page.theme.name} — ${suffix}`;
+    }
     case "target":
       return `${page.target.title[locale]} — ${brand(locale)}`;
-    case "guide":
-      return `${page.guide.title[locale]} — ${brand(locale)}`;
+    case "guide": {
+      const base = page.guide.title[locale];
+      const suffix = locale === "zh" ? "终端主题" : "Terminal Themes";
+      const full = `${base} — ${suffix}`;
+      return full.length > 60 ? `${base} — ${locale === "zh" ? "教程" : "Themes"}` : full;
+    }
     case "guideIndex":
       return `${t(locale, "guide.indexTitle")} — ${brand(locale)}`;
     case "static": {
@@ -59,15 +76,31 @@ export function descriptionFor(page: Page): string {
     case "family":
       return familyDescription(page.family, locale);
     case "theme":
-      return generatedDescription(page.theme, locale);
+      return themeMetaDescription(page.theme, locale);
     case "target":
       return page.target.description[locale];
     case "guide":
       return page.guide.description[locale];
     case "guideIndex":
       return t(locale, "guide.indexDescription");
-    case "static":
-      return page.slug === "editor" ? t(locale, "editor.description") : t(locale, "site.tagline");
+    case "static": {
+      switch (page.slug) {
+        case "editor":
+          return t(locale, "editor.description");
+        case "contribute":
+          return t(locale, "contribute.description");
+        case "about":
+          return t(locale, "about.description");
+        case "license":
+          return t(locale, "license.description");
+        case "privacy":
+          return t(locale, "privacy.description");
+        case "changelog":
+          return t(locale, "changelog.description");
+        case "search":
+          return t(locale, "search.description");
+      }
+    }
   }
 }
 
@@ -79,7 +112,12 @@ export function ogImageFor(page: Page): string {
 }
 
 export function breadcrumbFor(page: Page) {
-  const items = [{ name: t(page.locale, "common.home"), url: absoluteUrl("") }];
+  const items = [
+    {
+      name: t(page.locale, "common.home"),
+      url: absoluteUrl(page.locale === "zh" ? "zh" : ""),
+    },
+  ];
   const bare = page.path.replace(/^zh\/?/, "");
 
   if (page.kind === "theme") {
@@ -116,19 +154,33 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
   const canonical = absoluteUrl(page.path);
 
   if (page.kind === "home") {
+    const orgId = `${absoluteUrl("")}#organization`;
+    graph.push({
+      "@type": "Organization",
+      "@id": orgId,
+      name: SITE,
+      url: absoluteUrl(""),
+      logo: { "@type": "ImageObject", url: absoluteFileUrl("favicon.svg") },
+      sameAs: [GITHUB],
+      parentOrganization: { "@type": "Organization", name: "iwwi", url: "https://iwwi.app/" },
+    });
     graph.push({
       "@type": "WebSite",
       "@id": `${canonical}#website`,
       url: canonical,
       name: t(page.locale, "site.name"),
       description: descriptionFor(page),
-      inLanguage: page.locale,
+      inLanguage: languageFor(page.locale),
+      publisher: { "@id": orgId },
     });
     graph.push({
-      "@type": "Organization",
-      "@id": "https://iwwi.app/#organization",
-      name: "iwwi",
-      url: "https://iwwi.app/",
+      "@type": "FAQPage",
+      "@id": `${canonical}#faq`,
+      mainEntity: faqFor(page.locale).map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
     });
   }
 
@@ -138,12 +190,15 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
       name: page.theme.name,
       url: canonical,
       description: descriptionFor(page),
-      inLanguage: page.locale,
+      inLanguage: languageFor(page.locale),
       keywords: page.theme.tags.join(", "),
+      image: ogImageFor(page),
       license: page.theme.source.licenseUrl ?? page.theme.source.license,
       creator: { "@type": "Organization", name: page.theme.source.author },
       isBasedOn: page.theme.source.upstream,
+      datePublished: page.theme.meta.addedAt,
       dateModified: page.theme.meta.updatedAt,
+      mainEntityOfPage: canonical,
       about: "terminal color scheme",
     });
   }
@@ -163,12 +218,41 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
     });
   }
 
-  if (page.kind === "guide") {
+  if (page.kind === "target") {
     graph.push({
       "@type": "HowTo",
-      name: page.guide.title[page.locale],
+      name: page.target.title[page.locale],
+      description: page.target.description[page.locale],
+      inLanguage: languageFor(page.locale),
+      step: page.target.install[page.locale].map((text, index) => ({
+        "@type": "HowToStep",
+        position: index + 1,
+        name: text,
+        text,
+      })),
+    });
+  }
+
+  if (page.kind === "guide") {
+    const publisher = {
+      "@type": "Organization",
+      name: SITE,
+      url: absoluteUrl(""),
+      logo: { "@type": "ImageObject", url: absoluteFileUrl("favicon.svg") },
+    };
+    graph.push({
+      "@type": "Article",
+      headline: page.guide.title[page.locale],
       description: page.guide.description[page.locale],
-      inLanguage: page.locale,
+      image: ogImageFor(page),
+      author: publisher,
+      publisher,
+      datePublished: page.guide.updatedAt,
+      dateModified: page.guide.updatedAt,
+      mainEntityOfPage: canonical,
+      inLanguage: languageFor(page.locale),
+      articleSection: "Guides",
+      isAccessibleForFree: true,
     });
   }
 

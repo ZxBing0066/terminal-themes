@@ -85,6 +85,15 @@ export function generatedDescription(theme: Theme, locale: Locale): string {
   return `${theme.name} is a ${theme.appearance} terminal theme with a ${theme.palette.background} background and ${ratio}:1 body contrast. It ships a full 16-color ANSI palette and exports to the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.`;
 }
 
+export function themeMetaDescription(theme: Theme, locale: Locale): string {
+  const ratio = contrastRatio(theme).toFixed(1);
+  const appearance = theme.appearance === "dark" ? (locale === "zh" ? "深色" : "dark") : (locale === "zh" ? "浅色" : "light");
+  if (locale === "zh") {
+    return `${theme.name}：${appearance}终端主题，背景 ${theme.palette.background}，对比度 ${ratio}:1，含 16 色 ANSI，支持六种终端导出。`;
+  }
+  return `${theme.name}: ${appearance} terminal theme, ${theme.palette.background} background, ${ratio}:1 contrast, 16 ANSI colors, six terminal exports.`;
+}
+
 export function familyDescription(family: Family, locale: Locale): string {
   const override = family.description?.[locale];
   if (override) return override;
