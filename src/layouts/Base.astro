@@ -128,5 +128,40 @@ const brand = [
         <span class="mono">{locale === "zh" ? "数据与预览在构建时生成" : "Data and previews generated at build time"}</span>
       </div>
     </footer>
+
+    <script>
+      const canonicalOrigin = "https://terminalthemes.iwwi.app";
+      const currentOrigin = window.location.origin;
+      if (currentOrigin !== canonicalOrigin) {
+        document.querySelectorAll<HTMLElement>("[data-copy]").forEach((element) => {
+          const value = element.dataset.copy;
+          if (value?.includes(canonicalOrigin)) {
+            element.dataset.copy = value.replaceAll(canonicalOrigin, currentOrigin);
+          }
+        });
+        document.querySelectorAll<HTMLElement>(".install-command code").forEach((element) => {
+          if (element.textContent?.includes(canonicalOrigin)) {
+            element.textContent = element.textContent.replaceAll(canonicalOrigin, currentOrigin);
+          }
+        });
+      }
+
+      document.addEventListener("click", async (event) => {
+        const button = (event.target as HTMLElement).closest<HTMLElement>("[data-copy]");
+        if (!button) return;
+        const value = button.dataset.copy;
+        if (!value) return;
+        const original = button.textContent;
+        try {
+          await navigator.clipboard.writeText(value);
+          button.textContent = document.documentElement.lang.startsWith("zh") ? "已复制" : "Copied";
+          window.setTimeout(() => {
+            button.textContent = original;
+          }, 1200);
+        } catch {
+          /* clipboard unavailable */
+        }
+      });
+    </script>
   </body>
 </html>

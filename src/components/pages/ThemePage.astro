@@ -258,21 +258,4 @@ const installLabel = (port: PortTarget) =>
       });
     });
   });
-
-  document.addEventListener("click", async (event) => {
-    const button = (event.target as HTMLElement).closest<HTMLElement>("[data-copy]");
-    if (!button) return;
-    const value = button.dataset.copy;
-    if (!value) return;
-    const original = button.textContent;
-    try {
-      await navigator.clipboard.writeText(value);
-      button.textContent = "Copied";
-      window.setTimeout(() => {
-        button.textContent = original;
-      }, 1200);
-    } catch {
-      /* clipboard unavailable */
-    }
-  });
 </script>
