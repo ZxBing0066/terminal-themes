@@ -108,7 +108,9 @@ const sampleCommand = sample ? installCommand(target.slug, sample, sampleUrl) : 
       </div>
     </div>
     <div class="grid">
-      {themes.map((theme) => <ThemeCard theme={theme} locale={locale} />)}
+      {themes.map((theme) => (
+        <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} />
+      ))}
     </div>
   </div>
 </section>

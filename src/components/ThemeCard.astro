@@ -7,9 +7,12 @@ import ZoomIcon from "./ZoomIcon.astro";
 interface Props {
   theme: Theme;
   locale: Locale;
+  previewTarget?: string;
+  previewName?: string;
 }
 
-const { theme, locale } = Astro.props;
+const { theme, locale, previewTarget = "herdr-app", previewName = "Herdr app" } = Astro.props;
+const previewSrc = `/previews/${theme.family}-${theme.slug}-${previewTarget}.svg`;
 const href = `/${locale === "zh" ? "zh/" : ""}themes/${theme.family}/${theme.slug}/`;
 const colors = ansiList(theme.palette.ansi).slice(0, 8);
 ---
@@ -18,8 +21,8 @@ const colors = ansiList(theme.palette.ansi).slice(0, 8);
   <a class="card" href={href}>
     <div class="card-media">
       <img
-        src={`/previews/${theme.family}-${theme.slug}.svg`}
-        alt={`${theme.name} preview`}
+        src={previewSrc}
+        alt={`${theme.name} preview in ${previewName}`}
         loading="lazy"
         width="1200"
         height="720"
@@ -45,9 +48,9 @@ const colors = ansiList(theme.palette.ansi).slice(0, 8);
     class="zoom-chip"
     type="button"
     data-zoom
-    data-zoom-src={`/previews/${theme.family}-${theme.slug}.svg`}
-    data-zoom-alt={`${theme.name} preview`}
-    aria-label={locale === "zh" ? `查看 ${theme.name} 大图` : `View larger preview of ${theme.name}`}
+    data-zoom-src={previewSrc}
+    data-zoom-alt={`${theme.name} preview in ${previewName}`}
+    aria-label={locale === "zh" ? `查看 ${theme.name} 在 ${previewName} 中的大图` : `View larger ${previewName} preview of ${theme.name}`}
   >
     <ZoomIcon />
   </button>
