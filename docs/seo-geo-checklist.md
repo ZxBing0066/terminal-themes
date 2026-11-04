@@ -34,6 +34,9 @@ so all essential content must exist in the HTML before JavaScript runs.
 - [x] Target install hubs: `HowTo` only when the visible steps and schema steps match.
 - [x] FAQ schema only for visible Q&A, and answers are complete without JavaScript.
 - [x] No structured-data claims that are absent from the visible page.
+- [x] Every page has a `WebPage` node with author, publisher, `dateModified`, and canonical URL.
+- [x] Target pages add `FAQPage` and keep `HowTo` steps in sync with visible install steps.
+- [x] The editor adds `WebApplication` and `FAQPage` data.
 
 ## 4. Social and sharing
 
@@ -71,9 +74,12 @@ so all essential content must exist in the HTML before JavaScript runs.
 - [x] Images have descriptive `alt` text; decorative images are ignored by assistive tech.
 - [x] Outbound source links are valid and use `rel` where appropriate.
 - [x] The changelog records meaningful updates.
+- [x] Long prose pages place a heading at least every 120–180 words; code blocks and editor control labels are excluded from prose sizing.
 
 ## 8. Performance, accessibility, and mobile
 
+- [x] Visible maintainer, last-reviewed date, source/license, and methodology links appear on target, editor, theme, guide, and About pages.
+- [x] About documents verification and corrections with an issue-reporting path.
 - [x] Static HTML is the primary render path.
 - [x] Lighthouse Accessibility, Best Practices, and SEO are 100 on representative pages.
 - [x] No horizontal overflow at 390 px.
@@ -126,10 +132,16 @@ Final metadata checks:
 - English descriptions <80 chars: **0**. Chinese descriptions are shorter by design because CJK characters carry more information per character.
 - Pages with H1 count ≠ 1: **0**.
 - Indexable pages missing canonical: **0**; missing hreflang: **0**; missing OG alt: **0**.
-- JSON-LD parse errors: **0**.
-- Structured types: BreadcrumbList 340, CreativeWork 224, ItemList 86, Article 12, HowTo 12, Organization 2, WebSite 2, FAQPage 2.
-- Home FAQ: **3 visible questions / 3 schema questions**.
-- Lighthouse (representative pages: home, catalog, theme, target hub, guide): Accessibility, Best Practices, SEO **100**.
+- JSON-LD parse errors: **0**; canonical mismatches: **0**; missing canonical/hreflang on indexable pages: **0**.
+- Structured types: WebPage 340, BreadcrumbList 340, CreativeWork 224, ItemList 86, FAQPage 16, HowTo 12, Article 12, Organization 2, WebSite 2, WebApplication 2.
+- FAQ: home **3** visible/schema; each target hub **4/4**; editor **4/4**.
+- Every `WebPage.mainEntity` resolves to a node in the same graph; static informational pages intentionally omit `mainEntity`.
+- Target pages now have intro answers, install steps, FAQ, dark/light catalog groups, and a visible maintainer/reviewed/docs byline.
+- Editor now has a static explainer, export/install table, privacy note, submission workflow, FAQ, and `WebApplication` schema.
+- Theme pages now have H2/H3 headings for preview, palette, contrast, details, provenance, install, ports, and similar themes.
+- About now documents verification and corrections; guides and theme pages show reviewed/updated dates.
+- Section sizing: target/editor/theme prose is split by H2/H3; long code blocks and editor UI controls are not counted as prose.
+- Lighthouse (home, target hub, editor, theme, catalog, guide): Accessibility, Best Practices, SEO **100**.
 
 Exceptions: the 404 page is `noindex` and intentionally has no canonical/hreflang/OG image; the internal search pages are `noindex` and excluded from the sitemap. Rich-result eligibility was checked structurally, not with Google's live Rich Results Test. Earlier title/description audit is the source of the 112-theme long-tail fix; the current build is clean.
 

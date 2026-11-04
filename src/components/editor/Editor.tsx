@@ -263,6 +263,7 @@ export default function Editor() {
   return (
     <div class="editor">
       <div class="editor-toolbar">
+        <h3 class="panel-title" style="width:100%;margin:0">Theme metadata</h3>
         <label class="field">
           <span>Start from</span>
           <select
@@ -316,7 +317,7 @@ export default function Editor() {
       <div class="editor-grid">
         <div class="editor-controls">
           <div class="panel">
-            <div class="panel-title">Base colors</div>
+            <h3 class="panel-title">Base colors</h3>
             {["Background", "Foreground", "Cursor", "Selection"].map((label, index) => (
               <div class="color-row" key={label}>
                 <span>{label}</span>
@@ -337,7 +338,7 @@ export default function Editor() {
           </div>
 
           <div class="panel">
-            <div class="panel-title">ANSI palette</div>
+            <h3 class="panel-title">ANSI palette</h3>
             <div class="color-grid">
               {ANSI_ORDER.map((key, index) => (
                 <div class="color-row" key={key}>
@@ -360,7 +361,7 @@ export default function Editor() {
           </div>
 
           <div class="panel">
-            <div class="panel-title">Checks</div>
+            <h3 class="panel-title">Checks</h3>
             <p class={fgRatio >= 4.5 ? "small" : "small ratio-bad"}>Body contrast: {fgRatio.toFixed(2)}:1</p>
             {weak.length > 0 ? (
               <p class="small ratio-warn">
@@ -373,9 +374,10 @@ export default function Editor() {
         </div>
 
         <div class="editor-right">
+          <h3 class="panel-title">Preview</h3>
           <div class="editor-preview" dangerouslySetInnerHTML={{ __html: svg }} />
           <div class="panel">
-            <div class="panel-title">Export</div>
+            <h3 class="panel-title">Export</h3>
             <div class="port-tabs" role="tablist">
               {ports.map((candidate) => (
                 <button

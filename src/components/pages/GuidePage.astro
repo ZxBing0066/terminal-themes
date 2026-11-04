@@ -16,6 +16,11 @@ const href = (bare: string) => localizedHref(locale, bare);
     <p class="eyebrow">{t(locale, "nav.guides")}</p>
     <h1>{guide.title[locale]}</h1>
     <p class="lede">{guide.description[locale]}</p>
+    <p class="byline small muted">
+      {locale === "zh" ? "由 Terminal Themes 复核" : "Reviewed by Terminal Themes"}
+      {" · "}{t(locale, "common.updated")} {guide.updatedAt}
+      {" · "}<a href={`${href("about")}#verification`}>{locale === "zh" ? "方法" : "Methodology"}</a>
+    </p>
   </div>
 </section>
 

@@ -5,8 +5,11 @@ import {
   themeMetaDescription,
   themesOf,
 } from "./data";
+import { editorFaqs } from "./editorFaq";
 import { faqFor } from "./faq";
 import { absoluteFileUrl, absoluteUrl, alternatesFor, type Page } from "./routes";
+import { SITE_UPDATED } from "./siteMeta";
+import { targetFaqs } from "./targetFaq";
 
 const SITE = "Terminal Themes";
 const GITHUB = "https://github.com/ZxBing0066/terminal-themes";
@@ -17,6 +20,16 @@ function brand(locale: "en" | "zh"): string {
 
 function languageFor(locale: "en" | "zh"): string {
   return locale === "zh" ? "zh-CN" : "en";
+}
+
+function organization() {
+  return {
+    "@type": "Organization",
+    name: SITE,
+    url: absoluteUrl(""),
+    logo: { "@type": "ImageObject", url: absoluteFileUrl("favicon.svg") },
+    sameAs: [GITHUB],
+  };
 }
 
 export function titleFor(page: Page): string {
@@ -187,6 +200,7 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
   if (page.kind === "theme") {
     graph.push({
       "@type": "CreativeWork",
+      "@id": `${canonical}#theme`,
       name: page.theme.name,
       url: canonical,
       description: descriptionFor(page),
@@ -207,6 +221,7 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
     const themes = page.kind === "family" ? themesOf(page.family.id) : allThemes();
     graph.push({
       "@type": "ItemList",
+      "@id": `${canonical}#list`,
       name: titleFor(page),
       numberOfItems: themes.length,
       itemListElement: themes.map((theme, index) => ({
@@ -219,16 +234,66 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
   }
 
   if (page.kind === "target") {
+    const org = organization();
     graph.push({
       "@type": "HowTo",
+      "@id": `${canonical}#howto`,
       name: page.target.title[page.locale],
       description: page.target.description[page.locale],
+      image: ogImageFor(page),
       inLanguage: languageFor(page.locale),
+      dateModified: SITE_UPDATED,
+      author: org,
+      publisher: org,
+      mainEntityOfPage: canonical,
       step: page.target.install[page.locale].map((text, index) => ({
         "@type": "HowToStep",
         position: index + 1,
         name: text,
         text,
+      })),
+    });
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${canonical}#faq`,
+      mainEntity: targetFaqs(page.target, page.locale).map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      })),
+    });
+  }
+
+  if (page.kind === "static" && page.slug === "editor") {
+    const org = organization();
+    const features =
+      page.locale === "zh"
+        ? ["编辑 16 色 ANSI 与基础颜色", "在 Herdr App 中预览", "检查 WCAG 对比度", "导出六种终端格式", "通过 URL 分享调色板"]
+        : ["Edit 16 ANSI and base colors", "Preview in the Herdr app", "Check WCAG contrast", "Export six terminal formats", "Share palettes by URL"];
+    graph.push({
+      "@type": "WebApplication",
+      "@id": `${canonical}#app`,
+      name: t(page.locale, "editor.title"),
+      url: canonical,
+      description: descriptionFor(page),
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript",
+      inLanguage: languageFor(page.locale),
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      featureList: features,
+      author: org,
+      publisher: org,
+      dateModified: SITE_UPDATED,
+    });
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${canonical}#faq`,
+      mainEntity: editorFaqs(page.locale).map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
       })),
     });
   }
@@ -242,6 +307,7 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
     };
     graph.push({
       "@type": "Article",
+      "@id": `${canonical}#article`,
       headline: page.guide.title[page.locale],
       description: page.guide.description[page.locale],
       image: ogImageFor(page),
@@ -255,6 +321,40 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
       isAccessibleForFree: true,
     });
   }
+
+  const mainEntityId =
+    page.kind === "home"
+      ? `${canonical}#website`
+      : page.kind === "catalog" || page.kind === "family"
+        ? `${canonical}#list`
+        : page.kind === "theme"
+          ? `${canonical}#theme`
+          : page.kind === "target"
+            ? `${canonical}#howto`
+            : page.kind === "guide"
+              ? `${canonical}#article`
+              : page.kind === "static" && page.slug === "editor"
+                ? `${canonical}#app`
+                : undefined;
+  const pageDate =
+    page.kind === "theme"
+      ? page.theme.meta.updatedAt
+      : page.kind === "guide"
+        ? page.guide.updatedAt
+        : SITE_UPDATED;
+  graph.push({
+    "@type": "WebPage",
+    "@id": `${canonical}#webpage`,
+    url: canonical,
+    name: titleFor(page),
+    description: descriptionFor(page),
+    inLanguage: languageFor(page.locale),
+    dateModified: pageDate,
+    author: organization(),
+    publisher: organization(),
+    isPartOf: { "@type": "WebSite", url: absoluteUrl(""), name: SITE },
+    ...(mainEntityId ? { mainEntity: { "@id": mainEntityId } } : {}),
+  });
 
   graph.push(breadcrumbFor(page));
 

@@ -1,12 +1,24 @@
 ---
 import Editor from "../editor/Editor";
+import { targets } from "../../data/targets";
 import { t } from "../../i18n/ui";
 import { localizedHref, type Page } from "../../lib/routes";
+import { editorFaqs } from "../../lib/editorFaq";
+import { SITE_UPDATED } from "../../lib/siteMeta";
 
 const page = Astro.props.page as Extract<Page, { kind: "static" }>;
 const { locale, slug } = page;
 const href = (bare: string) => localizedHref(locale, bare);
 const github = "https://github.com/ZxBing0066/terminal-themes";
+const faqs = editorFaqs(locale);
+const editorPaths: Record<string, string> = {
+  "herdr-app": "~/.config/herdr-app/themes/<name>.json",
+  ghostty: "~/.config/ghostty/themes/<name>",
+  alacritty: "~/.config/alacritty/alacritty.toml",
+  kitty: "~/.config/kitty/<name>.conf",
+  iterm2: "*.itermcolors → Profiles → Colors",
+  "windows-terminal": "settings.json → schemes[]",
+};
 ---
 
 {slug === "editor" && (
@@ -15,11 +27,76 @@ const github = "https://github.com/ZxBing0066/terminal-themes";
       <p class="eyebrow">{t(locale, "nav.editor")}</p>
       <h1>{t(locale, "editor.title")}</h1>
       <p class="lede">{t(locale, "editor.description")}</p>
+      <p class="byline small muted">
+        {locale === "zh" ? "由 Terminal Themes 构建与维护" : "Built and maintained by Terminal Themes"}
+        {" · "}{t(locale, "common.updated")} {SITE_UPDATED}
+        {" · "}<a href={github}>{locale === "zh" ? "源码" : "Source"}</a>
+        {" · "}<a href={`${href("about")}#verification`}>{locale === "zh" ? "方法" : "Methodology"}</a>
+      </p>
     </div>
   </section>
   <div class="wrap">
+    <h2 class="editor-workspace-title">{locale === "zh" ? "调色板工作区" : "Palette workspace"}</h2>
+    <p class="small muted">{locale === "zh" ? "从任意主题开始，调整颜色，然后导出或提交。" : "Start from any theme, tune the colors, then export or submit."}</p>
     <Editor client:load />
   </div>
+  <section class="section">
+    <div class="wrap">
+      <article class="prose">
+        <h2>{locale === "zh" ? "编辑器能做什么" : "What the editor does"}</h2>
+        <p>
+          {locale === "zh"
+            ? "编辑器把一份 20 色调色板转换成六种终端原生配置。调整 16 个 ANSI 颜色位，以及背景、前景、光标和选区；预览和对比度检查会立即更新。"
+            : "The editor turns one 20-color palette into six native terminal configurations. Adjust the 16 ANSI slots plus background, foreground, cursor, and selection; the preview and contrast checks update immediately."}
+        </p>
+
+        <h2>{locale === "zh" ? "导出格式与安装位置" : "Exports and install paths"}</h2>
+        <p>
+          {locale === "zh"
+            ? "每个导出都使用同一份调色板，因此切换终端时颜色保持一致。下面是各目标的典型安装位置；完整步骤在对应的应用页面。"
+            : "Every export uses the same palette, so colors stay consistent when you switch terminals. The table lists the usual install location for each target; the full steps live on the target page."}
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>{t(locale, "common.family")}</th><th>{locale === "zh" ? "安装位置" : "Install location"}</th></tr></thead>
+            <tbody>
+              {targets.map((target) => (
+                <tr>
+                  <td><a href={href(target.slug)}>{target.name}</a></td>
+                  <td class="mono">{editorPaths[target.slug]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>{locale === "zh" ? "隐私与分享" : "Privacy and sharing"}</h2>
+        <p>
+          {locale === "zh"
+            ? "编辑器不需要账号，也不会上传调色板。颜色计算、预览和导出都在浏览器里完成；分享链接只把调色板状态放在 URL hash 中。"
+            : "The editor needs no account and does not upload your palette. Color math, previews, and exports run in the browser; a share link only stores the palette state in the URL hash."}
+        </p>
+
+        <h2>{locale === "zh" ? "提交到目录" : "Submit to the catalog"}</h2>
+        <p>
+          {locale === "zh"
+            ? "填好 family、slug 和名称后点击 Submit。GitHub 新建文件页会预填完整 JSON；检查后提交 PR，CI 会校验 schema、重复颜色、对比度和完整构建。流程细节见贡献指南。"
+            : "Fill in family, slug, and name, then press Submit. GitHub's new-file page opens with the full JSON prefilled; review it, open a pull request, and CI validates the schema, duplicate colors, contrast, and the full build. See the contribution guide for the workflow."}
+        </p>
+        <p><a href={href("contribute")}>{t(locale, "nav.contribute")}</a> · <a href={href("guides/create-and-submit-a-theme")}>{t(locale, "common.readGuide")}</a></p>
+
+        <h2 id="faq">{locale === "zh" ? "常见问题" : "Frequently asked questions"}</h2>
+        <div class="faq">
+          {faqs.map((faq) => (
+            <details class="faq-item">
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </article>
+    </div>
+  </section>
 )}
 
 {slug === "search" && (
@@ -130,6 +207,13 @@ const github = "https://github.com/ZxBing0066/terminal-themes";
             ? "预览由调色板在构建时生成，是 Herdr App 的风格化示意图，不是第三方截图。"
             : "Previews are generated from palette data at build time. They are stylized Herdr app mockups, not third-party screenshots."}
         </p>
+        <h2 id="verification">{locale === "zh" ? "校验与更正" : "Verification and corrections"}</h2>
+        <p>
+          {locale === "zh"
+            ? `每个主题记录上游链接、作者、许可和更新时间；安装步骤对照应用官方文档复核。最近一次全站复核：${SITE_UPDATED}。如果发现颜色、路径或来源错误，请在本仓库开 issue。`
+            : `Every theme records its upstream link, author, license, and update date; install steps are checked against the application's official documentation. Last full review: ${SITE_UPDATED}. If a color, path, or source is wrong, open an issue in this repository.`}
+        </p>
+        <p><a href={`${github}/issues`}>{locale === "zh" ? "报告问题" : "Report an issue"}</a></p>
       </article>
     </div>
   </>

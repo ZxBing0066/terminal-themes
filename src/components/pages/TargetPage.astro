@@ -6,6 +6,8 @@ import { deriveHerdrAppColors } from "../../lib/ports/herdr-app";
 import { installCommand } from "../../lib/ports/install";
 import { portFileName, ports } from "../../lib/ports";
 import { absoluteFileUrl, localizedHref, type Page } from "../../lib/routes";
+import { SITE_UPDATED } from "../../lib/siteMeta";
+import { targetFaqs } from "../../lib/targetFaq";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import ThemeCard from "../ThemeCard.astro";
 
@@ -21,6 +23,9 @@ const sampleUrl =
     ? absoluteFileUrl(`/ports/${target.slug}/${portFileName(sample, samplePort)}`)
     : "";
 const sampleCommand = sample ? installCommand(target.slug, sample, sampleUrl) : "";
+const faqs = targetFaqs(target, locale);
+const darkThemes = themes.filter((theme) => theme.appearance === "dark");
+const lightThemes = themes.filter((theme) => theme.appearance === "light");
 ---
 
 <section class="page-head">
@@ -34,6 +39,36 @@ const sampleCommand = sample ? installCommand(target.slug, sample, sampleUrl) : 
       <a class="chip" href={href("themes")}>{t(locale, "nav.themes")}</a>
       <a class="chip" href={href("editor")}>{t(locale, "nav.editor")}</a>
     </div>
+    <p class="byline small muted" style="margin-top:14px">
+      {locale === "zh" ? "由 Terminal Themes 维护" : "Maintained by Terminal Themes"}
+      {" · "}{t(locale, "common.updated")} {SITE_UPDATED}
+      {target.docs && <>{" · "}<a href={target.docs} rel="noopener">{t(locale, "target.docs")}</a></>}
+      {" · "}<a href={`${href("about")}#verification`}>{locale === "zh" ? "方法" : "Methodology"}</a>
+    </p>
+  </div>
+</section>
+
+<section class="section" style="padding-bottom:0">
+  <div class="wrap">
+    <article class="prose">
+      <h2>{locale === "zh" ? `什么是 ${target.name} 主题？` : `What is a ${target.name} theme?`}</h2>
+      <p>
+        {locale === "zh"
+          ? `要在 ${target.name} 中安装主题，先下载该主题的配置文件，再按下方步骤放到配置目录。本站提供 ${themes.length} 个可直接使用的配色。`
+          : `To install a theme in ${target.name}, download the theme file and follow the steps below; this page includes ${themes.length} ready-to-use palettes.`}
+      </p>
+      <p>
+        {locale === "zh"
+          ? "每个调色板都设置背景、前景、光标、选区，以及提示符、Git 和编辑器使用的 16 个 ANSI 颜色。同一份数据会导出到六种终端，切换应用时颜色保持一致。"
+          : "Each palette sets the background, foreground, cursor, selection, and the 16 ANSI colors used by prompts, Git, and editors. One palette is exported to six terminals, so colors stay consistent when you switch apps."}
+      </p>
+      <h2>{locale === "zh" ? `${target.name} 如何读取主题？` : `How does ${target.name} load themes?`}</h2>
+      <p>
+        {locale === "zh"
+          ? `${target.install.zh[0]} ${target.install.zh[1]} 本站的配置由同一份调色板生成，不复制上游文件或截图。`
+          : `${target.install.en[0]} ${target.install.en[1]} This site generates the native file from one palette instead of copying an upstream theme file or screenshot.`}
+      </p>
+    </article>
   </div>
 </section>
 
@@ -99,18 +134,57 @@ const sampleCommand = sample ? installCommand(target.slug, sample, sampleUrl) : 
   </section>
 )}
 
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2>{locale === "zh" ? "常见问题" : "Frequently asked questions"}</h2>
+      </div>
+    </div>
+    <div class="faq">
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary>{faq.question}</summary>
+          <p>{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <div class="section-head">
       <div>
         <p class="eyebrow">{t(locale, "target.allThemes")}</p>
         <h2>{t(locale, "target.allThemes")}</h2>
+        <p>
+          {locale === "zh"
+            ? "以下每个主题都包含完整的 16 色 ANSI 调色板，并已生成该应用的原生配置。"
+            : "Every theme below includes the full 16-color ANSI palette and a native configuration for this app."}
+        </p>
       </div>
     </div>
-    <div class="grid">
-      {themes.map((theme) => (
-        <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} />
-      ))}
-    </div>
+    {darkThemes.length > 0 && (
+      <>
+        <h3 class="panel-subtitle">{t(locale, "common.dark")} · {darkThemes.length}</h3>
+        <div class="grid">
+          {darkThemes.map((theme) => (
+            <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} />
+          ))}
+        </div>
+      </>
+    )}
+    {lightThemes.length > 0 && (
+      <>
+        <h3 class="panel-subtitle">{t(locale, "common.light")} · {lightThemes.length}</h3>
+        <div class="grid" style="margin-top:10px">
+          {lightThemes.map((theme) => (
+            <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} />
+          ))}
+        </div>
+      </>
+    )}
   </div>
 </section>

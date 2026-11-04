@@ -62,6 +62,12 @@ const installLabel = (port: PortTarget) =>
     <p class="eyebrow">{theme.family} · {theme.appearance} · {theme.source.license}</p>
     <h1>{theme.name}</h1>
     <p class="lede">{generatedDescription(theme, locale)}</p>
+    <p class="byline small muted">
+      {locale === "zh" ? "来源" : "Source"}: {theme.source.author}
+      {" · "}{t(locale, "common.updated")} {theme.meta.updatedAt}
+      {" · "}{theme.source.license}
+      {theme.source.upstream && <>{" · "}<a href={theme.source.upstream} rel="noopener">{locale === "zh" ? "上游项目" : "Upstream"}</a></>}
+    </p>
     <div class="actions">
       <a class="btn btn-primary" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
       <button class="btn" data-copy={herdrCommand}>{t(locale, "theme.copyInstall")}</button>
@@ -74,6 +80,7 @@ const installLabel = (port: PortTarget) =>
 <div class="wrap">
   <div class="theme-layout">
     <div>
+      <h2 class="preview-heading">{locale === "zh" ? "预览" : "Preview"}</h2>
       <div class="theme-preview">
         <button
           class="preview-zoom"
@@ -95,10 +102,11 @@ const installLabel = (port: PortTarget) =>
       </div>
 
       <div class="panel" style="margin-top:18px">
-        <div class="panel-title">
-          <span>{t(locale, "common.palette")}</span>
+        <div class="panel-title-row">
+          <h2 class="panel-title">{t(locale, "common.palette")}</h2>
           <button class="hex-button" data-copy={paletteJson}>{t(locale, "common.copy")}</button>
         </div>
+        <h3 class="panel-subtitle">{t(locale, "common.ansi")}</h3>
         <div class="ansi-grid">
           {pairs.map(({ name, hex }) => (
             <div class="ansi-cell">
@@ -110,6 +118,7 @@ const installLabel = (port: PortTarget) =>
             </div>
           ))}
         </div>
+        <h3 class="panel-subtitle">{locale === "zh" ? "基础颜色" : "Base colors"}</h3>
         <div class="ansi-grid" style="margin-top:6px">
           {baseColors.map(({ name, hex }) => (
             <div class="ansi-cell">
@@ -124,8 +133,8 @@ const installLabel = (port: PortTarget) =>
       </div>
 
       <div class="panel" style="margin-top:18px">
-        <div class="panel-title">
-          <span>{t(locale, "common.contrast")}</span>
+        <div class="panel-title-row">
+          <h2 class="panel-title">{t(locale, "common.contrast")}</h2>
           <span class="muted">WCAG · vs {theme.palette.background}</span>
         </div>
         <div class="table-wrap">
@@ -154,7 +163,7 @@ const installLabel = (port: PortTarget) =>
 
     <aside class="side-stack">
       <div class="panel">
-        <div class="panel-title">{t(locale, "common.themes")}</div>
+        <h2 class="panel-title">{locale === "zh" ? "主题详情" : "Theme details"}</h2>
         <dl class="kv">
           <dt>{t(locale, "common.family")}</dt><dd><a href={href(`themes/${theme.family}`)}>{theme.family}</a></dd>
           <dt>{t(locale, "common.background")}</dt><dd class="mono">{theme.palette.background}</dd>
@@ -167,7 +176,7 @@ const installLabel = (port: PortTarget) =>
       </div>
 
       <div class="panel">
-        <div class="panel-title">{t(locale, "common.provenance")}</div>
+        <h2 class="panel-title">{t(locale, "common.provenance")}</h2>
         <dl class="kv">
           <dt>{t(locale, "common.author")}</dt><dd>{theme.source.author}</dd>
           <dt>{t(locale, "common.license")}</dt>
@@ -182,7 +191,7 @@ const installLabel = (port: PortTarget) =>
       </div>
 
       <div class="panel">
-        <div class="panel-title">{t(locale, "common.install")}</div>
+        <h2 class="panel-title">{t(locale, "common.install")}</h2>
         <p class="muted small">
           {locale === "zh"
             ? "Herdr App：把 JSON 放进 ~/.config/herdr-app/themes/，然后在 设置 → 主题 中选择。"
@@ -224,6 +233,7 @@ const installLabel = (port: PortTarget) =>
       </div>
       {serialized.map(({ port, content }, index) => (
         <div class="port-panel" data-port-panel={port.slug} hidden={index !== 0 ? true : undefined}>
+          <h3 class="panel-subtitle" style="margin-top:0">{port.name}</h3>
           <div class="code-block">
             <pre><code>{content}</code></pre>
             <div class="code-actions">
