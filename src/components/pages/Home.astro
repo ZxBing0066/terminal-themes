@@ -43,10 +43,10 @@ const faq = faqFor(locale);
       <a class="btn" href={href("editor")}>{t(locale, "home.ctaEditor")}</a>
     </div>
     <div class="stat-row">
-      <div class="stat"><strong>{themes.length}</strong><span>{t(locale, "home.statsThemes")}</span></div>
-      <div class="stat"><strong>{families.length}</strong><span>{t(locale, "home.statsFamilies")}</span></div>
-      <div class="stat"><strong>{targets.length}</strong><span>{t(locale, "home.statsTargets")}</span></div>
-      <div class="stat"><strong>2</strong><span>{t(locale, "home.statsLanguages")}</span></div>
+      <div class="stat"><strong data-count={themes.length}>{themes.length}</strong><span>{t(locale, "home.statsThemes")}</span></div>
+      <div class="stat"><strong data-count={families.length}>{families.length}</strong><span>{t(locale, "home.statsFamilies")}</span></div>
+      <div class="stat"><strong data-count={targets.length}>{targets.length}</strong><span>{t(locale, "home.statsTargets")}</span></div>
+      <div class="stat"><strong data-count="2">2</strong><span>{t(locale, "home.statsLanguages")}</span></div>
     </div>
   </div>
 </section>
@@ -136,3 +136,27 @@ const faq = faqFor(locale);
     </div>
   </div>
 </section>
+
+
+<script>
+  const counters = document.querySelectorAll<HTMLElement>("[data-count]");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (counters.length > 0 && !reduceMotion) {
+    const duration = 1100;
+    const start = performance.now();
+    const values = [...counters].map((element) => ({
+      element,
+      value: Number(element.dataset.count ?? 0),
+    }));
+    const easeOut = (progress: number) => 1 - Math.pow(1 - progress, 3);
+    const frame = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = easeOut(progress);
+      values.forEach(({ element, value }) => {
+        element.textContent = String(Math.round(value * eased));
+      });
+      if (progress < 1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }
+</script>

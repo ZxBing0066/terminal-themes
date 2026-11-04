@@ -347,9 +347,12 @@ pre {
 }
 
 .stat strong {
+  display: inline-block;
+  min-width: 3ch;
   font-family: var(--font-mono);
   font-size: 22px;
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat span {
