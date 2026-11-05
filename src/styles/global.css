@@ -1526,24 +1526,18 @@ th.mono {
 
 .agent-prompt {
   margin-top: 18px;
-  padding: 0 14px;
+  padding: 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--panel);
 }
 
-.agent-prompt summary {
-  padding: 14px 0;
-  cursor: pointer;
-  font-weight: 550;
-}
-
-.agent-prompt[open] summary {
-  border-bottom: 1px solid var(--border);
+.agent-prompt .panel-title-row {
+  margin-bottom: 8px;
 }
 
 .agent-prompt p {
-  margin-top: 12px;
+  margin-top: 0;
 }
 
 .agent-prompt pre {

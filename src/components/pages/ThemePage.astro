@@ -247,8 +247,13 @@ const lede = target ? terminalThemeDescription(theme, target, locale) : generate
       )}
 
       {target && activePort && (
-        <details class="agent-prompt">
-          <summary>{locale === "zh" ? "让 Agent 帮我安装" : "Let an agent install it"}</summary>
+        <section class="agent-prompt">
+          <div class="panel-title-row">
+            <h2 class="panel-title">{locale === "zh" ? "让 Agent 帮我安装" : "Let an agent install it"}</h2>
+            <button class="btn btn-small" data-copy={promptFor(activePort)}>
+              {locale === "zh" ? "复制提示词" : "Copy prompt"}
+            </button>
+          </div>
           <p class="small muted">
             {locale === "zh"
               ? `把这段提示词交给编码 Agent。它会读取 ${target.name} 的安装页面、备份配置并只修改这个主题需要的文件。`
@@ -260,7 +265,7 @@ const lede = target ? terminalThemeDescription(theme, target, locale) : generate
               {locale === "zh" ? "复制提示词" : "Copy prompt"}
             </button>
           </div>
-        </details>
+        </section>
       )}
     </div>
 
