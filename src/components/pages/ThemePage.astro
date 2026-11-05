@@ -59,7 +59,7 @@ const installLabel = (port: PortTarget) =>
     ? "PowerShell"
     : ["alacritty", "iterm2"].includes(port.slug)
       ? t(locale, "common.download")
-      : t(locale, "theme.installCommand");
+      : t(locale, "target.oneLineInstall");
 const title = target ? `${theme.name} for ${target.name}` : theme.name;
 const lede = target ? terminalThemeDescription(theme, target, locale) : generatedDescription(theme, locale);
 ---
@@ -220,19 +220,29 @@ const lede = target ? terminalThemeDescription(theme, target, locale) : generate
           <ol class="install-steps">
             {target.install[locale].map((step) => <li>{step}</li>)}
           </ol>
-          <div class="code-block">
-            <pre><code>{activeContent}</code></pre>
-            <div class="code-actions">
-              <button class="btn btn-small" data-copy={activeContent}>{t(locale, "common.copy")}</button>
+          <div class="install-command-block">
+            <div class="install-command-head">
+              <span class="mono small muted">{installLabel(activePort)}</span>
+              <span class="mono small muted">{portFileName(activePort)}</span>
+            </div>
+            <pre class="install-command-code"><code>{commandFor(activePort)}</code></pre>
+            <div class="actions install-actions">
+              <button class="btn btn-small" data-copy={commandFor(activePort)}>{t(locale, "common.copyCommand")}</button>
               <a class="btn btn-small" href={portPath(activePort)} download>{t(locale, "common.download")}</a>
-              <span class="mono small muted" style="margin-left:auto">{portFileName(activePort)}</span>
+              <a class="btn btn-small" href={href(target.slug)}>{t(locale, "target.docs")}</a>
             </div>
           </div>
-          <div class="install-command">
-            <span class="mono small muted">{installLabel(activePort)}</span>
-            <code>{commandFor(activePort)}</code>
-            <button class="btn btn-small" data-copy={commandFor(activePort)}>{t(locale, "common.copyCommand")}</button>
-          </div>
+          <details class="config-details">
+            <summary>{locale === "zh" ? "完整配置文件" : "Full configuration"}</summary>
+            <div class="code-block">
+              <pre><code>{activeContent}</code></pre>
+              <div class="code-actions">
+                <button class="btn btn-small" data-copy={activeContent}>{t(locale, "common.copy")}</button>
+                <a class="btn btn-small" href={portPath(activePort)} download>{t(locale, "common.download")}</a>
+                <span class="mono small muted" style="margin-left:auto">{portFileName(activePort)}</span>
+              </div>
+            </div>
+          </details>
         </div>
       )}
 

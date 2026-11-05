@@ -1465,6 +1465,65 @@ th.mono {
   margin-top: 4px;
 }
 
+.install-command-block {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+  overflow: hidden;
+}
+
+.install-command-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.install-command-code {
+  max-height: 190px;
+  margin: 0;
+  padding: 12px;
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+
+.install-actions {
+  margin: 0;
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+}
+
+.config-details {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+  overflow: hidden;
+}
+
+.config-details summary {
+  padding: 10px 12px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.config-details[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.config-details .code-block {
+  border: 0;
+  border-radius: 0;
+}
+
 .agent-prompt {
   margin-top: 18px;
   padding: 0 14px;
