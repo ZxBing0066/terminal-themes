@@ -21,8 +21,10 @@ interface BasePage {
 export type Page =
   | (BasePage & { kind: "home" })
   | (BasePage & { kind: "catalog" })
+  | (BasePage & { kind: "terminals" })
   | (BasePage & { kind: "family"; family: Family })
   | (BasePage & { kind: "theme"; theme: Theme })
+  | (BasePage & { kind: "themeVariant"; theme: Theme; target: Target })
   | (BasePage & { kind: "target"; target: Target })
   | (BasePage & { kind: "guide"; guide: Guide })
   | (BasePage & { kind: "guideIndex" })
@@ -46,6 +48,15 @@ export function localized(locale: Locale, bare: string): string {
 export function localizedHref(locale: Locale, bare: string): string {
   const path = localized(locale, bare);
   return `/${path}${path ? "/" : ""}`;
+}
+
+export function themePath(theme: Theme): string {
+  return `themes/${theme.family}/${theme.slug}`;
+}
+
+export function terminalThemePath(theme: Theme, target: Target | string): string {
+  const slug = typeof target === "string" ? target : target.slug;
+  return `${slug}/themes/${theme.family}/${theme.slug}`;
 }
 
 export function stripLocale(path: string): string {
@@ -78,6 +89,7 @@ export function buildRoutes(): Page[] {
   for (const locale of ["en", "zh"] as const) {
     pages.push({ kind: "home", locale, path: localized(locale, "") });
     pages.push({ kind: "catalog", locale, path: localized(locale, "themes") });
+    pages.push({ kind: "terminals", locale, path: localized(locale, "terminals") });
     pages.push({ kind: "guideIndex", locale, path: localized(locale, "guides") });
 
     for (const family of families) {
@@ -87,9 +99,18 @@ export function buildRoutes(): Page[] {
       pages.push({
         kind: "theme",
         locale,
-        path: localized(locale, `themes/${theme.family}/${theme.slug}`),
+        path: localized(locale, themePath(theme)),
         theme,
       });
+      for (const target of targets) {
+        pages.push({
+          kind: "themeVariant",
+          locale,
+          path: localized(locale, terminalThemePath(theme, target)),
+          theme,
+          target,
+        });
+      }
     }
     for (const target of targets) {
       pages.push({ kind: "target", locale, path: localized(locale, target.slug), target });

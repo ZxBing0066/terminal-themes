@@ -10,7 +10,11 @@ A static, open-source catalog of terminal color schemes with exports for the Her
 
 ## Herdr app, not Herdr TUI
 
-The Herdr target is the native desktop app (`herdrdev/herdr-app`). A theme is one JSON file in `~/.config/herdr-app/themes/`, with the terminal palette plus optional UI color overrides. Herdr TUI is a separate product configured through `~/.config/herdr/config.toml` and is out of scope for this release. See [`docs/adr/0005-herdr-app-target.md`](docs/adr/0005-herdr-app-target.md).
+The Herdr app is the native desktop app (`herdrdev/herdr-app`). A theme is one JSON file in `~/.config/herdr-app/themes/`, with the terminal palette plus optional UI color overrides. Herdr TUI is a separate product configured through `~/.config/herdr/config.toml` and is out of scope for this release. See [`docs/adr/0005-herdr-app-target.md`](docs/adr/0005-herdr-app-target.md).
+
+## Terminal pages
+
+The terminal index lives at `/terminals/`. The terminal-neutral theme hub lives at `/themes/{family}/{slug}/`. Each terminal has its own install page at `/{terminal}/themes/{family}/{slug}/`, with terminal-specific install steps, FAQ, and structured data. A sticky Terminal bar keeps the selected terminal across cards, theme pages, and the editor.
 
 ## Data model
 
@@ -49,7 +53,7 @@ The existing `dist/_redirects` and `dist/_headers` files are parsed by Workers S
 themes/<family>/family.json
 themes/<family>/<slug>.json
 src/lib/          schema, color math, data loader, ports, previews, routes, SEO
-src/components/   Astro pages and the Preact editor
+src/components/   Astro pages, Terminal bar, and the Preact editor
 src/content/      guides in en/ and zh/
 src/pages/        catch-all route + static endpoints
 scripts/          importer

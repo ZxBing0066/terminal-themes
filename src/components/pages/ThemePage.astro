@@ -1,19 +1,25 @@
 ---
 import { t } from "../../i18n/ui";
 import { contrast } from "../../lib/color";
-import { contrastRatio, generatedDescription } from "../../lib/data";
+import { contrastRatio, generatedDescription, terminalThemeDescription } from "../../lib/data";
 import { ansiPairs } from "../../lib/palette";
 import { ports, type PortTarget } from "../../lib/ports";
 import { installCommand } from "../../lib/ports/install";
-import { absoluteFileUrl, localizedHref, type Page } from "../../lib/routes";
+import { absoluteFileUrl, localizedHref, themePath, type Page } from "../../lib/routes";
 import { similarThemes } from "../../lib/similar";
+import { terminalThemeFaqs } from "../../lib/terminalThemeFaq";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import ZoomIcon from "../ZoomIcon.astro";
 import ThemeCard from "../ThemeCard.astro";
 
-const page = Astro.props.page as Extract<Page, { kind: "theme" }>;
+const page = Astro.props.page as Extract<Page, { kind: "theme" | "themeVariant" }>;
 const { theme, locale } = page;
+const target = page.kind === "themeVariant" ? page.target : undefined;
+const activePort = target ? ports.find((port) => port.slug === target.slug) : undefined;
+const activeContent = activePort ? activePort.serialize(theme) : "";
 const href = (bare: string) => localizedHref(locale, bare);
+const hubHref = localizedHref(locale, themePath(theme));
+const variantHref = (slug: string) => localizedHref(locale, `${slug}/themes/${theme.family}/${theme.slug}`);
 const ratio = contrastRatio(theme);
 const pairs = ansiPairs(theme.palette.ansi);
 const paletteJson = JSON.stringify(
@@ -25,8 +31,8 @@ const paletteJson = JSON.stringify(
   null,
   2,
 );
-const serialized = ports.map((port) => ({ port, content: port.serialize(theme) }));
 const similar = similarThemes(theme, 4);
+const faqs = target ? terminalThemeFaqs(theme, target, locale) : [];
 const baseColors = [
   { name: t(locale, "common.background"), hex: theme.palette.background },
   { name: t(locale, "common.foreground"), hex: theme.palette.foreground },
@@ -47,21 +53,24 @@ const previewFor = (port: PortTarget) => `/previews/${theme.family}-${theme.slug
 const previewAlt = (port: PortTarget) =>
   locale === "zh" ? `${theme.name} 在 ${port.name} 中的预览` : `${theme.name} preview in ${port.name}`;
 const commandFor = (port: PortTarget) => installCommand(port.slug, theme, portUrl(port));
-const herdrCommand = commandFor(ports[0]);
 const installLabel = (port: PortTarget) =>
   port.slug === "windows-terminal"
     ? "PowerShell"
     : ["alacritty", "iterm2"].includes(port.slug)
       ? t(locale, "common.download")
       : t(locale, "theme.installCommand");
+const title = target ? `${theme.name} for ${target.name}` : theme.name;
+const lede = target ? terminalThemeDescription(theme, target, locale) : generatedDescription(theme, locale);
 ---
 
 <section class="page-head">
   <div class="wrap">
     <Breadcrumbs page={page} />
-    <p class="eyebrow">{theme.family} · {theme.appearance} · {theme.source.license}</p>
-    <h1>{theme.name}</h1>
-    <p class="lede">{generatedDescription(theme, locale)}</p>
+    <p class="eyebrow">
+      {target && <>{target.name} · </>}{theme.family} · {theme.appearance} · {theme.source.license}
+    </p>
+    <h1>{title}</h1>
+    <p class="lede">{lede}</p>
     <p class="byline small muted">
       {locale === "zh" ? "来源" : "Source"}: {theme.source.author}
       {" · "}{t(locale, "common.updated")} {theme.meta.updatedAt}
@@ -70,9 +79,18 @@ const installLabel = (port: PortTarget) =>
     </p>
     <div class="actions">
       <a class="btn btn-primary" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
-      <button class="btn" data-copy={herdrCommand}>{t(locale, "theme.copyInstall")}</button>
-      <button class="btn" data-copy={paletteJson}>{t(locale, "common.copy")} JSON</button>
-      <a class="btn" href={portPath(ports[0])} download>{t(locale, "common.downloadTheme")}</a>
+      {target && activePort ? (
+        <>
+          <button class="btn" data-copy={commandFor(activePort)}>{t(locale, "theme.copyInstall")}</button>
+          <a class="btn" href={portPath(activePort)} download>{t(locale, "common.downloadTheme")}</a>
+          <a class="btn" href={hubHref}>{locale === "zh" ? "所有终端" : "All terminals"}</a>
+        </>
+      ) : (
+        <>
+          <button class="btn" data-copy={paletteJson}>{t(locale, "common.copy")} JSON</button>
+          <a class="btn" href="#terminal-previews">{locale === "zh" ? "选择终端" : "Choose a terminal"}</a>
+        </>
+      )}
     </div>
   </div>
 </section>
@@ -80,26 +98,58 @@ const installLabel = (port: PortTarget) =>
 <div class="wrap">
   <div class="theme-layout">
     <div>
-      <h2 class="preview-heading">{locale === "zh" ? "预览" : "Preview"}</h2>
-      <div class="theme-preview">
-        <button
-          class="preview-zoom"
-          type="button"
-          data-zoom
-          aria-label={locale === "zh" ? "查看大图" : "View larger preview"}
-        >
-          <img
-            data-theme-preview
-            src={previewFor(ports[0])}
-            alt={previewAlt(ports[0])}
-            width="1200"
-            height="720"
-            loading="eager"
-            decoding="async"
-          />
-          <span class="zoom-chip" aria-hidden="true"><ZoomIcon /></span>
-        </button>
-      </div>
+      {target && activePort ? (
+        <>
+          <h2 class="preview-heading">{locale === "zh" ? "预览" : "Preview"}</h2>
+          <div class="theme-preview">
+            <button
+              class="preview-zoom"
+              type="button"
+              data-zoom
+              aria-label={locale === "zh" ? "查看大图" : "View larger preview"}
+            >
+              <img
+                data-theme-preview
+                src={previewFor(activePort)}
+                alt={previewAlt(activePort)}
+                width="1200"
+                height="720"
+                loading="eager"
+                decoding="async"
+              />
+              <span class="zoom-chip" aria-hidden="true"><ZoomIcon /></span>
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <h2 class="preview-heading" id="terminal-previews">{locale === "zh" ? "终端预览" : "Terminal previews"}</h2>
+          <div class="grid terminal-preview-grid">
+            {ports.map((port) => (
+              <a class="card" href={variantHref(port.slug)}>
+                <div class="card-media">
+                  <img
+                    src={previewFor(port)}
+                    alt={previewAlt(port)}
+                    loading="lazy"
+                    width="1200"
+                    height="720"
+                  />
+                </div>
+                <div class="card-body">
+                  <div class="card-title">
+                    <span>{port.name}</span>
+                    <span class="badge">{port.extension}</span>
+                  </div>
+                  <p class="muted small">
+                    {locale === "zh" ? `打开 ${theme.name} 的 ${port.name} 版本` : `Open ${theme.name} for ${port.name}`}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
 
       <div class="panel" style="margin-top:18px">
         <div class="panel-title-row">
@@ -159,6 +209,31 @@ const installLabel = (port: PortTarget) =>
           </table>
         </div>
       </div>
+
+      {target && activePort && (
+        <div class="panel" style="margin-top:18px">
+          <div class="panel-title-row">
+            <h2 class="panel-title">{locale === "zh" ? `安装到 ${target.name}` : `Install for ${target.name}`}</h2>
+            <a class="hex-button" href={href(target.slug)}>{t(locale, "target.docs")}</a>
+          </div>
+          <ol class="install-steps">
+            {target.install[locale].map((step) => <li>{step}</li>)}
+          </ol>
+          <div class="code-block">
+            <pre><code>{activeContent}</code></pre>
+            <div class="code-actions">
+              <button class="btn btn-small" data-copy={activeContent}>{t(locale, "common.copy")}</button>
+              <a class="btn btn-small" href={portPath(activePort)} download>{t(locale, "common.download")}</a>
+              <span class="mono small muted" style="margin-left:auto">{portFileName(activePort)}</span>
+            </div>
+          </div>
+          <div class="install-command">
+            <span class="mono small muted">{installLabel(activePort)}</span>
+            <code>{commandFor(activePort)}</code>
+            <button class="btn btn-small" data-copy={commandFor(activePort)}>{t(locale, "common.copyCommand")}</button>
+          </div>
+        </div>
+      )}
     </div>
 
     <aside class="side-stack">
@@ -191,67 +266,40 @@ const installLabel = (port: PortTarget) =>
       </div>
 
       <div class="panel">
-        <h2 class="panel-title">{t(locale, "common.install")}</h2>
-        <p class="muted small">
-          {locale === "zh"
-            ? "Herdr App：把 JSON 放进 ~/.config/herdr-app/themes/，然后在 设置 → 主题 中选择。"
-            : "Herdr app: save the JSON to ~/.config/herdr-app/themes/, then choose it in Settings → Theme."}
-        </p>
-        <div class="actions" style="margin-top:12px">
-          <a class="btn btn-small" href={href("herdr-app")}>{t(locale, "nav.herdr")}</a>
-          <a class="btn btn-small" href={href("guides/how-to-theme-herdr-app")}>{t(locale, "common.readGuide")}</a>
+        <h2 class="panel-title">{locale === "zh" ? "其他终端" : "Other terminals"}</h2>
+        <div class="terminal-links">
+          {ports.map((port) => (
+            <a class="terminal-link" href={variantHref(port.slug)} aria-current={target?.slug === port.slug ? "page" : undefined}>
+              <span>{port.name}</span>
+              <span class="mono small muted">{port.extension}</span>
+            </a>
+          ))}
         </div>
       </div>
     </aside>
   </div>
 </div>
 
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">{t(locale, "common.ports")}</p>
-        <h2>{t(locale, "common.ports")}</h2>
-        <p>{locale === "zh" ? "复制或下载对应应用的配置。" : "Copy or download the configuration for each application."}</p>
+{target && faqs.length > 0 && (
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">FAQ</p>
+          <h2>{locale === "zh" ? "常见问题" : "Frequently asked questions"}</h2>
+        </div>
       </div>
-    </div>
-    <div class="panel">
-      <div class="port-tabs" role="tablist">
-        {serialized.map(({ port }, index) => (
-          <button
-            class="port-tab"
-            type="button"
-            role="tab"
-            data-port-tab={port.slug}
-            data-preview={previewFor(port)}
-            data-preview-alt={previewAlt(port)}
-            aria-selected={index === 0 ? "true" : "false"}
-          >
-            {port.name}
-          </button>
+      <div class="faq">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary>{faq.question}</summary>
+            <p>{faq.answer}</p>
+          </details>
         ))}
       </div>
-      {serialized.map(({ port, content }, index) => (
-        <div class="port-panel" data-port-panel={port.slug} hidden={index !== 0 ? true : undefined}>
-          <h3 class="panel-subtitle" style="margin-top:0">{port.name}</h3>
-          <div class="code-block">
-            <pre><code>{content}</code></pre>
-            <div class="code-actions">
-              <button class="btn btn-small" data-copy={content}>{t(locale, "common.copy")}</button>
-              <a class="btn btn-small" href={portPath(port)} download>{t(locale, "common.download")}</a>
-              <span class="mono small muted" style="margin-left:auto">{portFileName(port)}</span>
-            </div>
-          </div>
-          <div class="install-command">
-            <span class="mono small muted">{installLabel(port)}</span>
-            <code>{commandFor(port)}</code>
-            <button class="btn btn-small" data-copy={commandFor(port)}>{t(locale, "common.copyCommand")}</button>
-          </div>
-        </div>
-      ))}
     </div>
-  </div>
-</section>
+  </section>
+)}
 
 <section class="section">
   <div class="wrap">
@@ -264,40 +312,16 @@ const installLabel = (port: PortTarget) =>
     <div class="grid">
       {similar.map(({ theme: candidate, distance }) => (
         <div>
-          <ThemeCard theme={candidate} locale={locale} />
+          <ThemeCard
+            theme={candidate}
+            locale={locale}
+            previewTarget={target?.slug}
+            previewName={target?.name}
+            variant={Boolean(target)}
+          />
           <p class="mono small muted" style="margin-top:6px">ΔE00 {distance.toFixed(1)}</p>
         </div>
       ))}
     </div>
   </div>
 </section>
-
-<script>
-  import { rememberPort, savedPortSlug } from "../../lib/ports/preference";
-
-  const tabs = [...document.querySelectorAll<HTMLElement>("[data-port-tab]")];
-  const panels = [...document.querySelectorAll<HTMLElement>("[data-port-panel]")];
-  const preview = document.querySelector<HTMLImageElement>("[data-theme-preview]");
-
-  const selectPort = (slug: string, persist: boolean) => {
-    const tab = tabs.find((item) => item.dataset.portTab === slug) ?? tabs[0];
-    if (!tab) return;
-    tabs.forEach((item) => {
-      item.setAttribute("aria-selected", String(item === tab));
-    });
-    panels.forEach((panel) => {
-      panel.hidden = panel.dataset.portPanel !== tab.dataset.portTab;
-    });
-    if (preview && tab.dataset.preview) {
-      preview.src = tab.dataset.preview;
-      if (tab.dataset.previewAlt) preview.alt = tab.dataset.previewAlt;
-    }
-    if (persist) rememberPort(tab.dataset.portTab ?? "");
-  };
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => selectPort(tab.dataset.portTab ?? "", true));
-  });
-
-  selectPort(savedPortSlug() ?? tabs[0]?.dataset.portTab ?? "", false);
-</script>

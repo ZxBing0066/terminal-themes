@@ -3,7 +3,7 @@ import { deflateSync, inflateSync, strFromU8, strToU8 } from "fflate";
 import { contrast, isDark } from "../../lib/color";
 import { ANSI_ORDER } from "../../lib/palette";
 import { ports } from "../../lib/ports";
-import { rememberPort, savedPortSlug } from "../../lib/ports/preference";
+import { savedPortSlug } from "../../lib/ports/preference";
 import { renderPortPreview } from "../../lib/preview";
 import type { Theme } from "../../lib/schema";
 
@@ -163,6 +163,12 @@ export default function Editor() {
   useEffect(() => {
     const saved = savedPortSlug();
     if (saved && ports.some((candidate) => candidate.slug === saved)) setPortSlug(saved);
+    const onChange = (event: Event) => {
+      const slug = (event as CustomEvent<string>).detail;
+      if (ports.some((candidate) => candidate.slug === slug)) setPortSlug(slug);
+    };
+    window.addEventListener("terminalthemes:terminal-change", onChange);
+    return () => window.removeEventListener("terminalthemes:terminal-change", onChange);
   }, []);
 
   useEffect(() => {
@@ -378,21 +384,7 @@ export default function Editor() {
           <div class="editor-preview" dangerouslySetInnerHTML={{ __html: svg }} />
           <div class="panel">
             <h3 class="panel-title">Export</h3>
-            <div class="port-tabs" role="tablist">
-              {ports.map((candidate) => (
-                <button
-                  class="port-tab"
-                  role="tab"
-                  aria-selected={candidate.slug === port.slug ? "true" : "false"}
-                  onClick={() => {
-                    setPortSlug(candidate.slug);
-                    rememberPort(candidate.slug);
-                  }}
-                >
-                  {candidate.name}
-                </button>
-              ))}
-            </div>
+            <p class="small muted" style="margin-bottom:10px">Using the global Terminal bar above: <span class="mono">{port.name}</span></p>
             <div class="code-block">
               <pre><code>{output}</code></pre>
               <div class="code-actions">

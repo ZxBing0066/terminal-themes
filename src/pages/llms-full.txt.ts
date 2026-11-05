@@ -1,8 +1,9 @@
 import type { APIRoute } from "astro";
+import { targets } from "../data/targets";
 import { contrast } from "../lib/color";
 import { allThemes } from "../lib/data";
 import { ansiPairs } from "../lib/palette";
-import { absoluteUrl } from "../lib/routes";
+import { absoluteUrl, terminalThemePath } from "../lib/routes";
 
 export const GET: APIRoute = () => {
   const lines = [
@@ -14,6 +15,9 @@ export const GET: APIRoute = () => {
   for (const theme of allThemes()) {
     lines.push(`## ${theme.name}`, "");
     lines.push(`- URL: ${absoluteUrl(`themes/${theme.family}/${theme.slug}`)}`);
+    for (const target of targets) {
+      lines.push(`- ${target.name}: ${absoluteUrl(terminalThemePath(theme, target))}`);
+    }
     lines.push(`- Appearance: ${theme.appearance}`);
     lines.push(`- Background: ${theme.palette.background}`);
     lines.push(`- Foreground: ${theme.palette.foreground}`);

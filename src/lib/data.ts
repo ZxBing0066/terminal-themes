@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import type { Target } from "../data/targets";
 import { contrast } from "./color";
 import { familySchema, themeSchema, type Family, type Theme } from "./schema";
 
@@ -83,6 +84,24 @@ export function generatedDescription(theme: Theme, locale: Locale): string {
     return `${theme.name} 是一套${appearance}终端主题，背景色 ${theme.palette.background}，正文对比度 ${ratio}:1。它包含完整的 16 色 ANSI 调色板，可导出到 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal。`;
   }
   return `${theme.name} is a ${theme.appearance} terminal theme with a ${theme.palette.background} background and ${ratio}:1 body contrast. It ships a full 16-color ANSI palette and exports to the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.`;
+}
+
+export function terminalThemeDescription(theme: Theme, target: Target, locale: Locale): string {
+  const ratio = contrastRatio(theme).toFixed(1);
+  const first = target.install[locale][0] ?? "";
+  const second = target.install[locale][1] ?? "";
+  if (locale === "zh") {
+    return `${theme.name} 的 ${target.name} 版本：背景 ${theme.palette.background}，正文对比度 ${ratio}:1，包含完整 16 色 ANSI。${first} ${second} 同一份调色板也可导出到其他终端。`;
+  }
+  return `${theme.name} for ${target.name}: ${theme.palette.background} background, ${ratio}:1 body contrast, and the full 16-color ANSI palette. ${first} ${second} The same palette also exports to the other supported terminals.`;
+}
+
+export function terminalThemeMetaDescription(theme: Theme, target: Target, locale: Locale): string {
+  const ratio = contrastRatio(theme).toFixed(1);
+  if (locale === "zh") {
+    return `${theme.name} 的 ${target.name} 主题：背景 ${theme.palette.background}，正文对比度 ${ratio}:1，含 16 色 ANSI 和安装命令。`;
+  }
+  return `${theme.name} for ${target.name}: ${theme.palette.background} background, ${ratio}:1 contrast, 16 ANSI colors, install file, and one-line command.`;
 }
 
 export function themeMetaDescription(theme: Theme, locale: Locale): string {

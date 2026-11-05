@@ -1,0 +1,118 @@
+---
+import { targets } from "../data/targets";
+import { t } from "../i18n/ui";
+import { localizedHref, terminalThemePath, type Page } from "../lib/routes";
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+const locale = page.locale;
+const theme = page.kind === "theme" || page.kind === "themeVariant" ? page.theme : undefined;
+const pageTarget = page.kind === "target" || page.kind === "themeVariant" ? page.target.slug : "";
+const pageKind = page.kind;
+const hrefFor = (targetSlug: string) => {
+  if (theme) return localizedHref(locale, terminalThemePath(theme, targetSlug));
+  return localizedHref(locale, targetSlug);
+};
+---
+
+<div
+  class="terminal-bar"
+  data-terminal-bar
+  data-page-kind={pageKind}
+  data-page-target={pageTarget}
+  data-theme-family={theme?.family}
+  data-theme-slug={theme?.slug}
+  data-locale-prefix={locale === "zh" ? "/zh" : ""}
+  data-pagefind-ignore
+>
+  <div class="wrap terminal-bar-inner">
+    <span class="terminal-bar-label">{t(locale, "terminalBar.label")}</span>
+    <div class="terminal-bar-options" role="group" aria-label={t(locale, "terminalBar.aria")}>
+      {targets.map((target) => (
+        <a
+          class="terminal-chip"
+          href={hrefFor(target.slug)}
+          data-terminal-chip
+          data-terminal-slug={target.slug}
+          aria-current={pageTarget === target.slug ? "true" : undefined}
+        >
+          {target.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  import { rememberPort, savedPortSlug } from "../lib/ports/preference";
+
+  const bar = document.querySelector<HTMLElement>("[data-terminal-bar]");
+  if (bar) {
+    const chips = [...bar.querySelectorAll<HTMLElement>("[data-terminal-chip]")];
+    const pageKind = bar.dataset.pageKind ?? "";
+    const pageTarget = bar.dataset.pageTarget ?? "";
+    const localePrefix = bar.dataset.localePrefix ?? "";
+    const isContextual = pageKind === "target" || pageKind === "themeVariant";
+    const isHub = pageKind === "theme";
+    const valid = new Set(chips.map((chip) => chip.dataset.terminalSlug ?? ""));
+    const stored = savedPortSlug();
+    const initial = pageTarget || (isHub ? "" : stored && valid.has(stored) ? stored : "herdr-app");
+
+    const setActive = (slug: string, persist: boolean) => {
+      if (!slug || !valid.has(slug)) return;
+      for (const chip of chips) {
+        if (chip.dataset.terminalSlug === slug) chip.setAttribute("aria-current", "true");
+        else chip.removeAttribute("aria-current");
+      }
+      if (persist) rememberPort(slug);
+      updateCards(slug);
+      window.dispatchEvent(new CustomEvent("terminalthemes:terminal-change", { detail: slug }));
+    };
+
+    const updateCards = (terminalSlug: string) => {
+      const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
+      const terminalName = chips.find((chip) => chip.dataset.terminalSlug === terminalSlug)?.textContent?.trim() ?? terminalSlug;
+      for (const card of document.querySelectorAll<HTMLElement>("[data-theme-card]")) {
+        const family = card.dataset.family;
+        const themeSlug = card.dataset.slug;
+        const themeName = card.dataset.themeName;
+        if (!family || !themeSlug || !themeName) continue;
+        const link = card.querySelector<HTMLAnchorElement>("[data-card-link]");
+        if (link) link.href = `${localePrefix}/${terminalSlug}/themes/${family}/${themeSlug}/`;
+        const image = card.querySelector<HTMLImageElement>(".card-media img");
+        const preview = `/previews/${family}-${themeSlug}-${terminalSlug}.svg`;
+        const alt = language === "zh" ? `${themeName} 在 ${terminalName} 中的预览` : `${themeName} preview in ${terminalName}`;
+        if (image) {
+          image.src = preview;
+          image.alt = alt;
+        }
+        const zoom = card.querySelector<HTMLElement>("[data-zoom]");
+        if (zoom) {
+          zoom.dataset.zoomSrc = preview;
+          zoom.dataset.zoomAlt = alt;
+        }
+      }
+    };
+
+    if (pageTarget) rememberPort(pageTarget);
+    if (initial) setActive(initial, false);
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", (event) => {
+        if (isContextual || isHub) return;
+        event.preventDefault();
+        setActive(chip.dataset.terminalSlug ?? "", true);
+      });
+    });
+
+    const nav = document.querySelector<HTMLElement>(".nav");
+    const setNavHeight = () => {
+      if (nav) document.documentElement.style.setProperty("--nav-h", `${nav.offsetHeight}px`);
+    };
+    setNavHeight();
+    window.addEventListener("resize", setNavHeight, { passive: true });
+  }
+</script>

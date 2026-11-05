@@ -16,9 +16,17 @@ _Avoid_: collection, series
 The 16 ANSI colors plus background, foreground, cursor, and selection colors that define a theme's appearance.
 _Avoid_: colors, swatch
 
+**Terminal**:
+The public term for an application that consumes a palette through its own configuration format, e.g. Herdr app, Ghostty, Alacritty.
+_Avoid_: app, integration, platform, target
+
+**Terminal variant**:
+One theme rendered for one terminal, with its own URL, install steps, and FAQ, e.g. Catppuccin Mocha for Ghostty.
+_Avoid_: target page, port page
+
 **Target**:
-An application that consumes a palette through its own configuration format, e.g. Herdr app, Ghostty, Alacritty.
-_Avoid_: app, integration, platform
+The internal code term for a Terminal; not used in public copy.
+_Avoid_: target in public copy
 
 **Herdr app**:
 The native desktop app (`herdrdev/herdr-app`) that reads one JSON theme file per theme from `~/.config/herdr-app/themes/`.
@@ -28,18 +36,22 @@ _Avoid_: Herdr, Herdr TUI
 The terminal multiplexer (`herdrdev/herdr`) configured through `config.toml`; not a Phase 1 target.
 _Avoid_: Herdr app
 
+**Export**:
+The generated configuration artifact that applies a theme's palette to one terminal. This is the public UI term.
+_Avoid_: port (in public copy), conversion, adapter
+
 **Port**:
-The generated configuration artifact that applies a theme's palette to one target.
-_Avoid_: export, conversion, adapter
+The internal code term for an Export; the serializer and file payload.
+_Avoid_: port in public copy
 
 **Source record**:
 The provenance attached to a theme: upstream repository, reference page, author, and license.
 _Avoid_: metadata
 
 **Preview**:
-A generated visual of a theme applied to a target's chrome, produced from palette data. Real Herdr app captures are used only to calibrate the generator.
+A generated visual of a theme applied to a terminal's chrome, produced from palette data. Real Herdr app captures are used only to calibrate the generator.
 _Avoid_: screenshot, mockup
 
 **Editor**:
-The browser-side tool that edits a palette and previews ports without a server.
+The browser-side tool that edits a palette and previews exports without a server.
 _Avoid_: builder, generator

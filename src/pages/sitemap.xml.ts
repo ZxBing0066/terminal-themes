@@ -8,7 +8,7 @@ export const GET: APIRoute = () => {
   const today = new Date().toISOString().slice(0, 10);
   const urls = buildRoutes().filter((page) => !(page.kind === "static" && page.slug === "search")).map((page) => {
     const alternates = alternatesFor(page);
-    const lastmod = page.kind === "theme" ? page.theme.meta.updatedAt : today;
+    const lastmod = page.kind === "theme" || page.kind === "themeVariant" ? page.theme.meta.updatedAt : today;
     return `<url>
   <loc>${escape(absoluteUrl(page.path))}</loc>
   <lastmod>${lastmod}</lastmod>

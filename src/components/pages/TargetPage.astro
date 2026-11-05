@@ -171,7 +171,7 @@ const lightThemes = themes.filter((theme) => theme.appearance === "light");
         <h3 class="panel-subtitle">{t(locale, "common.dark")} · {darkThemes.length}</h3>
         <div class="grid">
           {darkThemes.map((theme) => (
-            <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} />
+            <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} variant />
           ))}
         </div>
       </>
@@ -181,7 +181,7 @@ const lightThemes = themes.filter((theme) => theme.appearance === "light");
         <h3 class="panel-subtitle">{t(locale, "common.light")} · {lightThemes.length}</h3>
         <div class="grid" style="margin-top:10px">
           {lightThemes.map((theme) => (
-            <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} />
+            <ThemeCard theme={theme} locale={locale} previewTarget={target.slug} previewName={target.name} variant />
           ))}
         </div>
       </>

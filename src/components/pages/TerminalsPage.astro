@@ -1,0 +1,81 @@
+---
+import { targets } from "../../data/targets";
+import { t } from "../../i18n/ui";
+import { allThemes, getTheme } from "../../lib/data";
+import { localizedHref, type Page } from "../../lib/routes";
+import Breadcrumbs from "../Breadcrumbs.astro";
+
+const page = Astro.props.page as Extract<Page, { kind: "terminals" }>;
+const { locale } = page;
+const href = (bare: string) => localizedHref(locale, bare);
+const themes = allThemes();
+const sample = getTheme("catppuccin", "mocha");
+const previewFor = (slug: string) => sample ? `/previews/${sample.family}-${sample.slug}-${slug}.svg` : "";
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <Breadcrumbs page={page} />
+    <p class="eyebrow">{t(locale, "terminals.kicker")}</p>
+    <h1>{t(locale, "terminals.title")}</h1>
+    <p class="lede">{t(locale, "terminals.lede")}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={href("themes")}>{t(locale, "home.ctaThemes")}</a>
+      <a class="btn" href={href("editor")}>{t(locale, "home.ctaEditor")}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t(locale, "home.statsTargets")} · {targets.length}</p>
+        <h2>{locale === "zh" ? "选择一个终端" : "Choose a terminal"}</h2>
+        <p>{locale === "zh" ? "每个终端页都按原生格式提供安装步骤、命令和该终端的主题列表。" : "Each terminal page has native install steps, commands, and every theme ready for that terminal."}</p>
+      </div>
+    </div>
+    <div class="grid terminal-grid">
+      {targets.map((target) => (
+        <a class="card terminal-card" href={href(target.slug)}>
+          <div class="card-media">
+            <img
+              src={previewFor(target.slug)}
+              alt={`${sample?.name ?? "Theme"} preview in ${target.name}`}
+              loading="lazy"
+              width="1200"
+              height="720"
+            />
+          </div>
+          <div class="card-body">
+            <div class="card-title">
+              <span>{target.name}</span>
+              <span class="badge">{themes.length}</span>
+            </div>
+            <p class="muted small">{target.title[locale]}</p>
+            <p class="small terminal-card-description">{target.description[locale]}</p>
+            <div class="card-meta"><span>{target.slug}</span></div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <article class="prose">
+      <h2>{locale === "zh" ? "一份调色板，六种原生格式" : "One palette, six native formats"}</h2>
+      <p>
+        {locale === "zh"
+          ? "本站只保存一份调色板数据，再按终端生成原生配置。Herdr App 使用 JSON，Ghostty 与 Kitty 使用配置文件，Alacritty 使用 TOML，iTerm2 使用 .itermcolors，Windows Terminal 使用 JSON 方案对象。"
+          : "The catalog stores one palette, then generates the native format for each terminal. Herdr App uses JSON, Ghostty and Kitty use configuration files, Alacritty uses TOML, iTerm2 uses .itermcolors, and Windows Terminal uses a JSON scheme object."}
+      </p>
+      <p>
+        {locale === "zh"
+          ? "切换终端不会改变 16 色 ANSI、背景、前景、光标或选区；只改变安装路径、文件格式和该终端的专属说明。"
+          : "Switching terminals does not change the 16 ANSI colors, background, foreground, cursor, or selection; only the install path, file format, and terminal-specific instructions change."}
+      </p>
+    </article>
+  </div>
+</section>

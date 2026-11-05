@@ -73,6 +73,7 @@ const faq = faqFor(locale);
         <p class="eyebrow">{t(locale, "home.byTarget")}</p>
         <h2>{t(locale, "home.byTarget")}</h2>
       </div>
+      <a class="mono small view-all" href={href("terminals")}>{t(locale, "common.viewAll")} <span aria-hidden="true">→</span></a>
     </div>
     <div class="grid">
       {targets.map((target) => (

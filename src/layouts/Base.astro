@@ -2,6 +2,7 @@
 import { t } from "../i18n/ui";
 import { alternatesFor, localizedHref, type Page } from "../lib/routes";
 import { headFor, jsonLdFor } from "../lib/seo";
+import TerminalBar from "../components/TerminalBar.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -13,6 +14,9 @@ const { page, noindex = false } = Astro.props;
 const locale = page.locale;
 const head = headFor(page);
 const alternates = alternatesFor(page);
+const showTerminalBar =
+  ["home", "catalog", "family", "target", "theme", "themeVariant"].includes(page.kind) ||
+  (page.kind === "static" && page.slug === "editor");
 const nav = (bare: string) => localizedHref(locale, bare);
 const altHref = (target: "en" | "zh") => {
   const path = alternates[target];
@@ -56,7 +60,7 @@ const brand = [
     ) : (
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     )}
-    <meta property="og:type" content={page.kind === "theme" || page.kind === "guide" ? "article" : "website"} />
+    <meta property="og:type" content={page.kind === "theme" || page.kind === "themeVariant" || page.kind === "guide" ? "article" : "website"} />
     <meta property="og:site_name" content={t(locale, "site.name")} />
     <meta property="og:title" content={head.title} />
     <meta property="og:description" content={head.description} />
@@ -65,8 +69,8 @@ const brand = [
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={`${head.title} preview`} />
-    {page.kind === "theme" && <meta property="article:published_time" content={page.theme.meta.addedAt} />}
-    {page.kind === "theme" && <meta property="article:modified_time" content={page.theme.meta.updatedAt} />}
+    {(page.kind === "theme" || page.kind === "themeVariant") && <meta property="article:published_time" content={page.theme.meta.addedAt} />}
+    {(page.kind === "theme" || page.kind === "themeVariant") && <meta property="article:modified_time" content={page.theme.meta.updatedAt} />}
     {page.kind === "guide" && <meta property="article:published_time" content={page.guide.updatedAt} />}
     {page.kind === "guide" && <meta property="article:modified_time" content={page.guide.updatedAt} />}
     <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
@@ -92,6 +96,7 @@ const brand = [
         </a>
         <nav class="nav-links" aria-label={t(locale, "site.name")}>
           <a href={nav("themes")}>{t(locale, "nav.themes")}</a>
+          <a href={nav("terminals")}>{t(locale, "nav.terminals")}</a>
           <a href={nav("herdr-app")}>{t(locale, "nav.herdr")}</a>
           <a href={nav("guides")}>{t(locale, "nav.guides")}</a>
           <a href={nav("editor")}>{t(locale, "nav.editor")}</a>
@@ -112,6 +117,7 @@ const brand = [
     </header>
 
     <main id="main" data-pagefind-body={noindex ? undefined : ""}>
+      {showTerminalBar && <TerminalBar page={page} />}
       <slot />
     </main>
 
@@ -128,6 +134,7 @@ const brand = [
         </div>
         <div class="footer-links">
           <a href={nav("themes")}>{t(locale, "nav.themes")}</a>
+          <a href={nav("terminals")}>{t(locale, "nav.terminals")}</a>
           <a href={nav("guides")}>{t(locale, "nav.guides")}</a>
           <a href={nav("editor")}>{t(locale, "nav.editor")}</a>
           <a href={nav("contribute")}>{t(locale, "footer.contribute")}</a>

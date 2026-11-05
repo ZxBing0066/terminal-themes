@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "../i18n/ui";
 import { ansiList } from "../lib/palette";
+import { localizedHref, terminalThemePath, themePath } from "../lib/routes";
 import type { Theme } from "../lib/schema";
 import ZoomIcon from "./ZoomIcon.astro";
 
@@ -9,16 +10,24 @@ interface Props {
   locale: Locale;
   previewTarget?: string;
   previewName?: string;
+  variant?: boolean;
 }
 
-const { theme, locale, previewTarget = "herdr-app", previewName = "Herdr app" } = Astro.props;
+const { theme, locale, previewTarget = "herdr-app", previewName = "Herdr app", variant = false } = Astro.props;
 const previewSrc = `/previews/${theme.family}-${theme.slug}-${previewTarget}.svg`;
-const href = `/${locale === "zh" ? "zh/" : ""}themes/${theme.family}/${theme.slug}/`;
+const href = localizedHref(locale, variant ? terminalThemePath(theme, previewTarget) : themePath(theme));
 const colors = ansiList(theme.palette.ansi).slice(0, 8);
 ---
 
-<div class="card-wrap" data-appearance={theme.appearance}>
-  <a class="card" href={href}>
+<div
+  class="card-wrap"
+  data-appearance={theme.appearance}
+  data-theme-card
+  data-family={theme.family}
+  data-slug={theme.slug}
+  data-theme-name={theme.name}
+>
+  <a class="card" href={href} data-card-link>
     <div class="card-media">
       <img
         src={previewSrc}
@@ -26,7 +35,6 @@ const colors = ansiList(theme.palette.ansi).slice(0, 8);
         loading="lazy"
         width="1200"
         height="720"
-        data-zoom
       />
     </div>
   <div class="card-body">

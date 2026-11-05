@@ -4,7 +4,7 @@ Status: proposed. Vocabulary lives in `CONTEXT.md`; decisions live in `docs/adr/
 
 ## 1. Product
 
-A static, bilingual catalog of terminal color schemes. Every theme is stored once as palette data, then rendered into previews and into configuration files for six targets. The site is generic by design: the Herdr app is the first-class target, not the product boundary.
+A static, bilingual catalog of terminal color schemes. Every theme is stored once as palette data, then rendered into previews and into configuration files for six terminals. The site is generic by design: the Herdr app is the first-class target, not the product boundary.
 
 **Goals**
 
@@ -18,7 +18,7 @@ A static, bilingual catalog of terminal color schemes. Every theme is stored onc
 **Non-goals**
 
 - Accounts, votes, comments, or server-side storage.
-- Per-target-by-theme landing pages, hex-value pages, or auto-generated comparison pages.
+- Hex-value pages and auto-generated comparison pages.
 - Redistributing upstream theme files, screenshots, or descriptions.
 - Image-to-palette extraction (candidate for a later phase).
 - Targets beyond the six listed above (candidate for a later phase).
@@ -30,20 +30,22 @@ A static, bilingual catalog of terminal color schemes. Every theme is stored onc
 | 1 | Upstream-first data; the reference catalog supplies color values only, never images or copy | `docs/adr/0001-theme-data-sourcing.md` |
 | 2 | Static-only site; the editor runs in the browser and shares the build's port generator | `docs/adr/0002-static-only-site.md` |
 | 3 | English canonical at `/`, full Chinese mirror at `/zh/`, English slugs in both | `docs/adr/0003-bilingual-url-policy.md` |
-| 4 | Index only core page types; no combinatorial pages | `docs/adr/0004-core-index-taxonomy.md` |
+| 4 | Index core page types plus terminal-specific theme variants; no comparison pages | `docs/adr/0004-core-index-taxonomy.md`, `docs/adr/0006-terminal-first-theme-pages.md` |
 | 5 | Herdr exports target the Herdr app's JSON theme files; Herdr TUI is out of scope | this plan, §7 |
 | 6 | Previews are generated from palette data; real Herdr app captures calibrate, not mass-produce | this plan, §8 |
 | 7 | Contributions are editor-generated pull requests | this plan, §10 |
 | 8 | Canonical host `terminalthemes.iwwi.app`; `themes.iwwi.app` 301s to it | this plan, §14 |
 | 9 | Visual language: terminal-native editorial | this plan, §13 |
+| 10 | Terminal-first theme variant URLs with a sticky global Terminal bar | `docs/adr/0006-terminal-first-theme-pages.md` |
 
 ## 3. Domain model
 
 - **Theme** — one catalog entry: a named palette plus provenance and metadata.
 - **Family** — a group of themes from one upstream project.
 - **Palette** — 16 ANSI colors plus background, foreground, cursor, and selection colors.
-- **Target** — an application with its own configuration format.
-- **Port** — the generated configuration artifact for one target.
+- **Terminal** — the public term for an application with its own configuration format. Code may still call this a target.
+- **Terminal variant** — one theme rendered for one terminal, with its own URL, install steps, and FAQ.
+- **Port** — the generated configuration artifact for one terminal.
 - **Source record** — upstream repository, reference page, author, license.
 - **Preview** — a generated visual of a theme applied to a target's chrome.
 - **Editor** — the browser-side palette editor.
@@ -56,8 +58,10 @@ The atomic unit is the theme, not the target. A target never owns palette data; 
 /                                  EN home
 /zh/                               ZH home
 /themes/                           catalog
+/terminals/                        terminal index
 /themes/{family}/                  family hub
-/themes/{family}/{slug}/           theme page
+/themes/{family}/{slug}/           theme hub
+/{terminal}/themes/{family}/{slug}/ terminal-specific variant
 /herdr-app/                        target hub
 /ghostty/
 /alacritty/
@@ -78,7 +82,7 @@ The atomic unit is the theme, not the target. A target never owns palette data; 
 
 Chinese routes mirror these under `/zh/`. Slugs are English in both locales.
 
-Catalog size at launch: 36 families, about 110 themes (80 variant links visible on the reference index plus collapsed groups), 6 target hubs, 9 guides, and the editor — roughly 340 indexable pages across two locales.
+Catalog size at launch: 36 families, about 110 themes, 6 terminal hubs, 6 terminal-specific variants per theme, 9 guides, and the editor. The terminal-first architecture adds about 1,344 variant pages across two locales plus one terminal index per locale.
 
 ## 5. Data model
 
@@ -143,7 +147,7 @@ flowchart LR
   F --> H[Astro build]
   G --> H
   D --> H
-  H --> I[Cloudflare Pages]
+  H --> I[Cloudflare Workers]
   H --> J[JSON API + llms.txt]
 ```
 
@@ -238,7 +242,7 @@ Every theme gets a generated preview; five representative themes also get a manu
 **Generated preview** (`scripts/preview/`)
 
 - 1600×1000 logical canvas, 2× raster for OG.
-- Herdr app window: title bar, left sidebar with spaces and agent rows (status dots), tab bar, pane grid with borders, status bar. Chrome is driven by the 22 app tokens; terminal panes use ANSI 0–15.
+- Herdr app window: compact top bar with tabs, narrow left sidebar with spaces and agent rows (status dots), pane grid with borders, and status bar. No macOS traffic lights. Chrome is driven by the 22 app tokens; terminal panes use ANSI 0–15.
 - Fixed content: `git status`, a diff, a prompt, `ls --color`; no timestamps or randomness.
 - Font: JetBrains Mono 14/1.4. All text ASCII; no CJK in previews.
 - Card variant 800×500 for grids; OG variant 1200×630 per locale.
@@ -257,8 +261,8 @@ Route: `/editor/` and `/zh/editor/`. Loaded as a lazy island; theme pages never 
 - **State**: 22 colors in the URL fragment, deflated and base64url-encoded; version byte for migrations. No server, no account.
 - **Inputs**: start from any catalog theme, blank, or pasted hex list; hex/RGB fields and native color pickers; per-token reset.
 - **Checks**: WCAG ratios for foreground/background and each ANSI color; warnings when a derived Herdr app token fails its guard; no moralizing badges.
-- **Preview**: terminal mock and Herdr app mock side by side; target tabs for all six ports.
-- **Export**: copy or download all six ports plus canonical JSON; build output and editor output share the same serializer.
+- **Preview**: terminal mock and Herdr app mock side by side; the global Terminal bar selects the terminal.
+- **Export**: copy or download the selected terminal port plus canonical JSON; build output and editor output share the same serializer.
 - **Submit**: copy the JSON, then open the repository's new-file page with the target path prefilled. GitHub's `value` prefill is unreliable, so the flow is copy + paste; the guide says so.
 - **Persistence**: last five palettes in `localStorage`; no sync.
 
@@ -276,7 +280,7 @@ CI on every PR:
 6. All six serializers produce golden output.
 7. Preview and OG render without errors.
 8. Internal link check and a Lighthouse run on representative pages.
-9. Build succeeds; Cloudflare Pages preview deploys.
+9. Build succeeds; Cloudflare Workers preview deploys.
 
 PR template asks for upstream URL, author, license, and a screenshot-free description. Reviewers check attribution, naming, and Chinese copy. `CONTRIBUTING.md` documents the schema, the editor path, and the review checklist.
 
@@ -286,22 +290,24 @@ PR template asks for upstream URL, author, license, and a screenshot-free descri
 
 | Page | Intent | Title pattern |
 |---|---|---|
-| Theme | `{theme} terminal theme`, `{theme} hex codes` | `{Name} — Terminal Color Scheme for Herdr App, Ghostty, Alacritty` |
+| Theme hub | `{theme} terminal theme`, `{theme} hex codes` | `{Name} — Terminal Theme` |
+| Terminal variant | `{theme} for {terminal}`, `{theme} {terminal} theme` | `{Name} for {Terminal} — Terminal Themes` |
 | Family | `{family} terminal themes` | `{Family} Terminal Themes — All Variants` |
-| Target hub | `herdr app themes`, `herdr themes`, `ghostty themes` | `Herdr App Themes — {N} Color Schemes for Herdr` |
+| Terminal index | `terminal themes`, `terminal color schemes` | `Terminals — Terminal Themes` |
+| Terminal hub | `herdr app themes`, `herdr themes`, `ghostty themes` | `Herdr App Themes — {N} Color Schemes for Herdr` |
 | Guide | `how to theme herdr`, `iterm2 color schemes` | `How to Theme the Herdr App — Complete Guide` |
 | Editor | `terminal theme editor`, `herdr theme generator` | `Terminal Theme Editor — Edit, Preview, Export` |
 
 **Rules**
 
-- One canonical URL per theme; no target-by-theme duplicates. Target sections live on the theme page with anchors.
-- Every theme page carries unique data: palette table, contrast ratios, similar themes with ΔE, six ports, provenance.
+- Each terminal variant has its own canonical URL, terminal-specific install steps, FAQ, and `HowTo`; the theme hub remains canonical for the terminal-neutral overview.
+- Variant pages must carry unique terminal-specific copy, not just a duplicated palette; the hub carries the palette, contrast, provenance, and six terminal links.
 - Metadata is generated from facts, not boilerplate: background hex, body contrast, appearance, targets.
-- Internal links: theme ↔ family ↔ target hub; theme → similar themes; guide → relevant themes and targets; breadcrumbs everywhere.
+- Internal links: theme hub ↔ terminal variant ↔ terminal hub ↔ family; variant → other terminals; theme → similar themes; guide → relevant themes and terminals; breadcrumbs everywhere.
 - `hreflang` (`en`, `zh`, `x-default`) is reciprocal; each locale self-canonicals.
 - Sitemaps split by locale with `lastmod` from `meta.updatedAt`; `robots.txt` disallows `/ports/` and `/search/`.
 - Search is Pagefind; `/search/` is `noindex`.
-- Performance budget: a single inline script under 3 KB for copy and site appearance; no framework JS on theme, family, or target pages; fonts subset and preloaded; previews sized and lazy below the fold; LCP < 1.5 s on mobile, CLS 0.
+- Performance budget: a small shared script for the Terminal bar and copy behavior; no framework JS on theme, family, or target pages; fonts subset and preloaded; previews sized and lazy below the fold; LCP < 1.5 s on mobile, CLS 0.
 - Accessibility: WCAG AA for site UI, keyboard navigation, visible focus, reduced-motion support, table semantics.
 
 **Keyword map**
@@ -340,8 +346,8 @@ Terminal-native editorial: the palettes are the only saturated color.
 
 - **Palette**: near-black `#08090a` canvas, `#0e1012` panels, `#1f2328` borders, `#e6e8eb` text, `#9aa4af` muted. Light mode mirrors these. Links use underline plus text color; focus rings use the foreground.
 - **Type**: Geist Sans for prose; JetBrains Mono for labels, hex values, navigation, and buttons. Both OFL, self-hosted and subset.
-- **Layout**: 12-column grid, 1280 px max, 24 px gutters. Theme pages read as spec sheets: large preview, palette table, contrast table, port tabs, similar themes, provenance.
-- **Components**: ANSI grid with copy-on-click hex; contrast chips; port tabs with code blocks; download/copy actions; "open in editor"; provenance footer.
+- **Layout**: 12-column grid, 1280 px max, 24 px gutters. Theme hub pages read as a six-terminal chooser; variant pages read as spec sheets with a large preview, palette table, contrast table, install steps, FAQ, similar themes, and provenance.
+- **Components**: sticky Terminal bar; ANSI grid with copy-on-click hex; contrast chips; terminal-specific code block; download/copy actions; "open in editor"; provenance footer.
 - **Motion**: none beyond focus/hover transitions; respects `prefers-reduced-motion`.
 - **Brand**: lowercase `terminalthemes` wordmark with a 16-color bar; favicon derived from the same bar; OG cards use the theme's own palette.
 
@@ -353,7 +359,7 @@ Homepage: live theme switcher in the hero, a featured grid, browse-by-target, ne
 - Zod for schemas; `culori` for OKLCH/contrast; `fflate` for URL state; `satori` + `@resvg/resvg-js` for OG; Pagefind for search.
 - Vitest for serializers and color math; Playwright for the editor flow; Lighthouse CI and axe for audits.
 - Node 22, pnpm, GitHub Actions.
-- Cloudflare Pages at `terminalthemes.iwwi.app`; `themes.iwwi.app` 301s to the canonical host. `_headers` sets CSP, caching, and `X-Robots-Tag` for ports; `_redirects` handles legacy slugs.
+- Cloudflare Workers Static Assets at `terminalthemes.iwwi.app`; `themes.iwwi.app` 301s to the canonical host. `_headers` sets CSP, caching, and `X-Robots-Tag` for ports; `_redirects` handles legacy slugs.
 - Cloudflare Web Analytics (cookieless); no consent banner.
 
 **Repository layout**
@@ -382,7 +388,7 @@ tests/
 
 Schema, importer skeleton, one family end-to-end, port serializers with golden tests, design tokens, Astro shell, CI skeleton.
 
-Acceptance: one theme renders a page, six ports, a preview, and passes validation in CI.
+Acceptance: one theme renders a page, six exports, a preview, and passes validation in CI.
 
 **M1 — Catalog**
 
@@ -394,7 +400,7 @@ Acceptance: every record validates; no duplicate palettes; import report has no 
 
 Theme, family, target, guide, about, license, and changelog pages in both locales; sitemaps, hreflang, structured data, `llms.txt`, JSON endpoints, Pagefind.
 
-Acceptance: ~340 pages build; Lighthouse ≥ 95 on representative pages; zero broken internal links; hreflang reciprocity verified.
+Acceptance: the hub and all terminal variants build; Lighthouse ≥ 95 on representative pages; zero broken internal links; hreflang reciprocity verified.
 
 **M3 — Editor and contributions**
 

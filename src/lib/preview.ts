@@ -59,18 +59,17 @@ export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}
   const og = options.og ?? false;
   const brandBar = og ? 46 : 0;
   const appH = H - brandBar;
-  const title = 40;
-  const status = 28;
-  const sidebar = 300;
-  const tabbar = 38;
+  const title = 42;
+  const status = 26;
+  const sidebar = 168;
   const c = deriveHerdrAppColors(theme);
   const ansi = ansiList(theme.palette.ansi);
   const a = theme.palette.ansi;
   const mainX = sidebar;
   const mainW = W - sidebar;
-  const contentY = title + tabbar;
+  const contentY = title;
   const contentH = appH - contentY - status;
-  const pad = 12;
+  const pad = 10;
   const paneY = contentY + pad;
   const paneH = contentH - pad * 2;
   const leftW = Math.round((mainW - pad * 3) * 0.6);
@@ -117,50 +116,48 @@ export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}
     text(rightX + 16, paneY + 306, "22 ui colors", c.dim, 10),
   ].join("\n");
 
-  const agents = [
-    { name: "claude code", state: "working", color: c.working, y: 142, active: true },
-    { name: "codex", state: "done", color: c.done, y: 170, active: false },
-    { name: "tests", state: "idle", color: c.idle, y: 198, active: false },
-  ];
-
   const sidebarRows = [
-    text(20, 76, "SPACES", c.dim, 10, 'letter-spacing="1.2"'),
-    `<rect x="10" y="88" width="280" height="26" rx="5" fill="${c.selected}" />`,
-    text(20, 105, "terminal-themes", c.foreground, 12),
-    ...agents.map(
-      (agent) =>
-        `${dot(24, agent.y - 4, agent.color)}${text(36, agent.y, agent.name, agent.active ? c.foreground : c.muted, 11)}${text(286, agent.y, agent.state, c.dim, 9, 'text-anchor="end"')}`,
-    ),
-    `<line x1="10" y1="220" x2="290" y2="220" stroke="${c.border}" />`,
-    text(20, 244, "api", c.foreground, 12),
-    `${dot(24, 266, c.blocked)}${text(36, 270, "codex", c.muted, 11)}${text(286, 270, "blocked", c.dim, 9, 'text-anchor="end"')}`,
-    `${dot(24, 292, c.working)}${text(36, 296, "reviewer", c.muted, 11)}${text(286, 296, "working", c.dim, 9, 'text-anchor="end"')}`,
-    `<line x1="10" y1="322" x2="290" y2="322" stroke="${c.border}" />`,
-    text(20, 346, "MACHINES", c.dim, 10, 'letter-spacing="1.2"'),
-    text(20, 370, "local", c.muted, 11),
-    text(286, 370, "2", c.dim, 10, 'text-anchor="end"'),
-    text(20, 394, "vps", c.muted, 11),
-    text(286, 394, "1", c.dim, 10, 'text-anchor="end"'),
-    `<line x1="10" y1="${appH - 58}" x2="290" y2="${appH - 58}" stroke="${c.border}" />`,
-    text(20, appH - 34, "5 agents · 2 working", c.dim, 10),
+    text(12, title + 22, "SPACES", c.dim, 9, 'letter-spacing="1.2"'),
+    `<rect x="8" y="${title + 30}" width="${sidebar - 16}" height="24" rx="5" fill="${c.selected}" />`,
+    text(16, title + 46, "terminal-themes", c.foreground, 11),
+    text(12, title + 74, "AGENTS", c.dim, 9, 'letter-spacing="1.2"'),
+    `${dot(18, title + 94, c.working)}${text(28, title + 98, "claude code", c.foreground, 10)}${text(sidebar - 12, title + 98, "working", c.dim, 8, 'text-anchor="end"')}`,
+    `${dot(18, title + 120, c.done)}${text(28, title + 124, "codex", c.muted, 10)}${text(sidebar - 12, title + 124, "done", c.dim, 8, 'text-anchor="end"')}`,
+    `${dot(18, title + 146, c.idle)}${text(28, title + 150, "tests", c.muted, 10)}${text(sidebar - 12, title + 150, "idle", c.dim, 8, 'text-anchor="end"')}`,
+    `<line x1="10" y1="${title + 172}" x2="${sidebar - 10}" y2="${title + 172}" stroke="${c.border}" />`,
+    text(12, title + 194, "api", c.foreground, 11),
+    `${dot(18, title + 214, c.blocked)}${text(28, title + 218, "codex", c.muted, 10)}${text(sidebar - 12, title + 218, "blocked", c.dim, 8, 'text-anchor="end"')}`,
+    `${dot(18, title + 240, c.working)}${text(28, title + 244, "reviewer", c.muted, 10)}${text(sidebar - 12, title + 244, "working", c.dim, 8, 'text-anchor="end"')}`,
+    `<line x1="10" y1="${title + 268}" x2="${sidebar - 10}" y2="${title + 268}" stroke="${c.border}" />`,
+    text(12, title + 290, "MACHINES", c.dim, 9, 'letter-spacing="1.2"'),
+    text(12, title + 312, "local", c.muted, 10),
+    text(sidebar - 12, title + 312, "2", c.dim, 9, 'text-anchor="end"'),
+    text(12, title + 334, "vps", c.muted, 10),
+    text(sidebar - 12, title + 334, "1", c.dim, 9, 'text-anchor="end"'),
+    `<line x1="10" y1="${appH - 54}" x2="${sidebar - 10}" y2="${appH - 54}" stroke="${c.border}" />`,
+    text(12, appH - 30, "5 agents · 2 working", c.dim, 9),
   ].join("\n");
 
-  const tabs = [
-    `<rect x="${mainX}" y="${title}" width="${mainW}" height="${tabbar}" fill="${c.chrome}" />`,
-    `<line x1="${mainX}" y1="${title + tabbar}" x2="${W}" y2="${title + tabbar}" stroke="${c.border}" />`,
-    `<rect x="${mainX + 8}" y="${title + 6}" width="104" height="${tabbar - 8}" rx="5" fill="${c.surface}" />`,
-    text(mainX + 20, title + 24, "main", c.foreground, 11),
-    text(mainX + 132, title + 24, "tokens", c.muted, 11),
-    text(mainX + 208, title + 24, "preview", c.muted, 11),
-    text(W - 24, title + 24, "⌘K", c.dim, 10, 'text-anchor="end"'),
+  const topbar = [
+    `<rect x="0" y="0" width="${W}" height="${title}" fill="${c.chrome}" />`,
+    `<line x1="0" y1="${title}" x2="${W}" y2="${title}" stroke="${c.border}" />`,
+    `<rect x="12" y="10" width="22" height="22" rx="6" fill="${c.surface}" stroke="${c.border}" />`,
+    `<circle cx="23" cy="21" r="5" fill="${c.accent}" />`,
+    text(42, 27, "Herdr", c.foreground, 11),
+    `<line x1="92" y1="10" x2="92" y2="${title - 10}" stroke="${c.border}" />`,
+    `<rect x="100" y="6" width="96" height="${title - 12}" rx="5" fill="${c.surface}" />`,
+    text(114, 26, "main", c.foreground, 11),
+    text(212, 26, "tokens", c.muted, 11),
+    text(288, 26, "preview", c.muted, 11),
+    text(W - 18, 27, "⌘K", c.dim, 10, 'text-anchor="end"'),
   ].join("\n");
 
   const statusBar = [
     `<rect x="0" y="${appH - status}" width="${W}" height="${status}" fill="${c.chrome}" />`,
     `<line x1="0" y1="${appH - status}" x2="${W}" y2="${appH - status}" stroke="${c.border}" />`,
-    text(14, appH - 10, "herdr", c.accent, 10),
-    text(58, appH - 10, "3 spaces · 5 agents", c.dim, 10),
-    text(W - 14, appH - 10, "main · 2 panes", c.dim, 10, 'text-anchor="end"'),
+    text(14, appH - 9, "herdr", c.accent, 9),
+    text(58, appH - 9, "3 spaces · 5 agents", c.dim, 9),
+    text(W - 14, appH - 9, "MCP connected", c.dim, 9, 'text-anchor="end"'),
   ].join("\n");
 
   const brand = og
@@ -175,15 +172,10 @@ export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}
   <rect x="0" y="0" width="${W}" height="${appH}" rx="10" fill="${c.canvas}" />
   <rect x="0" y="0" width="${W}" height="${title}" rx="10" fill="${c.chrome}" />
   <rect x="0" y="${title - 10}" width="${W}" height="10" fill="${c.chrome}" />
-  <line x1="0" y1="${title}" x2="${W}" y2="${title}" stroke="${c.border}" />
-  <circle cx="18" cy="20" r="5" fill="#ff5f57" />
-  <circle cx="36" cy="20" r="5" fill="#febc2e" />
-  <circle cx="54" cy="20" r="5" fill="#28c840" />
-  ${text(W / 2, 24, "Herdr", c.muted, 11, 'text-anchor="middle"')}
+  ${topbar}
   <rect x="0" y="${title}" width="${sidebar}" height="${appH - title}" fill="${c.surface}" />
   <line x1="${sidebar}" y1="${title}" x2="${sidebar}" y2="${appH}" stroke="${c.border}" />
   ${sidebarRows}
-  ${tabs}
   ${pane(leftX, paneY, leftW, paneH, theme, "claude code", c.working, [])}
   ${leftBody}
   ${pane(rightX, paneY, rightW, paneH, theme, "codex", c.done, [])}

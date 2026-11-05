@@ -54,7 +54,7 @@ const editorPaths: Record<string, string> = {
         <p>
           {locale === "zh"
             ? "每个导出都使用同一份调色板，因此切换终端时颜色保持一致。下面是各目标的典型安装位置；完整步骤在对应的应用页面。"
-            : "Every export uses the same palette, so colors stay consistent when you switch terminals. The table lists the usual install location for each target; the full steps live on the target page."}
+            : "Every export uses the same palette, so colors stay consistent when you switch terminals. The table lists the usual install location for each terminal; the full steps live on the terminal page."}
         </p>
         <div class="table-wrap">
           <table>
@@ -193,7 +193,7 @@ const editorPaths: Record<string, string> = {
         <p>
           {locale === "zh"
             ? "本站的 Herdr 目标是原生桌面应用：每个主题是一个 JSON 文件，放在 ~/.config/herdr-app/themes/。Herdr TUI 使用 config.toml，是另一个产品，不在本期范围内。"
-            : "The Herdr target here is the native desktop app: one JSON file per theme in ~/.config/herdr-app/themes/. Herdr TUI uses config.toml and is a separate product, out of scope for this release."}
+            : "The Herdr app here is the native desktop app: one JSON file per theme in ~/.config/herdr-app/themes/. Herdr TUI uses config.toml and is a separate product, out of scope for this release."}
         </p>
         <h2>{locale === "zh" ? "数据来源" : "Data"}</h2>
         <p>
@@ -275,7 +275,7 @@ const editorPaths: Record<string, string> = {
         <h2>2026-11-03</h2>
         <ul>
           <li>{locale === "zh" ? "首批 112 个主题、36 个家族。" : "Initial catalog: 112 themes across 36 families."}</li>
-          <li>{locale === "zh" ? "六种导出目标，包括 Herdr App JSON 主题。" : "Six export targets, including Herdr app JSON themes."}</li>
+          <li>{locale === "zh" ? "六种终端导出，包括 Herdr App JSON 主题。" : "Six terminal exports, including Herdr app JSON themes."}</li>
           <li>{locale === "zh" ? "构建时生成预览、OG 图、JSON API、llms.txt 和中英文页面。" : "Build-time previews, OG images, JSON API, llms.txt, and English/Chinese pages."}</li>
           <li>{locale === "zh" ? "浏览器端调色板编辑器。" : "Browser-side palette editor."}</li>
         </ul>
