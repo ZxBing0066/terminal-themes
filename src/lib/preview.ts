@@ -61,7 +61,7 @@ export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}
   const appH = H - brandBar;
   const title = 42;
   const status = 26;
-  const sidebar = 168;
+  const sidebar = 148;
   const c = deriveHerdrAppColors(theme);
   const ansi = ansiList(theme.palette.ansi);
   const a = theme.palette.ansi;
@@ -117,10 +117,10 @@ export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}
   ].join("\n");
 
   const sidebarRows = [
-    text(12, title + 22, "SPACES", c.dim, 9, 'letter-spacing="1.2"'),
+    text(12, title + 22, "Spaces", c.dim, 10),
     `<rect x="8" y="${title + 30}" width="${sidebar - 16}" height="24" rx="5" fill="${c.selected}" />`,
-    text(16, title + 46, "terminal-themes", c.foreground, 11),
-    text(12, title + 74, "AGENTS", c.dim, 9, 'letter-spacing="1.2"'),
+    text(16, title + 46, "terminal-themes", c.foreground, 10),
+    text(12, title + 74, "Agents", c.dim, 10),
     `${dot(18, title + 94, c.working)}${text(28, title + 98, "claude code", c.foreground, 10)}${text(sidebar - 12, title + 98, "working", c.dim, 8, 'text-anchor="end"')}`,
     `${dot(18, title + 120, c.done)}${text(28, title + 124, "codex", c.muted, 10)}${text(sidebar - 12, title + 124, "done", c.dim, 8, 'text-anchor="end"')}`,
     `${dot(18, title + 146, c.idle)}${text(28, title + 150, "tests", c.muted, 10)}${text(sidebar - 12, title + 150, "idle", c.dim, 8, 'text-anchor="end"')}`,
@@ -129,13 +129,14 @@ export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}
     `${dot(18, title + 214, c.blocked)}${text(28, title + 218, "codex", c.muted, 10)}${text(sidebar - 12, title + 218, "blocked", c.dim, 8, 'text-anchor="end"')}`,
     `${dot(18, title + 240, c.working)}${text(28, title + 244, "reviewer", c.muted, 10)}${text(sidebar - 12, title + 244, "working", c.dim, 8, 'text-anchor="end"')}`,
     `<line x1="10" y1="${title + 268}" x2="${sidebar - 10}" y2="${title + 268}" stroke="${c.border}" />`,
-    text(12, title + 290, "MACHINES", c.dim, 9, 'letter-spacing="1.2"'),
+    text(12, title + 290, "Machines", c.dim, 10),
     text(12, title + 312, "local", c.muted, 10),
     text(sidebar - 12, title + 312, "2", c.dim, 9, 'text-anchor="end"'),
     text(12, title + 334, "vps", c.muted, 10),
     text(sidebar - 12, title + 334, "1", c.dim, 9, 'text-anchor="end"'),
-    `<line x1="10" y1="${appH - 54}" x2="${sidebar - 10}" y2="${appH - 54}" stroke="${c.border}" />`,
-    text(12, appH - 30, "5 agents · 2 working", c.dim, 9),
+    `<line x1="10" y1="${appH - 78}" x2="${sidebar - 10}" y2="${appH - 78}" stroke="${c.border}" />`,
+    text(12, appH - 58, "+ Add machine", c.muted, 9),
+    text(12, appH - 38, "Settings", c.dim, 9),
   ].join("\n");
 
   const topbar = [
@@ -150,16 +151,18 @@ export function renderHerdrAppPreview(theme: Theme, options: PreviewOptions = {}
     `<line x1="154" y1="10" x2="154" y2="${title - 10}" stroke="${c.border}" />`,
     `<rect x="162" y="6" width="96" height="${title - 12}" rx="5" fill="${c.surface}" />`,
     text(176, 26, "main", c.foreground, 11),
+    text(244, 26, "×", c.dim, 10),
     text(274, 26, "tokens", c.muted, 11),
     text(350, 26, "preview", c.muted, 11),
-    text(W - 18, 27, "⌘K", c.dim, 10, 'text-anchor="end"'),
+    text(W - 18, 27, "Files   Changes   + Visual", c.dim, 10, 'text-anchor="end"'),
   ].join("\n");
 
   const statusBar = [
     `<rect x="0" y="${appH - status}" width="${W}" height="${status}" fill="${c.chrome}" />`,
     `<line x1="0" y1="${appH - status}" x2="${W}" y2="${appH - status}" stroke="${c.border}" />`,
-    text(14, appH - 9, "herdr", c.accent, 9),
-    text(58, appH - 9, "3 spaces · 5 agents", c.dim, 9),
+    text(14, appH - 9, "This computer", c.muted, 9),
+    text(104, appH - 9, "main", c.dim, 9),
+    text(140, appH - 9, "5 agents", c.dim, 9),
     text(W - 14, appH - 9, "MCP connected", c.dim, 9, 'text-anchor="end"'),
   ].join("\n");
 
