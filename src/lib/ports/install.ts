@@ -1,3 +1,5 @@
+import type { Target } from "../../data/targets";
+import type { Locale } from "../../i18n/ui";
 import type { Theme } from "../schema";
 
 /**
@@ -42,4 +44,45 @@ export function installCommand(slug: string, theme: Theme, url: string): string 
     default:
       return `curl -fsSL "${url}" -o "${name}"`;
   }
+}
+
+export function agentPrompt(
+  theme: Theme,
+  target: Target,
+  pageUrl: string,
+  fileUrl: string,
+  locale: Locale,
+): string {
+  const steps = target.install[locale];
+  const command = installCommand(target.slug, theme, fileUrl);
+  if (locale === "zh") {
+    return [
+      `帮我在这台机器上安装 ${theme.name} 的 ${target.name} 主题。`,
+      "",
+      `先阅读安装页面：${pageUrl}`,
+      `原生配置文件：${fileUrl}`,
+      "",
+      "请按以下步骤操作：",
+      ...steps.map((step, index) => `${index + 1}. ${step}`),
+      "",
+      "一行安装命令：",
+      command,
+      "",
+      "请先检查并备份现有配置，只修改这个主题需要的设置，不要覆盖无关配置；如果要修改默认主题，先询问我。安装后验证文件存在并告诉我改了哪些文件。",
+    ].join("\n");
+  }
+  return [
+    `Help me install the ${theme.name} theme for ${target.name} on this machine.`,
+    "",
+    `Read the install page: ${pageUrl}`,
+    `Native theme file: ${fileUrl}`,
+    "",
+    "Follow these steps:",
+    ...steps.map((step, index) => `${index + 1}. ${step}`),
+    "",
+    "One-line install:",
+    command,
+    "",
+    "Inspect and back up my existing configuration first. Change only what this theme needs; do not overwrite unrelated settings. Ask before changing my default theme. After installing, verify the file exists and tell me which files changed.",
+  ].join("\n");
 }

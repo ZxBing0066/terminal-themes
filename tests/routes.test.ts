@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { targets } from "../src/data/targets";
 import { allThemes } from "../src/lib/data";
 import { buildRoutes, terminalThemePath } from "../src/lib/routes";
+import { agentPrompt } from "../src/lib/ports/install";
 import { terminalThemeFaqs } from "../src/lib/terminalThemeFaq";
 import { catppuccinMocha } from "./fixtures";
 
@@ -36,6 +37,21 @@ describe("terminal theme routes", () => {
         locale: "zh",
       }),
     );
+  });
+
+  it("generates an agent install prompt with the page and native file", () => {
+    const ghostty = targets.find((target) => target.slug === "ghostty")!;
+    const prompt = agentPrompt(
+      catppuccinMocha,
+      ghostty,
+      "https://terminalthemes.iwwi.app/ghostty/themes/catppuccin/mocha/",
+      "https://terminalthemes.iwwi.app/ports/ghostty/catppuccin-mocha.conf",
+      "en",
+    );
+    expect(prompt).toContain("Catppuccin Mocha");
+    expect(prompt).toContain("ghostty/themes/catppuccin/mocha");
+    expect(prompt).toContain("ports/ghostty/catppuccin-mocha.conf");
+    expect(prompt).toContain("back up");
   });
 
   it("provides terminal-specific FAQ content", () => {

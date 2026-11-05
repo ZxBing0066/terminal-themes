@@ -4,8 +4,8 @@ import { contrast } from "../../lib/color";
 import { contrastRatio, generatedDescription, terminalThemeDescription } from "../../lib/data";
 import { ansiPairs } from "../../lib/palette";
 import { ports, type PortTarget } from "../../lib/ports";
-import { installCommand } from "../../lib/ports/install";
-import { absoluteFileUrl, localizedHref, themePath, type Page } from "../../lib/routes";
+import { agentPrompt, installCommand } from "../../lib/ports/install";
+import { absoluteFileUrl, absoluteUrl, localizedHref, themePath, type Page } from "../../lib/routes";
 import { similarThemes } from "../../lib/similar";
 import { terminalThemeFaqs } from "../../lib/terminalThemeFaq";
 import Breadcrumbs from "../Breadcrumbs.astro";
@@ -53,6 +53,7 @@ const previewFor = (port: PortTarget) => `/previews/${theme.family}-${theme.slug
 const previewAlt = (port: PortTarget) =>
   locale === "zh" ? `${theme.name} 在 ${port.name} 中的预览` : `${theme.name} preview in ${port.name}`;
 const commandFor = (port: PortTarget) => installCommand(port.slug, theme, portUrl(port));
+const promptFor = (port: PortTarget) => target ? agentPrompt(theme, target, absoluteUrl(page.path), portUrl(port), locale) : "";
 const installLabel = (port: PortTarget) =>
   port.slug === "windows-terminal"
     ? "PowerShell"
@@ -233,6 +234,23 @@ const lede = target ? terminalThemeDescription(theme, target, locale) : generate
             <button class="btn btn-small" data-copy={commandFor(activePort)}>{t(locale, "common.copyCommand")}</button>
           </div>
         </div>
+      )}
+
+      {target && activePort && (
+        <details class="agent-prompt">
+          <summary>{locale === "zh" ? "让 Agent 帮我安装" : "Let an agent install it"}</summary>
+          <p class="small muted">
+            {locale === "zh"
+              ? `把这段提示词交给编码 Agent。它会读取 ${target.name} 的安装页面、备份配置并只修改这个主题需要的文件。`
+              : `Give this prompt to your coding agent. It includes the ${target.name} install page, native file, steps, and safety constraints.`}
+          </p>
+          <pre><code>{promptFor(activePort)}</code></pre>
+          <div class="actions">
+            <button class="btn btn-small" data-copy={promptFor(activePort)}>
+              {locale === "zh" ? "复制提示词" : "Copy prompt"}
+            </button>
+          </div>
+        </details>
       )}
     </div>
 
