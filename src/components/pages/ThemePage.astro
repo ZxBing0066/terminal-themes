@@ -79,19 +79,20 @@ const lede = target ? terminalThemeDescription(theme, target, locale) : generate
       {theme.source.upstream && <>{" · "}<a href={theme.source.upstream} rel="noopener">{locale === "zh" ? "上游项目" : "Upstream"}</a></>}
     </p>
     <div class="actions">
-      <a class="btn btn-primary" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
       {target && activePort ? (
         <>
-          <button class="btn" data-copy={commandFor(activePort)}>{t(locale, "theme.copyInstall")}</button>
+          <button class="btn btn-primary" data-copy={commandFor(activePort)}>{t(locale, "theme.copyInstall")}</button>
+          <button class="btn" data-copy={promptFor(activePort)}>{locale === "zh" ? "复制提示词" : "Copy prompt"}</button>
           <a class="btn" href={portPath(activePort)} download>{t(locale, "common.downloadTheme")}</a>
           <a class="btn" href={hubHref}>{locale === "zh" ? "所有终端" : "All terminals"}</a>
         </>
       ) : (
         <>
+          <a class="btn btn-primary" href="#terminal-previews">{locale === "zh" ? "选择终端" : "Choose a terminal"}</a>
           <button class="btn" data-copy={paletteJson}>{t(locale, "common.copy")} JSON</button>
-          <a class="btn" href="#terminal-previews">{locale === "zh" ? "选择终端" : "Choose a terminal"}</a>
         </>
       )}
+      <a class="btn" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
     </div>
   </div>
 </section>
@@ -248,12 +249,7 @@ const lede = target ? terminalThemeDescription(theme, target, locale) : generate
 
       {target && activePort && (
         <section class="agent-prompt">
-          <div class="panel-title-row">
-            <h2 class="panel-title">{locale === "zh" ? "让 Agent 帮我安装" : "Let an agent install it"}</h2>
-            <button class="btn btn-small" data-copy={promptFor(activePort)}>
-              {locale === "zh" ? "复制提示词" : "Copy prompt"}
-            </button>
-          </div>
+          <h2 class="panel-title">{locale === "zh" ? "让 Agent 帮我安装" : "Let an agent install it"}</h2>
           <p class="small muted">
             {locale === "zh"
               ? `把这段提示词交给编码 Agent。它会读取 ${target.name} 的安装页面、备份配置并只修改这个主题需要的文件。`
