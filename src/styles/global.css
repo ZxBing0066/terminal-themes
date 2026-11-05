@@ -431,6 +431,20 @@ pre {
   border-color: var(--muted);
 }
 
+.editor-action {
+  align-self: center;
+  margin-left: 4px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.editor-action:hover {
+  color: var(--fg);
+}
+
 .btn-small {
   min-height: 32px;
   padding: 0 10px;

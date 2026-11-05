@@ -92,7 +92,7 @@ const lede = target ? terminalThemeDescription(theme, target, locale) : generate
           <button class="btn" data-copy={paletteJson}>{t(locale, "common.copy")} JSON</button>
         </>
       )}
-      <a class="btn" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
+      <a class="editor-action" href={`${href("editor")}?theme=${encodeURIComponent(theme.id)}`}>{t(locale, "common.openInEditor")}</a>
     </div>
   </div>
 </section>
