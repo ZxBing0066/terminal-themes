@@ -1,4 +1,4 @@
-import { ansiList, cursorText, selectionForeground } from "../palette";
+import { ansiList, cursorText } from "../palette";
 import type { Theme } from "../schema";
 
 /**
@@ -23,7 +23,6 @@ export function serializeHyper(theme: Theme): string {
   cursorColor: ${quote(p.cursor)},
   cursorAccentColor: ${quote(cursorText(theme))},
   selectionColor: ${quote(p.selectionBackground)},
-  selectionForegroundColor: ${quote(selectionForeground(theme))},
   colors: {
     ...config.colors,
     ${colors.join(",\n    ")}
