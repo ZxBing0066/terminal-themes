@@ -25,6 +25,11 @@ export function installCommand(slug: string, theme: Theme, url: string): string 
         `mkdir -p "$HOME/.config/alacritty/themes" && curl -fsSL "${url}" -o "$HOME/.config/alacritty/themes/${name}.toml"`,
         `# Then add an import entry to alacritty.toml pointing at ~/.config/alacritty/themes/${name}.toml`,
       ].join("\n");
+    case "foot":
+      return [
+        `mkdir -p "$HOME/.config/foot/themes" && curl -fsSL "${url}" -o "$HOME/.config/foot/themes/${name}.ini"`,
+        `# Add include=~/.config/foot/themes/${name}.ini to ~/.config/foot/foot.ini; for a light theme set initial-color-theme=light.`,
+      ].join("\n");
     case "rio":
       return [
         `mkdir -p "$HOME/.config/rio/themes" && curl -fsSL "${url}" -o "$HOME/.config/rio/themes/${name}.toml"`,

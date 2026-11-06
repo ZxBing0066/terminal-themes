@@ -1,5 +1,6 @@
 import type { Theme } from "../schema";
 import { serializeHerdrApp } from "./herdr-app";
+import { serializeFoot } from "./foot";
 import { serializeRio } from "./rio";
 import { serializeWarp } from "./warp";
 import { serializeWezterm } from "./wezterm";
@@ -40,6 +41,13 @@ export const ports: PortTarget[] = [
     extension: "toml",
     mime: "text/plain",
     serialize: serializeAlacritty,
+  },
+  {
+    slug: "foot",
+    name: "foot",
+    extension: "ini",
+    mime: "text/plain",
+    serialize: serializeFoot,
   },
   {
     slug: "rio",

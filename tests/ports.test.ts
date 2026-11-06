@@ -40,7 +40,7 @@ describe("port serializers", () => {
     it(`serializes ${port.slug}`, () => {
       const output = port.serialize(catppuccinMocha);
       expect(output.length).toBeGreaterThan(20);
-      if (port.slug !== "iterm2") expect(output).toContain("#");
+      if (!["iterm2", "foot"].includes(port.slug)) expect(output).toContain("#");
     });
   }
 
@@ -61,6 +61,16 @@ describe("port serializers", () => {
   it("ghostty output uses palette lines", () => {
     const port = ports.find((candidate) => candidate.slug === "ghostty")!;
     expect(port.serialize(catppuccinMocha)).toContain("palette = 0=#45475a");
+  });
+
+  it("foot output is an INI color section", () => {
+    const port = ports.find((candidate) => candidate.slug === "foot")!;
+    const output = port.serialize(catppuccinMocha);
+    expect(output).toContain("[colors-dark]");
+    expect(output).toContain("background=1e1e2e");
+    expect(output).toContain("regular0=45475a");
+    expect(output).toContain("bright7=bac2de");
+    expect(output).not.toContain("#");
   });
 
   it("rio output is a named TOML theme", () => {

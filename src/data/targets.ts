@@ -85,6 +85,30 @@ export const targets: Target[] = [
     docs: "https://alacritty.org/config-alacritty.html",
   },
   {
+    slug: "foot",
+    name: "foot",
+    title: { en: "foot themes", zh: "foot 主题" },
+    description: {
+      en: "foot reads INI color sections. The export sets the background, foreground, cursor, selection, and the regular and bright ANSI colors as RRGGBB values without a leading #.",
+      zh: "foot 读取 INI 颜色段。导出文件设置背景、前景、光标、选区以及 regular 和 bright ANSI 颜色，值使用不带 # 的 RRGGBB。",
+    },
+    install: {
+      en: [
+        "Download the foot INI theme.",
+        "Save it to ~/.config/foot/themes/<name>.ini.",
+        "Add include=~/.config/foot/themes/<name>.ini to ~/.config/foot/foot.ini.",
+        "For a light theme, also set initial-color-theme=light in foot.ini.",
+      ],
+      zh: [
+        "下载 foot INI 主题。",
+        "保存到 ~/.config/foot/themes/<name>.ini。",
+        "在 ~/.config/foot/foot.ini 中加入 include=~/.config/foot/themes/<name>.ini。",
+        "浅色主题还需在 foot.ini 中设置 initial-color-theme=light。",
+      ],
+    },
+    docs: "https://man.archlinux.org/man/foot.ini.5",
+  },
+  {
     slug: "rio",
     name: "Rio",
     title: { en: "Rio themes", zh: "Rio 主题" },

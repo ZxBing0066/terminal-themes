@@ -4,6 +4,7 @@ import { ansiList } from "./palette";
 import type { Theme } from "./schema";
 import { dot, esc, text, type PreviewOptions } from "./previews/common";
 import { renderAlacrittyPreview } from "./previews/alacritty";
+import { renderFootPreview } from "./previews/foot";
 import { renderGhosttyPreview } from "./previews/ghostty";
 import { renderIterm2Preview } from "./previews/iterm2";
 import { renderKittyPreview } from "./previews/kitty";
@@ -180,6 +181,7 @@ interface PortLike {
 export function renderPortPreview(theme: Theme, port: PortLike, options: PreviewOptions = {}): string {
   if (port.slug === "herdr-app") return renderHerdrAppPreview(theme, options);
   if (port.slug === "ghostty") return renderGhosttyPreview(theme, options);
+  if (port.slug === "foot") return renderFootPreview(theme, options);
   if (port.slug === "alacritty") return renderAlacrittyPreview(theme, options);
   if (port.slug === "rio") return renderRioPreview(theme, options);
   if (port.slug === "warp") return renderWarpPreview(theme, options);
