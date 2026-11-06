@@ -31,7 +31,7 @@ For this repository, the map below is the subsystem reference. Keep each fact in
 - **Source of truth:** `src/lib/routes.ts`, `src/lib/seo.ts`, `src/pages/[...path].astro`, `src/pages/llms.txt.ts`, `src/pages/llms-full.txt.ts`
 - **Contract:** the terminal-neutral hub is canonical for `/themes/{family}/{slug}/`; terminal variants are canonical for `/{terminal}/themes/{family}/{slug}/`. English is `/`, Chinese is `/zh/`.
 - **Invariant:** every generated page has a self-referencing canonical, alternates, breadcrumb, visible install copy, and matching structured data. New routes must appear in the sitemap and `llms.txt`.
-- **Build budget:** the terminal-first design creates about 1.7k pages; a new target multiplies across the catalog. Check the page count and Cloudflare asset limits before adding one.
+- **Build budget:** the terminal-first design creates about 2.8k pages; a new target multiplies across the catalog. Check the page count and Cloudflare asset limits before adding one.
 
 ## Editor
 

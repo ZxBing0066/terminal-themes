@@ -84,8 +84,8 @@ export const guides: Guide[] = [
       zh: "在任意终端安装主题",
     },
     description: {
-      en: "File formats, config paths, and reload steps for Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
-      zh: "Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的文件格式、配置路径与重载步骤。",
+      en: "File formats, config paths, and reload steps for every supported terminal.",
+      zh: "每个受支持终端的文件格式、配置路径与重载步骤。",
     },
     order: 6,
     updatedAt: "2026-11-03",

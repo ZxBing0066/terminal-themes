@@ -40,8 +40,8 @@ export function titleFor(page: Page): string {
   switch (page.kind) {
     case "home":
       return page.locale === "zh"
-        ? "终端主题 — Herdr App、Ghostty、Alacritty 配色方案"
-        : `${SITE} — Herdr App, Ghostty, Alacritty schemes`;
+        ? "终端主题 — 原生终端配色方案"
+        : `${SITE} — native terminal color schemes`;
     case "catalog":
       return `${t(locale, "catalog.title")} — ${brand(locale)}`;
     case "terminals":

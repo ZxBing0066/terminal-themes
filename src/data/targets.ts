@@ -85,126 +85,6 @@ export const targets: Target[] = [
     docs: "https://alacritty.org/config-alacritty.html",
   },
   {
-    slug: "hyper",
-    name: "Hyper",
-    title: { en: "Hyper themes", zh: "Hyper 主题" },
-    description: {
-      en: "Hyper themes are local plugins. The export uses decorateConfig to merge the palette into the user's existing .hyper.js settings without replacing unrelated options.",
-      zh: "Hyper 主题是本地插件。导出文件使用 decorateConfig 把调色板合并进现有的 .hyper.js 配置，不覆盖无关设置。",
-    },
-    install: {
-      en: [
-        "Download the Hyper plugin.",
-        "Save it to ~/.hyper_plugins/local/<name>/index.js.",
-        "Add \"<name>\" to localPlugins in your Hyper config: ~/Library/Application Support/Hyper/.hyper.js on macOS, ~/.config/Hyper/.hyper.js on Linux, or %APPDATA%\\Hyper\\.hyper.js on Windows.",
-        "Reload Hyper or open a new window.",
-      ],
-      zh: [
-        "下载 Hyper 插件。",
-        "保存到 ~/.hyper_plugins/local/<name>/index.js。",
-        "在 Hyper 配置的 localPlugins 中加入 \"<name>\"：macOS 为 ~/Library/Application Support/Hyper/.hyper.js，Linux 为 ~/.config/Hyper/.hyper.js，Windows 为 %APPDATA%\\Hyper\\.hyper.js。",
-        "重新加载 Hyper 或打开新窗口。",
-      ],
-    },
-    docs: "https://hyper.is/",
-  },
-  {
-    slug: "foot",
-    name: "foot",
-    title: { en: "foot themes", zh: "foot 主题" },
-    description: {
-      en: "foot reads INI color sections. The export sets the background, foreground, cursor, selection, and the regular and bright ANSI colors as RRGGBB values without a leading #.",
-      zh: "foot 读取 INI 颜色段。导出文件设置背景、前景、光标、选区以及 regular 和 bright ANSI 颜色，值使用不带 # 的 RRGGBB。",
-    },
-    install: {
-      en: [
-        "Download the foot INI theme.",
-        "Save it to ~/.config/foot/themes/<name>.ini.",
-        "Add include=~/.config/foot/themes/<name>.ini to ~/.config/foot/foot.ini.",
-        "For a light theme, also set initial-color-theme=light in foot.ini.",
-      ],
-      zh: [
-        "下载 foot INI 主题。",
-        "保存到 ~/.config/foot/themes/<name>.ini。",
-        "在 ~/.config/foot/foot.ini 中加入 include=~/.config/foot/themes/<name>.ini。",
-        "浅色主题还需在 foot.ini 中设置 initial-color-theme=light。",
-      ],
-    },
-    docs: "https://man.archlinux.org/man/foot.ini.5",
-  },
-  {
-    slug: "rio",
-    name: "Rio",
-    title: { en: "Rio themes", zh: "Rio 主题" },
-    description: {
-      en: "Rio loads a named TOML theme from its themes directory. The export provides the background, foreground, cursor, selection, tabs, eight ANSI colors, and eight bright colors.",
-      zh: "Rio 从主题目录加载命名的 TOML 主题。导出文件提供背景、前景、光标、选区、标签页、8 个 ANSI 颜色和 8 个亮色。",
-    },
-    install: {
-      en: [
-        "Download the Rio TOML theme.",
-        "Save it to ~/.config/rio/themes/<name>.toml.",
-        "Add theme = \"<name>\" to ~/.config/rio/config.toml.",
-        "Restart Rio or reload its configuration.",
-      ],
-      zh: [
-        "下载 Rio TOML 主题。",
-        "保存到 ~/.config/rio/themes/<name>.toml。",
-        "在 ~/.config/rio/config.toml 中加入 theme = \"<name>\"。",
-        "重启 Rio 或重新加载配置。",
-      ],
-    },
-    docs: "https://rio.dev/docs/config",
-  },
-  {
-    slug: "warp",
-    name: "Warp",
-    title: { en: "Warp themes", zh: "Warp 主题" },
-    description: {
-      en: "Warp reads custom themes from a YAML file in its themes directory. The export defines the terminal colors plus Warp's accent, cursor, background, foreground, and light/dark detail mode.",
-      zh: "Warp 从主题目录中的 YAML 文件读取自定义主题。导出文件定义终端颜色，以及 Warp 的强调色、光标、背景、前景和明暗细节模式。",
-    },
-    install: {
-      en: [
-        "Download the Warp theme YAML.",
-        "Save it to ~/.warp/themes/<name>.yaml on macOS, %APPDATA%\\warp\\Warp\\data\\themes on Windows, or ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes on Linux.",
-        "Open Warp -> Settings -> Appearance -> Themes and choose <name>.",
-        "If the theme is not listed yet, restart Warp so it discovers the directory.",
-      ],
-      zh: [
-        "下载 Warp 主题 YAML。",
-        "macOS 保存到 ~/.warp/themes/<name>.yaml；Windows 保存到 %APPDATA%\\warp\\Warp\\data\\themes；Linux 保存到 ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes。",
-        "打开 Warp -> 设置 -> 外观 -> 主题，选择 <name>。",
-        "如果主题尚未出现，重启 Warp 让它发现主题目录。",
-      ],
-    },
-    docs: "https://docs.warp.dev/terminal/appearance/custom-themes",
-  },
-  {
-    slug: "wezterm",
-    name: "WezTerm",
-    title: { en: "WezTerm themes", zh: "WezTerm 主题" },
-    description: {
-      en: "WezTerm reads colors from a Lua table. The export defines foreground, background, cursor, selection, the eight ANSI colors, and the eight brights.",
-      zh: "WezTerm 从 Lua 表读取颜色。导出的表定义前景、背景、光标、选区、8 个 ANSI 颜色和 8 个亮色。",
-    },
-    install: {
-      en: [
-        "Download the Lua color table.",
-        "Save it to ~/.config/wezterm/colors/<name>.lua.",
-        "Add config.colors = dofile(wezterm.config_dir .. '/colors/<name>.lua') to ~/.config/wezterm/wezterm.lua.",
-        "Reload WezTerm.",
-      ],
-      zh: [
-        "下载 Lua 颜色表。",
-        "保存到 ~/.config/wezterm/colors/<name>.lua。",
-        "在 ~/.config/wezterm/wezterm.lua 中加入 config.colors = dofile(wezterm.config_dir .. '/colors/<name>.lua')。",
-        "重新加载 WezTerm。",
-      ],
-    },
-    docs: "https://wezterm.org/config/lua/config/colors.html",
-  },
-  {
     slug: "kitty",
     name: "Kitty",
     title: { en: "Kitty themes", zh: "Kitty 主题" },
@@ -269,6 +149,126 @@ export const targets: Target[] = [
       ],
     },
     docs: "https://learn.microsoft.com/en-us/windows/terminal/customize-settings/color-schemes",
+  },
+  {
+    slug: "wezterm",
+    name: "WezTerm",
+    title: { en: "WezTerm themes", zh: "WezTerm 主题" },
+    description: {
+      en: "WezTerm reads colors from a Lua table. The export defines foreground, background, cursor, selection, the eight ANSI colors, and the eight brights.",
+      zh: "WezTerm 从 Lua 表读取颜色。导出的表定义前景、背景、光标、选区、8 个 ANSI 颜色和 8 个亮色。",
+    },
+    install: {
+      en: [
+        "Download the Lua color table.",
+        "Save it to ~/.config/wezterm/colors/<name>.lua.",
+        "Add config.colors = dofile(wezterm.config_dir .. '/colors/<name>.lua') to ~/.config/wezterm/wezterm.lua.",
+        "Reload WezTerm.",
+      ],
+      zh: [
+        "下载 Lua 颜色表。",
+        "保存到 ~/.config/wezterm/colors/<name>.lua。",
+        "在 ~/.config/wezterm/wezterm.lua 中加入 config.colors = dofile(wezterm.config_dir .. '/colors/<name>.lua')。",
+        "重新加载 WezTerm。",
+      ],
+    },
+    docs: "https://wezterm.org/config/lua/config/colors.html",
+  },
+  {
+    slug: "warp",
+    name: "Warp",
+    title: { en: "Warp themes", zh: "Warp 主题" },
+    description: {
+      en: "Warp reads custom themes from a YAML file. The export defines terminal colors plus Warp's accent, cursor, background, foreground, and light/dark detail mode.",
+      zh: "Warp 从主题目录中的 YAML 文件读取自定义主题。导出文件定义终端颜色，以及 Warp 的强调色、光标、背景、前景和明暗细节模式。",
+    },
+    install: {
+      en: [
+        "Download the Warp theme YAML.",
+        "Save it to ~/.warp/themes/<name>.yaml on macOS, %APPDATA%\\warp\\Warp\\data\\themes on Windows, or ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes on Linux.",
+        "Open Warp -> Settings -> Appearance -> Themes and choose <name>.",
+        "If the theme is not listed yet, restart Warp so it discovers the directory.",
+      ],
+      zh: [
+        "下载 Warp 主题 YAML。",
+        "macOS 保存到 ~/.warp/themes/<name>.yaml；Windows 保存到 %APPDATA%\\warp\\Warp\\data\\themes；Linux 保存到 ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes。",
+        "打开 Warp -> 设置 -> 外观 -> 主题，选择 <name>。",
+        "如果主题尚未出现，重启 Warp 让它发现主题目录。",
+      ],
+    },
+    docs: "https://docs.warp.dev/terminal/appearance/custom-themes",
+  },
+  {
+    slug: "rio",
+    name: "Rio",
+    title: { en: "Rio themes", zh: "Rio 主题" },
+    description: {
+      en: "Rio loads a named TOML theme. The export provides background, foreground, cursor, selection, tabs, eight ANSI colors, and eight bright colors.",
+      zh: "Rio 从主题目录加载命名的 TOML 主题。导出文件提供背景、前景、光标、选区、标签页、8 个 ANSI 颜色和 8 个亮色。",
+    },
+    install: {
+      en: [
+        "Download the Rio TOML theme.",
+        "Save it to ~/.config/rio/themes/<name>.toml.",
+        "Add theme = \"<name>\" to ~/.config/rio/config.toml.",
+        "Restart Rio or reload its configuration.",
+      ],
+      zh: [
+        "下载 Rio TOML 主题。",
+        "保存到 ~/.config/rio/themes/<name>.toml。",
+        "在 ~/.config/rio/config.toml 中加入 theme = \"<name>\"。",
+        "重启 Rio 或重新加载配置。",
+      ],
+    },
+    docs: "https://rio.dev/docs/config",
+  },
+  {
+    slug: "foot",
+    name: "foot",
+    title: { en: "foot themes", zh: "foot 主题" },
+    description: {
+      en: "foot reads INI color sections. The export sets background, foreground, cursor, selection, and the regular and bright ANSI colors as RRGGBB values.",
+      zh: "foot 读取 INI 颜色段。导出文件设置背景、前景、光标、选区以及 regular 和 bright ANSI 颜色，值使用不带 # 的 RRGGBB。",
+    },
+    install: {
+      en: [
+        "Download the foot INI theme.",
+        "Save it to ~/.config/foot/themes/<name>.ini.",
+        "Add include=~/.config/foot/themes/<name>.ini to ~/.config/foot/foot.ini.",
+        "For a light theme, also set initial-color-theme=light in foot.ini.",
+      ],
+      zh: [
+        "下载 foot INI 主题。",
+        "保存到 ~/.config/foot/themes/<name>.ini。",
+        "在 ~/.config/foot/foot.ini 中加入 include=~/.config/foot/themes/<name>.ini。",
+        "浅色主题还需在 foot.ini 中设置 initial-color-theme=light。",
+      ],
+    },
+    docs: "https://man.archlinux.org/man/foot.ini.5",
+  },
+  {
+    slug: "hyper",
+    name: "Hyper",
+    title: { en: "Hyper themes", zh: "Hyper 主题" },
+    description: {
+      en: "Hyper themes are local plugins. The export uses decorateConfig to merge the palette into the existing .hyper.js without replacing unrelated options.",
+      zh: "Hyper 主题是本地插件。导出文件使用 decorateConfig 把调色板合并进现有的 .hyper.js 配置，不覆盖无关设置。",
+    },
+    install: {
+      en: [
+        "Download the Hyper plugin.",
+        "Save it to ~/.hyper_plugins/local/<name>/index.js.",
+        "Add \"<name>\" to localPlugins in your Hyper config: ~/Library/Application Support/Hyper/.hyper.js on macOS, ~/.config/Hyper/.hyper.js on Linux, or %APPDATA%\\Hyper\\.hyper.js on Windows.",
+        "Reload Hyper or open a new window.",
+      ],
+      zh: [
+        "下载 Hyper 插件。",
+        "保存到 ~/.hyper_plugins/local/<name>/index.js。",
+        "在 Hyper 配置的 localPlugins 中加入 \"<name>\"：macOS 为 ~/Library/Application Support/Hyper/.hyper.js，Linux 为 ~/.config/Hyper/.hyper.js，Windows 为 %APPDATA%\\Hyper\\.hyper.js。",
+        "重新加载 Hyper 或打开新窗口。",
+      ],
+    },
+    docs: "https://hyper.is/",
   },
 ];
 

@@ -5,7 +5,7 @@ import { generatedDescription, allThemes } from "../lib/data";
 export const GET: APIRoute = () =>
   rss({
     title: "Terminal Themes",
-    description: "New terminal color schemes for the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    description: "New terminal color schemes with native exports for every supported terminal.",
     site: "https://terminalthemes.iwwi.app",
     items: allThemes()
       .slice(0, 50)

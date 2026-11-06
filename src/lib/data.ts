@@ -81,9 +81,9 @@ export function generatedDescription(theme: Theme, locale: Locale): string {
   const ratio = contrastRatio(theme).toFixed(1);
   if (locale === "zh") {
     const appearance = theme.appearance === "dark" ? "深色" : "浅色";
-    return `${theme.name} 是一套${appearance}终端主题，背景色 ${theme.palette.background}，正文对比度 ${ratio}:1。它包含完整的 16 色 ANSI 调色板，可导出到 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal。`;
+    return `${theme.name} 是一套${appearance}终端主题，背景色 ${theme.palette.background}，正文对比度 ${ratio}:1。它包含完整的 16 色 ANSI 调色板，可导出到每个受支持终端的原生格式。`;
   }
-  return `${theme.name} is a ${theme.appearance} terminal theme with a ${theme.palette.background} background and ${ratio}:1 body contrast. It ships a full 16-color ANSI palette and exports to the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.`;
+  return `${theme.name} is a ${theme.appearance} terminal theme with a ${theme.palette.background} background and ${ratio}:1 body contrast. It ships a full 16-color ANSI palette and native exports for every supported terminal.`;
 }
 
 export function terminalThemeDescription(theme: Theme, target: Target, locale: Locale): string {

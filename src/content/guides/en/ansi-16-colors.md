@@ -24,7 +24,7 @@ On some palettes, bright red is a different hue rather than a lighter red. Do no
 
 ## Why the order matters
 
-Herdr app theme files, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal all map the same sixteen slots. If the order is wrong, `git diff` turns the deletions green. Always keep `black, red, green, yellow, blue, magenta, cyan, white` followed by their bright variants.
+Every supported terminal and the Herdr app map the same sixteen slots. If the order is wrong, `git diff` turns the deletions green. Always keep `black, red, green, yellow, blue, magenta, cyan, white` followed by their bright variants.
 
 ## What is not in the sixteen
 

@@ -1,6 +1,6 @@
 # Index only core page types
 
-Indexable page types are: home, catalog, family, theme, the six target hubs, guides, the editor, and the contribute page. Target-by-theme combinations, hex-value pages, auto-generated comparisons, search results, and port files are not indexed. Similar themes, contrast ratios, and palette deltas live inside theme pages instead.
+Indexable page types are: home, catalog, family, theme, the terminal target hubs, guides, the editor, and the contribute page. Target-by-theme combinations, hex-value pages, auto-generated comparisons, search results, and port files are not indexed. Similar themes, contrast ratios, and palette deltas live inside theme pages instead.
 
 ## Consequences
 

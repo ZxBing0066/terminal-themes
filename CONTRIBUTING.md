@@ -71,7 +71,7 @@ CI runs on every pull request:
 - 22 valid `#rrggbb` colors
 - duplicate detection in OKLab (ΔE00 < 1 fails)
 - source/author/license presence
-- all six serializers and the full static build
+- all serializers and the full static build
 - preview and OG rendering
 
 ## Translation

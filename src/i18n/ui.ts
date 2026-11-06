@@ -4,7 +4,7 @@ export type Locale = (typeof locales)[number];
 export const ui = {
   en: {
     "site.name": "Terminal Themes",
-    "site.tagline": "Color schemes for the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "site.tagline": "Native color schemes for every terminal you use.",
     "nav.themes": "Themes",
     "nav.terminals": "Terminals",
     "nav.herdr": "Herdr App",
@@ -55,7 +55,7 @@ export const ui = {
     "common.new": "New",
     "common.popular": "Popular",
     "home.title": "Terminal color schemes, ready for your app",
-    "home.description": "Browse terminal themes with previews, contrast data, and exports for Herdr App, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.",
+    "home.description": "Browse terminal themes with previews, contrast data, and native exports for every supported terminal.",
     "home.kicker": "Open palette data · native terminal exports · no account",
     "home.ctaThemes": "Browse themes",
     "home.ctaEditor": "Open the editor",
@@ -103,7 +103,7 @@ export const ui = {
   },
   zh: {
     "site.name": "终端主题",
-    "site.tagline": "为 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 提供配色方案。",
+    "site.tagline": "为每个终端提供原生配色方案。",
     "nav.themes": "主题",
     "nav.terminals": "终端",
     "nav.herdr": "Herdr App",
@@ -198,7 +198,7 @@ export const ui = {
     "privacy.description": "终端主题的隐私说明：无账号、无跟踪 Cookie、纯静态页面，编辑器数据只留在浏览器。",
     "changelog.description": "终端主题更新日志：新增主题与家族、导出格式、编辑器功能和站点更新。",
     "contribute.description": "提交终端主题：在编辑器调整调色板、验证对比度，并提交能通过 CI 的拉取请求。",
-    "search.description": "按名称、家族或明暗风格搜索 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 终端配色方案。",
+    "search.description": "按名称、家族或明暗风格搜索终端配色方案。",
   },
 } as const;
 

@@ -217,7 +217,7 @@ export function renderDefaultOg(locale: "en" | "zh"): string {
   const stats =
     locale === "zh"
       ? "112 个主题 · 36 个家族 · 6 种应用"
-      : "112 themes · 36 families · 6 targets";
+      : "112 themes · 36 families · native targets";
   const cells = bar
     .map(
       (color, index) =>

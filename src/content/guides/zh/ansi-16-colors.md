@@ -24,7 +24,7 @@
 
 ## 顺序为什么重要
 
-Herdr App 主题文件、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 都按同样顺序映射 16 个位置。顺序错了，`git diff` 的删除行会变绿。始终按 `black, red, green, yellow, blue, magenta, cyan, white` 再跟亮色变体的顺序排列。
+所有受支持的终端和 Herdr App 都按同样顺序映射 16 个位置。顺序错了，`git diff` 的删除行会变绿。始终按 `black, red, green, yellow, blue, magenta, cyan, white` 再跟亮色变体的顺序排列。
 
 ## 16 色之外
 

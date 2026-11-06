@@ -22,8 +22,8 @@ export const faqs: FaqItem[] = [
       zh: "同一个主题能用于 Herdr App 和其他终端吗？",
     },
     answer: {
-      en: "The catalog stores each palette once, then exports native formats for the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal. Colors stay the same; only the file format changes.",
-      zh: "目录只保存一份调色板，再导出 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 的原生格式。颜色保持一致，只改变文件格式。",
+      en: "The catalog stores each palette once, then exports native formats for every supported terminal. Colors stay the same; only the file format changes.",
+      zh: "目录只保存一份调色板，再导出每个受支持终端的原生格式。颜色保持一致，只改变文件格式。",
     },
   },
   {

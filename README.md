@@ -10,7 +10,7 @@ Browse terminal color schemes with live previews, contrast data, native exports,
 [![CI](https://github.com/ZxBing0066/terminal-themes/actions/workflows/ci.yml/badge.svg)](https://github.com/ZxBing0066/terminal-themes/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-111111)](LICENSE)
 [![Themes](https://img.shields.io/badge/themes-112-111111)](https://terminalthemes.iwwi.app/themes/)
-[![Terminals](https://img.shields.io/badge/terminals-6-111111)](https://terminalthemes.iwwi.app/terminals/)
+[![Terminals](https://img.shields.io/badge/terminals-11-111111)](https://terminalthemes.iwwi.app/terminals/)
 
 **[Browse themes](https://terminalthemes.iwwi.app/themes/)** · **[Open the editor](https://terminalthemes.iwwi.app/editor/)** · **[Terminals](https://terminalthemes.iwwi.app/terminals/)** · **[中文](https://terminalthemes.iwwi.app/zh/)**
 
@@ -25,7 +25,7 @@ Browse terminal color schemes with live previews, contrast data, native exports,
 Terminal palettes are easy to find and annoying to install. Every app wants a different file, a different path, and a different color model. This project keeps one canonical palette and generates the native file for each terminal at build time.
 
 - **112 themes, 36 families** from the terminal-colors ecosystem, each with source and license.
-- **Six native targets** — Herdr App, Ghostty, Alacritty, Kitty, iTerm2, Windows Terminal.
+- **Eleven native targets** — Herdr App, Ghostty, Alacritty, Kitty, iTerm2, Windows Terminal, WezTerm, Warp, Rio, foot, and Hyper.
 - **Terminal-specific pages** at `/{terminal}/themes/{family}/{slug}/`, with install steps, commands, FAQ, and `HowTo` schema.
 - **One editor, every format** — tune 16 ANSI colors plus background, foreground, cursor, and selection, then preview and export.
 - **Static by design** — no server, no accounts, no cookies; the whole catalog is built as static HTML and JSON.
@@ -35,7 +35,7 @@ Terminal palettes are easy to find and annoying to install. Every app wants a di
 
 | Terminals | Theme pages |
 | --- | --- |
-| [<img src="docs/screenshots/terminals.png" alt="Terminal index with six terminal previews">](https://terminalthemes.iwwi.app/terminals/) | [<img src="docs/screenshots/theme.png" alt="Catppuccin Mocha for Ghostty theme page">](https://terminalthemes.iwwi.app/ghostty/themes/catppuccin/mocha/) |
+| [<img src="docs/screenshots/terminals.png" alt="Terminal index with eleven terminal previews">](https://terminalthemes.iwwi.app/terminals/) | [<img src="docs/screenshots/theme.png" alt="Catppuccin Mocha for Ghostty theme page">](https://terminalthemes.iwwi.app/ghostty/themes/catppuccin/mocha/) |
 | Pick the app you use; every page keeps that choice. | Install steps, preview, contrast, palette, and exports for one theme. |
 
 [<img src="docs/screenshots/editor.png" alt="Browser-based terminal theme editor" width="100%">](https://terminalthemes.iwwi.app/editor/)
@@ -52,6 +52,11 @@ The editor runs entirely in the browser. Start from any catalog theme, edit the 
 | **Kitty** | Kitty config fragment | `~/.config/kitty/` |
 | **iTerm2** | `.itermcolors` plist | Import through iTerm2 settings |
 | **Windows Terminal** | JSON color scheme | Windows Terminal `settings.json` |
+| **WezTerm** | Lua color table | `~/.config/wezterm/colors/` |
+| **Warp** | YAML theme | `~/.warp/themes/` |
+| **Rio** | TOML theme | `~/.config/rio/themes/` |
+| **foot** | INI color section | `~/.config/foot/themes/` |
+| **Hyper** | JavaScript local plugin | `~/.hyper_plugins/local/` |
 
 Each theme stores:
 
