@@ -7,6 +7,7 @@ import { renderAlacrittyPreview } from "./previews/alacritty";
 import { renderGhosttyPreview } from "./previews/ghostty";
 import { renderIterm2Preview } from "./previews/iterm2";
 import { renderKittyPreview } from "./previews/kitty";
+import { renderWindowsTerminalPreview } from "./previews/windows-terminal";
 
 function pane(
   x: number,
@@ -173,75 +174,14 @@ interface PortLike {
   name: string;
 }
 
-const PORT_CONFIG: Record<string, (theme: Theme) => string[]> = {
-  ghostty: (theme) => [`theme = ${theme.family}-${theme.slug}`],
-  alacritty: (theme) => ["[colors.primary]", `background = '${theme.palette.background}'`],
-  kitty: (theme) => [`include ${theme.family}-${theme.slug}.conf`],
-  iterm2: (theme) => [`Preset: ${theme.name}`],
-  "windows-terminal": (theme) => [`"scheme": "${theme.name}"`],
-};
-
-export function renderTerminalPreview(theme: Theme, port: PortLike, options: PreviewOptions = {}): string {
-  const W = 1200;
-  const H = options.height ?? 720;
-  const p = theme.palette;
-  const c = deriveHerdrAppColors(theme);
-  const ansi = ansiList(p.ansi);
-  const titleH = 42;
-  const config = PORT_CONFIG[port.slug]?.(theme) ?? [];
-  const prompt = (x: number, y: number, command: string) =>
-    `${text(x, y, "~ /dev/terminal-themes", c.accent, 12)}${text(x, y + 24, "❯", ansi[2], 14)}${text(x + 20, y + 24, command, p.foreground, 13)}`;
-  const rows = [
-    text(48, 172, "On branch main", c.muted, 12),
-    text(48, 196, "Changes not staged for commit:", p.foreground, 12),
-    text(64, 220, "modified:   themes/mocha.json", ansi[3], 12),
-    text(64, 244, "new file:   previews/herdr-app.svg", ansi[2], 12),
-    text(48, 268, "no changes added to commit", c.muted, 12),
-    text(48, 316, "❯", ansi[2], 14),
-    text(68, 316, "pnpm build", p.foreground, 13),
-    text(48, 344, "✓ built all theme pages", ansi[2], 12),
-  ].join("\n");
-  const swatchW = (W - 96 - 15 * 5) / 16;
-  const palette = ansi
-    .map(
-      (hex, index) =>
-        `<rect x="${48 + index * (swatchW + 5)}" y="452" width="${swatchW}" height="26" rx="3" fill="${hex}" />`,
-    )
-    .join("\n");
-  const configText = config
-    .map((line, index) => text(824, 128 + index * 24, line, index === 0 ? ansi[2] : p.foreground, 12))
-    .join("\n");
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(theme.name)} preview in ${esc(port.name)}">
-  <rect width="${W}" height="${H}" fill="${c.canvas}" />
-  <rect x="0" y="0" width="${W}" height="${H}" rx="10" fill="${p.background}" stroke="${c.border}" />
-  <rect x="0" y="0" width="${W}" height="${titleH}" rx="10" fill="${c.chrome}" />
-  <rect x="0" y="${titleH - 10}" width="${W}" height="10" fill="${c.chrome}" />
-  <line x1="0" y1="${titleH}" x2="${W}" y2="${titleH}" stroke="${c.border}" />
-  <circle cx="20" cy="21" r="5" fill="#ff5f57" />
-  <circle cx="38" cy="21" r="5" fill="#febc2e" />
-  <circle cx="56" cy="21" r="5" fill="#28c840" />
-  ${text(W / 2, 26, port.name, c.muted, 12, 'text-anchor="middle"')}
-  ${prompt(48, 92, "git status")}
-  ${rows}
-  <rect x="790" y="82" width="362" height="248" rx="8" fill="${c.surface}" stroke="${c.border}" />
-  ${text(812, 108, "TARGET CONFIG", c.dim, 10, 'letter-spacing="1.2"')}
-  ${configText}
-  ${text(812, 292, `${theme.name} · 16 ANSI`, c.dim, 10)}
-  <line x1="48" y1="404" x2="${W - 48}" y2="404" stroke="${c.border}" />
-  ${text(48, 430, "ANSI 0–15", c.dim, 10, 'letter-spacing="1.2"')}
-  ${palette}
-  ${text(48, 520, `background ${p.background}  ·  foreground ${p.foreground}  ·  cursor ${p.cursor}`, c.muted, 11)}
-</svg>`;
-}
-
 export function renderPortPreview(theme: Theme, port: PortLike, options: PreviewOptions = {}): string {
   if (port.slug === "herdr-app") return renderHerdrAppPreview(theme, options);
   if (port.slug === "ghostty") return renderGhosttyPreview(theme, options);
   if (port.slug === "alacritty") return renderAlacrittyPreview(theme, options);
   if (port.slug === "kitty") return renderKittyPreview(theme, options);
   if (port.slug === "iterm2") return renderIterm2Preview(theme, options);
-  return renderTerminalPreview(theme, port, options);
+  if (port.slug === "windows-terminal") return renderWindowsTerminalPreview(theme, options);
+  throw new Error(`No preview renderer for ${port.slug}`);
 }
 
 export function renderDefaultOg(locale: "en" | "zh"): string {
