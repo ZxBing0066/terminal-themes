@@ -1,5 +1,6 @@
 import type { Theme } from "../schema";
 import { serializeHerdrApp } from "./herdr-app";
+import { serializeRio } from "./rio";
 import { serializeWarp } from "./warp";
 import { serializeWezterm } from "./wezterm";
 import {
@@ -39,6 +40,13 @@ export const ports: PortTarget[] = [
     extension: "toml",
     mime: "text/plain",
     serialize: serializeAlacritty,
+  },
+  {
+    slug: "rio",
+    name: "Rio",
+    extension: "toml",
+    mime: "text/plain",
+    serialize: serializeRio,
   },
   {
     slug: "warp",

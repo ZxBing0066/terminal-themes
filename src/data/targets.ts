@@ -85,6 +85,30 @@ export const targets: Target[] = [
     docs: "https://alacritty.org/config-alacritty.html",
   },
   {
+    slug: "rio",
+    name: "Rio",
+    title: { en: "Rio themes", zh: "Rio 主题" },
+    description: {
+      en: "Rio loads a named TOML theme from its themes directory. The export provides the background, foreground, cursor, selection, tabs, eight ANSI colors, and eight bright colors.",
+      zh: "Rio 从主题目录加载命名的 TOML 主题。导出文件提供背景、前景、光标、选区、标签页、8 个 ANSI 颜色和 8 个亮色。",
+    },
+    install: {
+      en: [
+        "Download the Rio TOML theme.",
+        "Save it to ~/.config/rio/themes/<name>.toml.",
+        "Add theme = \"<name>\" to ~/.config/rio/config.toml.",
+        "Restart Rio or reload its configuration.",
+      ],
+      zh: [
+        "下载 Rio TOML 主题。",
+        "保存到 ~/.config/rio/themes/<name>.toml。",
+        "在 ~/.config/rio/config.toml 中加入 theme = \"<name>\"。",
+        "重启 Rio 或重新加载配置。",
+      ],
+    },
+    docs: "https://rio.dev/docs/config",
+  },
+  {
     slug: "warp",
     name: "Warp",
     title: { en: "Warp themes", zh: "Warp 主题" },

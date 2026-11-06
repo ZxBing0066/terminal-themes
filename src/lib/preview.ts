@@ -7,6 +7,7 @@ import { renderAlacrittyPreview } from "./previews/alacritty";
 import { renderGhosttyPreview } from "./previews/ghostty";
 import { renderIterm2Preview } from "./previews/iterm2";
 import { renderKittyPreview } from "./previews/kitty";
+import { renderRioPreview } from "./previews/rio";
 import { renderWarpPreview } from "./previews/warp";
 import { renderWeztermPreview } from "./previews/wezterm";
 import { renderWindowsTerminalPreview } from "./previews/windows-terminal";
@@ -180,6 +181,7 @@ export function renderPortPreview(theme: Theme, port: PortLike, options: Preview
   if (port.slug === "herdr-app") return renderHerdrAppPreview(theme, options);
   if (port.slug === "ghostty") return renderGhosttyPreview(theme, options);
   if (port.slug === "alacritty") return renderAlacrittyPreview(theme, options);
+  if (port.slug === "rio") return renderRioPreview(theme, options);
   if (port.slug === "warp") return renderWarpPreview(theme, options);
   if (port.slug === "wezterm") return renderWeztermPreview(theme, options);
   if (port.slug === "kitty") return renderKittyPreview(theme, options);

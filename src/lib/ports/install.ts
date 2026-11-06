@@ -25,6 +25,11 @@ export function installCommand(slug: string, theme: Theme, url: string): string 
         `mkdir -p "$HOME/.config/alacritty/themes" && curl -fsSL "${url}" -o "$HOME/.config/alacritty/themes/${name}.toml"`,
         `# Then add an import entry to alacritty.toml pointing at ~/.config/alacritty/themes/${name}.toml`,
       ].join("\n");
+    case "rio":
+      return [
+        `mkdir -p "$HOME/.config/rio/themes" && curl -fsSL "${url}" -o "$HOME/.config/rio/themes/${name}.toml"`,
+        `# Add theme = "${name}" to ~/.config/rio/config.toml`,
+      ].join("\n");
     case "warp":
       return [
         `mkdir -p "$HOME/.warp/themes" && curl -fsSL "${url}" -o "$HOME/.warp/themes/${name}.yaml"`,
