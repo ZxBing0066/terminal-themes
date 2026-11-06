@@ -16,7 +16,7 @@ export function editorFaqs(locale: Locale): QA[] {
       {
         question: "可以导出哪些格式？",
         answer:
-          "Herdr App JSON、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 六种格式。每种格式都使用同一份 16 色 ANSI 调色板。",
+          "Herdr App JSON、Ghostty、Alacritty、WezTerm、Kitty、iTerm2 和 Windows Terminal 等格式。每种格式都使用同一份 16 色 ANSI 调色板。",
       },
       {
         question: "我的调色板会被上传吗？",

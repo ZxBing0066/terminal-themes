@@ -65,10 +65,10 @@ const previewFor = (slug: string) => sample ? `/previews/${sample.family}-${samp
 <section class="section">
   <div class="wrap">
     <article class="prose">
-      <h2>{locale === "zh" ? "一份调色板，六种原生格式" : "One palette, six native formats"}</h2>
+      <h2>{locale === "zh" ? "一份调色板，多种原生格式" : "One palette, native formats"}</h2>
       <p>
         {locale === "zh"
-          ? "本站只保存一份调色板数据，再按终端生成原生配置。Herdr App 使用 JSON，Ghostty 与 Kitty 使用配置文件，Alacritty 使用 TOML，iTerm2 使用 .itermcolors，Windows Terminal 使用 JSON 方案对象。"
+          ? "本站只保存一份调色板数据，再按终端生成原生配置；每个终端使用自己的文件格式和安装位置。"
           : "The catalog stores one palette, then generates the native format for each terminal. Herdr App uses JSON, Ghostty and Kitty use configuration files, Alacritty uses TOML, iTerm2 uses .itermcolors, and Windows Terminal uses a JSON scheme object."}
       </p>
       <p>

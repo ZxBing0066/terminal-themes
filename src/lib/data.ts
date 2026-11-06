@@ -108,9 +108,9 @@ export function themeMetaDescription(theme: Theme, locale: Locale): string {
   const ratio = contrastRatio(theme).toFixed(1);
   const appearance = theme.appearance === "dark" ? (locale === "zh" ? "深色" : "dark") : (locale === "zh" ? "浅色" : "light");
   if (locale === "zh") {
-    return `${theme.name}：${appearance}终端主题，背景 ${theme.palette.background}，对比度 ${ratio}:1，含 16 色 ANSI，支持六种终端导出。`;
+    return `${theme.name}：${appearance}终端主题，背景 ${theme.palette.background}，对比度 ${ratio}:1，含 16 色 ANSI，支持原生终端导出。`;
   }
-  return `${theme.name}: ${appearance} terminal theme, ${theme.palette.background} background, ${ratio}:1 contrast, 16 ANSI colors, six terminal exports.`;
+  return `${theme.name}: ${appearance} terminal theme, ${theme.palette.background} background, ${ratio}:1 contrast, 16 ANSI colors, native terminal exports.`;
 }
 
 export function familyDescription(family: Family, locale: Locale): string {
@@ -118,9 +118,9 @@ export function familyDescription(family: Family, locale: Locale): string {
   if (override) return override;
   const count = themesOf(family.id).length;
   if (locale === "zh") {
-    return `${family.name} 家族收录 ${count} 个终端配色变体，提供 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal 配置。`;
+    return `${family.name} 家族收录 ${count} 个终端配色变体，提供各受支持终端的原生配置。`;
   }
-  return `${family.name} has ${count} cataloged terminal color ${count === 1 ? "variant" : "variants"}, with ports for the Herdr app, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal.`;
+  return `${family.name} has ${count} cataloged terminal color ${count === 1 ? "variant" : "variants"}, with native exports for each supported terminal.`;
 }
 
 export function familyStats(family: Family) {

@@ -63,6 +63,14 @@ describe("port serializers", () => {
     expect(port.serialize(catppuccinMocha)).toContain("palette = 0=#45475a");
   });
 
+  it("wezterm output is a Lua color table", () => {
+    const port = ports.find((candidate) => candidate.slug === "wezterm")!;
+    const output = port.serialize(catppuccinMocha);
+    expect(output).toContain("cursor_bg = \"#cdd6f4\"");
+    expect(output).toContain("brights = {");
+    expect(output.match(/"#[0-9a-f]{6}"/g)).toHaveLength(25);
+  });
+
   it("windows terminal output parses", () => {
     const port = ports.find((candidate) => candidate.slug === "windows-terminal")!;
     const scheme = JSON.parse(port.serialize(catppuccinMocha));

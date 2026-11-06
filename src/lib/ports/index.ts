@@ -1,5 +1,6 @@
 import type { Theme } from "../schema";
 import { serializeHerdrApp } from "./herdr-app";
+import { serializeWezterm } from "./wezterm";
 import {
   serializeAlacritty,
   serializeGhostty,
@@ -37,6 +38,13 @@ export const ports: PortTarget[] = [
     extension: "toml",
     mime: "text/plain",
     serialize: serializeAlacritty,
+  },
+  {
+    slug: "wezterm",
+    name: "WezTerm",
+    extension: "lua",
+    mime: "text/plain",
+    serialize: serializeWezterm,
   },
   {
     slug: "kitty",

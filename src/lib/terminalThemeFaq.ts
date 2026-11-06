@@ -10,7 +10,16 @@ export function terminalThemeFaqs(theme: Theme, target: Target, locale: Locale):
   const second = steps[1] ?? "";
   const last = steps[steps.length - 1] ?? "";
   const ratio = contrastRatio(theme).toFixed(1);
-  const format = target.slug === "herdr-app" ? "JSON" : target.slug === "windows-terminal" ? "JSON color scheme" : target.slug === "iterm2" ? ".itermcolors" : "configuration file";
+  const format =
+    target.slug === "herdr-app"
+      ? "JSON"
+      : target.slug === "windows-terminal"
+        ? "JSON color scheme"
+        : target.slug === "iterm2"
+          ? ".itermcolors"
+          : target.slug === "wezterm"
+            ? "Lua color table"
+            : "configuration file";
 
   if (locale === "zh") {
     return [
@@ -28,7 +37,7 @@ export function terminalThemeFaqs(theme: Theme, target: Target, locale: Locale):
       },
       {
         question: `${theme.name} 还能用于其他终端吗？`,
-        answer: "可以。同一份调色板可以导出到 Herdr App、Ghostty、Alacritty、Kitty、iTerm2 和 Windows Terminal；每个版本只改变安装路径和文件格式。",
+        answer: "可以。同一份调色板可以导出到本站支持的每个终端；每个版本只改变安装路径和文件格式。",
       },
     ];
   }
@@ -48,7 +57,7 @@ export function terminalThemeFaqs(theme: Theme, target: Target, locale: Locale):
     },
     {
       question: `Can I use ${theme.name} in another terminal?`,
-      answer: "Yes. The same palette exports to Herdr App, Ghostty, Alacritty, Kitty, iTerm2, and Windows Terminal; only the install path and file format change.",
+      answer: "Yes. The same palette exports to every terminal listed on this site; only the install path and file format change.",
     },
   ];
 }

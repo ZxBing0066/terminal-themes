@@ -85,6 +85,30 @@ export const targets: Target[] = [
     docs: "https://alacritty.org/config-alacritty.html",
   },
   {
+    slug: "wezterm",
+    name: "WezTerm",
+    title: { en: "WezTerm themes", zh: "WezTerm 主题" },
+    description: {
+      en: "WezTerm reads colors from a Lua table. The export defines foreground, background, cursor, selection, the eight ANSI colors, and the eight brights.",
+      zh: "WezTerm 从 Lua 表读取颜色。导出的表定义前景、背景、光标、选区、8 个 ANSI 颜色和 8 个亮色。",
+    },
+    install: {
+      en: [
+        "Download the Lua color table.",
+        "Save it to ~/.config/wezterm/colors/<name>.lua.",
+        "Add config.colors = dofile(wezterm.config_dir .. '/colors/<name>.lua') to ~/.config/wezterm/wezterm.lua.",
+        "Reload WezTerm.",
+      ],
+      zh: [
+        "下载 Lua 颜色表。",
+        "保存到 ~/.config/wezterm/colors/<name>.lua。",
+        "在 ~/.config/wezterm/wezterm.lua 中加入 config.colors = dofile(wezterm.config_dir .. '/colors/<name>.lua')。",
+        "重新加载 WezTerm。",
+      ],
+    },
+    docs: "https://wezterm.org/config/lua/config/colors.html",
+  },
+  {
     slug: "kitty",
     name: "Kitty",
     title: { en: "Kitty themes", zh: "Kitty 主题" },

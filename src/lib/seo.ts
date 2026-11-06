@@ -334,8 +334,8 @@ export function jsonLdFor(page: Page): Record<string, unknown> {
     const org = organization();
     const features =
       page.locale === "zh"
-        ? ["编辑 16 色 ANSI 与基础颜色", "在 Herdr App 中预览", "检查 WCAG 对比度", "导出六种终端格式", "通过 URL 分享调色板"]
-        : ["Edit 16 ANSI and base colors", "Preview in the Herdr app", "Check WCAG contrast", "Export six terminal formats", "Share palettes by URL"];
+        ? ["编辑 16 色 ANSI 与基础颜色", "在 Herdr App 中预览", "检查 WCAG 对比度", "导出原生终端格式", "通过 URL 分享调色板"]
+        : ["Edit 16 ANSI and base colors", "Preview in the Herdr app", "Check WCAG contrast", "Export native terminal formats", "Share palettes by URL"];
     graph.push({
       "@type": "WebApplication",
       "@id": `${canonical}#app`,

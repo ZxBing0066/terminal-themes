@@ -25,6 +25,11 @@ export function installCommand(slug: string, theme: Theme, url: string): string 
         `mkdir -p "$HOME/.config/alacritty/themes" && curl -fsSL "${url}" -o "$HOME/.config/alacritty/themes/${name}.toml"`,
         `# Then add an import entry to alacritty.toml pointing at ~/.config/alacritty/themes/${name}.toml`,
       ].join("\n");
+    case "wezterm":
+      return [
+        `mkdir -p "$HOME/.config/wezterm/colors" && curl -fsSL "${url}" -o "$HOME/.config/wezterm/colors/${name}.lua"`,
+        `# Add config.colors = dofile(wezterm.config_dir .. "/colors/${name}.lua") to ~/.config/wezterm/wezterm.lua`,
+      ].join("\n");
     case "kitty":
       return [
         `mkdir -p "$HOME/.config/kitty" && curl -fsSL "${url}" -o "$HOME/.config/kitty/${name}.conf" && { grep -qxF 'include ${name}.conf' "$HOME/.config/kitty/kitty.conf" 2>/dev/null || printf '\\ninclude %s\\n' '${name}.conf' >> "$HOME/.config/kitty/kitty.conf"; }`,

@@ -15,6 +15,7 @@ const editorPaths: Record<string, string> = {
   "herdr-app": "~/.config/herdr-app/themes/<name>.json",
   ghostty: "~/.config/ghostty/themes/<name>",
   alacritty: "~/.config/alacritty/alacritty.toml",
+  wezterm: "~/.config/wezterm/colors/<name>.lua",
   kitty: "~/.config/kitty/<name>.conf",
   iterm2: "*.itermcolors → Profiles → Colors",
   "windows-terminal": "settings.json → schemes[]",
@@ -46,8 +47,8 @@ const editorPaths: Record<string, string> = {
         <h2>{locale === "zh" ? "编辑器能做什么" : "What the editor does"}</h2>
         <p>
           {locale === "zh"
-            ? "编辑器把一份 20 色调色板转换成六种终端原生配置。调整 16 个 ANSI 颜色位，以及背景、前景、光标和选区；预览和对比度检查会立即更新。"
-            : "The editor turns one 20-color palette into six native terminal configurations. Adjust the 16 ANSI slots plus background, foreground, cursor, and selection; the preview and contrast checks update immediately."}
+            ? "编辑器把一份 20 色调色板转换成原生终端配置。调整 16 个 ANSI 颜色位，以及背景、前景、光标和选区；预览和对比度检查会立即更新。"
+            : "The editor turns one 20-color palette into native terminal configurations. Adjust the 16 ANSI slots plus background, foreground, cursor, and selection; the preview and contrast checks update immediately."}
         </p>
 
         <h2>{locale === "zh" ? "导出格式与安装位置" : "Exports and install paths"}</h2>
@@ -275,7 +276,7 @@ const editorPaths: Record<string, string> = {
         <h2>2026-11-03</h2>
         <ul>
           <li>{locale === "zh" ? "首批 112 个主题、36 个家族。" : "Initial catalog: 112 themes across 36 families."}</li>
-          <li>{locale === "zh" ? "六种终端导出，包括 Herdr App JSON 主题。" : "Six terminal exports, including Herdr app JSON themes."}</li>
+          <li>{locale === "zh" ? "原生终端导出，包括 Herdr App JSON 主题。" : "Native terminal exports, including Herdr app JSON themes."}</li>
           <li>{locale === "zh" ? "构建时生成预览、OG 图、JSON API、llms.txt 和中英文页面。" : "Build-time previews, OG images, JSON API, llms.txt, and English/Chinese pages."}</li>
           <li>{locale === "zh" ? "浏览器端调色板编辑器。" : "Browser-side palette editor."}</li>
         </ul>
