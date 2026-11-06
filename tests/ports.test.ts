@@ -63,6 +63,16 @@ describe("port serializers", () => {
     expect(port.serialize(catppuccinMocha)).toContain("palette = 0=#45475a");
   });
 
+  it("warp output is a theme YAML document", () => {
+    const port = ports.find((candidate) => candidate.slug === "warp")!;
+    const output = port.serialize(catppuccinMocha);
+    expect(output).toContain("name: \"Catppuccin Mocha\"");
+    expect(output).toContain("details: darker");
+    expect(output).toContain("  normal:");
+    expect(output).toContain("  bright:");
+    expect(output).toContain("    white: '#bac2de'");
+  });
+
   it("wezterm output is a Lua color table", () => {
     const port = ports.find((candidate) => candidate.slug === "wezterm")!;
     const output = port.serialize(catppuccinMocha);

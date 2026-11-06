@@ -25,6 +25,11 @@ export function installCommand(slug: string, theme: Theme, url: string): string 
         `mkdir -p "$HOME/.config/alacritty/themes" && curl -fsSL "${url}" -o "$HOME/.config/alacritty/themes/${name}.toml"`,
         `# Then add an import entry to alacritty.toml pointing at ~/.config/alacritty/themes/${name}.toml`,
       ].join("\n");
+    case "warp":
+      return [
+        `mkdir -p "$HOME/.warp/themes" && curl -fsSL "${url}" -o "$HOME/.warp/themes/${name}.yaml"`,
+        `# Windows: save to %APPDATA%\\warp\\Warp\\data\\themes; Linux: \${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes.`,
+      ].join("\n");
     case "wezterm":
       return [
         `mkdir -p "$HOME/.config/wezterm/colors" && curl -fsSL "${url}" -o "$HOME/.config/wezterm/colors/${name}.lua"`,

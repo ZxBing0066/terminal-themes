@@ -85,6 +85,30 @@ export const targets: Target[] = [
     docs: "https://alacritty.org/config-alacritty.html",
   },
   {
+    slug: "warp",
+    name: "Warp",
+    title: { en: "Warp themes", zh: "Warp 主题" },
+    description: {
+      en: "Warp reads custom themes from a YAML file in its themes directory. The export defines the terminal colors plus Warp's accent, cursor, background, foreground, and light/dark detail mode.",
+      zh: "Warp 从主题目录中的 YAML 文件读取自定义主题。导出文件定义终端颜色，以及 Warp 的强调色、光标、背景、前景和明暗细节模式。",
+    },
+    install: {
+      en: [
+        "Download the Warp theme YAML.",
+        "Save it to ~/.warp/themes/<name>.yaml on macOS, %APPDATA%\\warp\\Warp\\data\\themes on Windows, or ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes on Linux.",
+        "Open Warp -> Settings -> Appearance -> Themes and choose <name>.",
+        "If the theme is not listed yet, restart Warp so it discovers the directory.",
+      ],
+      zh: [
+        "下载 Warp 主题 YAML。",
+        "macOS 保存到 ~/.warp/themes/<name>.yaml；Windows 保存到 %APPDATA%\\warp\\Warp\\data\\themes；Linux 保存到 ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes。",
+        "打开 Warp -> 设置 -> 外观 -> 主题，选择 <name>。",
+        "如果主题尚未出现，重启 Warp 让它发现主题目录。",
+      ],
+    },
+    docs: "https://docs.warp.dev/terminal/appearance/custom-themes",
+  },
+  {
     slug: "wezterm",
     name: "WezTerm",
     title: { en: "WezTerm themes", zh: "WezTerm 主题" },
