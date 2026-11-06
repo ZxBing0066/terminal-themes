@@ -6,6 +6,7 @@ import { dot, esc, text, type PreviewOptions } from "./previews/common";
 import { renderAlacrittyPreview } from "./previews/alacritty";
 import { renderFootPreview } from "./previews/foot";
 import { renderGhosttyPreview } from "./previews/ghostty";
+import { renderHyperPreview } from "./previews/hyper";
 import { renderIterm2Preview } from "./previews/iterm2";
 import { renderKittyPreview } from "./previews/kitty";
 import { renderRioPreview } from "./previews/rio";
@@ -188,6 +189,7 @@ export function renderPortPreview(theme: Theme, port: PortLike, options: Preview
   if (port.slug === "wezterm") return renderWeztermPreview(theme, options);
   if (port.slug === "kitty") return renderKittyPreview(theme, options);
   if (port.slug === "iterm2") return renderIterm2Preview(theme, options);
+  if (port.slug === "hyper") return renderHyperPreview(theme, options);
   if (port.slug === "windows-terminal") return renderWindowsTerminalPreview(theme, options);
   throw new Error(`No preview renderer for ${port.slug}`);
 }

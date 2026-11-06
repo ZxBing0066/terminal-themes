@@ -10,16 +10,17 @@ export function terminalThemeFaqs(theme: Theme, target: Target, locale: Locale):
   const second = steps[1] ?? "";
   const last = steps[steps.length - 1] ?? "";
   const ratio = contrastRatio(theme).toFixed(1);
-  const format =
-    target.slug === "herdr-app"
-      ? "JSON"
-      : target.slug === "windows-terminal"
-        ? "JSON color scheme"
-        : target.slug === "iterm2"
-          ? ".itermcolors"
-          : target.slug === "wezterm"
-            ? "Lua color table"
-            : "configuration file";
+  const formats: Record<string, string> = {
+    "herdr-app": "JSON",
+    "windows-terminal": "JSON color scheme",
+    iterm2: ".itermcolors",
+    wezterm: "Lua color table",
+    warp: "Warp YAML theme",
+    rio: "Rio TOML theme",
+    foot: "foot INI theme",
+    hyper: "Hyper plugin",
+  };
+  const format = formats[target.slug] ?? "configuration file";
 
   if (locale === "zh") {
     return [

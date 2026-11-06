@@ -63,6 +63,15 @@ describe("port serializers", () => {
     expect(port.serialize(catppuccinMocha)).toContain("palette = 0=#45475a");
   });
 
+  it("hyper output is a merging local plugin", () => {
+    const port = ports.find((candidate) => candidate.slug === "hyper")!;
+    const output = port.serialize(catppuccinMocha);
+    expect(output).toContain("exports.decorateConfig");
+    expect(output).toContain('backgroundColor: "#1e1e2e"');
+    expect(output).toContain('lightBlack: "#585b70"');
+    expect(output).toContain("...config.colors");
+  });
+
   it("foot output is an INI color section", () => {
     const port = ports.find((candidate) => candidate.slug === "foot")!;
     const output = port.serialize(catppuccinMocha);

@@ -85,6 +85,30 @@ export const targets: Target[] = [
     docs: "https://alacritty.org/config-alacritty.html",
   },
   {
+    slug: "hyper",
+    name: "Hyper",
+    title: { en: "Hyper themes", zh: "Hyper 主题" },
+    description: {
+      en: "Hyper themes are local plugins. The export uses decorateConfig to merge the palette into the user's existing .hyper.js settings without replacing unrelated options.",
+      zh: "Hyper 主题是本地插件。导出文件使用 decorateConfig 把调色板合并进现有的 .hyper.js 配置，不覆盖无关设置。",
+    },
+    install: {
+      en: [
+        "Download the Hyper plugin.",
+        "Save it to ~/.hyper_plugins/local/<name>/index.js.",
+        "Add \"<name>\" to localPlugins in your Hyper config: ~/Library/Application Support/Hyper/.hyper.js on macOS, ~/.config/Hyper/.hyper.js on Linux, or %APPDATA%\\Hyper\\.hyper.js on Windows.",
+        "Reload Hyper or open a new window.",
+      ],
+      zh: [
+        "下载 Hyper 插件。",
+        "保存到 ~/.hyper_plugins/local/<name>/index.js。",
+        "在 Hyper 配置的 localPlugins 中加入 \"<name>\"：macOS 为 ~/Library/Application Support/Hyper/.hyper.js，Linux 为 ~/.config/Hyper/.hyper.js，Windows 为 %APPDATA%\\Hyper\\.hyper.js。",
+        "重新加载 Hyper 或打开新窗口。",
+      ],
+    },
+    docs: "https://hyper.is/",
+  },
+  {
     slug: "foot",
     name: "foot",
     title: { en: "foot themes", zh: "foot 主题" },

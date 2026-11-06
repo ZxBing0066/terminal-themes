@@ -25,6 +25,11 @@ export function installCommand(slug: string, theme: Theme, url: string): string 
         `mkdir -p "$HOME/.config/alacritty/themes" && curl -fsSL "${url}" -o "$HOME/.config/alacritty/themes/${name}.toml"`,
         `# Then add an import entry to alacritty.toml pointing at ~/.config/alacritty/themes/${name}.toml`,
       ].join("\n");
+    case "hyper":
+      return [
+        `mkdir -p "$HOME/.hyper_plugins/local/${name}" && curl -fsSL "${url}" -o "$HOME/.hyper_plugins/local/${name}/index.js"`,
+        `# Add "${name}" to localPlugins in ~/Library/Application Support/Hyper/.hyper.js (macOS) or the platform config path.`,
+      ].join("\n");
     case "foot":
       return [
         `mkdir -p "$HOME/.config/foot/themes" && curl -fsSL "${url}" -o "$HOME/.config/foot/themes/${name}.ini"`,
