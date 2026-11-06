@@ -2,34 +2,8 @@ import { contrast } from "./color";
 import { deriveHerdrAppColors } from "./ports/herdr-app";
 import { ansiList } from "./palette";
 import type { Theme } from "./schema";
-
-interface PreviewOptions {
-  height?: number;
-  og?: boolean;
-}
-
-function esc(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function text(
-  x: number,
-  y: number,
-  value: string,
-  fill: string,
-  size = 13,
-  extra = "",
-): string {
-  return `<text x="${x}" y="${y}" fill="${fill}" font-size="${size}" font-family="JetBrains Mono, monospace" ${extra}>${esc(value)}</text>`;
-}
-
-function dot(x: number, y: number, color: string): string {
-  return `<circle cx="${x}" cy="${y}" r="3" fill="${color}" />`;
-}
+import { dot, esc, text, type PreviewOptions } from "./previews/common";
+import { renderGhosttyPreview } from "./previews/ghostty";
 
 function pane(
   x: number,
@@ -260,6 +234,7 @@ export function renderTerminalPreview(theme: Theme, port: PortLike, options: Pre
 
 export function renderPortPreview(theme: Theme, port: PortLike, options: PreviewOptions = {}): string {
   if (port.slug === "herdr-app") return renderHerdrAppPreview(theme, options);
+  if (port.slug === "ghostty") return renderGhosttyPreview(theme, options);
   return renderTerminalPreview(theme, port, options);
 }
 
