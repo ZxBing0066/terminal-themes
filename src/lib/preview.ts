@@ -5,6 +5,7 @@ import type { Theme } from "./schema";
 import { dot, esc, text, type PreviewOptions } from "./previews/common";
 import { renderAlacrittyPreview } from "./previews/alacritty";
 import { renderGhosttyPreview } from "./previews/ghostty";
+import { renderKittyPreview } from "./previews/kitty";
 
 function pane(
   x: number,
@@ -237,6 +238,7 @@ export function renderPortPreview(theme: Theme, port: PortLike, options: Preview
   if (port.slug === "herdr-app") return renderHerdrAppPreview(theme, options);
   if (port.slug === "ghostty") return renderGhosttyPreview(theme, options);
   if (port.slug === "alacritty") return renderAlacrittyPreview(theme, options);
+  if (port.slug === "kitty") return renderKittyPreview(theme, options);
   return renderTerminalPreview(theme, port, options);
 }
 
