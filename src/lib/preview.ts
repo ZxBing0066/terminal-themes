@@ -5,6 +5,7 @@ import type { Theme } from "./schema";
 import { dot, esc, text, type PreviewOptions } from "./previews/common";
 import { renderAlacrittyPreview } from "./previews/alacritty";
 import { renderGhosttyPreview } from "./previews/ghostty";
+import { renderIterm2Preview } from "./previews/iterm2";
 import { renderKittyPreview } from "./previews/kitty";
 
 function pane(
@@ -239,6 +240,7 @@ export function renderPortPreview(theme: Theme, port: PortLike, options: Preview
   if (port.slug === "ghostty") return renderGhosttyPreview(theme, options);
   if (port.slug === "alacritty") return renderAlacrittyPreview(theme, options);
   if (port.slug === "kitty") return renderKittyPreview(theme, options);
+  if (port.slug === "iterm2") return renderIterm2Preview(theme, options);
   return renderTerminalPreview(theme, port, options);
 }
 
