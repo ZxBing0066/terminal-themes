@@ -702,6 +702,10 @@ pre {
   padding: 32px 0 56px;
 }
 
+.theme-layout > * {
+  min-width: 0;
+}
+
 .theme-preview {
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1169,7 +1173,7 @@ th.mono {
 
 @media (max-width: 900px) {
   .theme-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer-grid {
@@ -1443,6 +1447,8 @@ th.mono {
 .install-steps li {
   padding-left: 4px;
   line-height: 1.55;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .install-command {
